@@ -16,8 +16,10 @@ const Cart = require('./Cart')
  * for example, we can say: const {User} = require('../db/models')
  * instead of: const User = require('../db/models/user')
  */
+
 module.exports = {
   User,
   Product,
-  Order
+  Order,
+  Cart
 }
