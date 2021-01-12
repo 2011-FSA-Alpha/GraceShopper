@@ -1,6 +1,12 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {fetchProduct} from '../store/singleProduct'
 
 class SingleProduct extends React.Component {
+  componentDidMount() {
+    this.props.fetchProduct(this.props.match.params.productId)
+  }
+
   render() {
     const {product} = this.props
     return (
@@ -18,3 +24,9 @@ class SingleProduct extends React.Component {
     )
   }
 }
+
+const mapState = state => ({product: state.product})
+const mapDispatch = dispatch => ({
+  fetchProduct: id => dispatch(fetchProduct(id))
+})
+export default connect(mapState, mapDispatch)(SingleProduct)
