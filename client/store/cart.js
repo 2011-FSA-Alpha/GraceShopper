@@ -88,7 +88,7 @@ export default function cartReducer(state = initialState, action) {
           cartItem.id === action.cartItem.id ? action.cartItem : cartItem
       )
     case ADD_TO_CART:
-      return {...state, state: [...state, action.product]}
+      return [...state, action.product]
 
     default:
       return state
