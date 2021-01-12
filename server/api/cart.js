@@ -12,6 +12,15 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res, next) => {
+  try {
+    const newCartItem = await Cart.create(req.body)
+    res.send(newCartItem)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.delete('/:cartItemId', (req, res, next) => {
   try {
     res.send(Cart.destroy({where: {id: req.params.cartItemId}}))
@@ -23,16 +32,7 @@ router.delete('/:cartItemId', (req, res, next) => {
 router.put('/:cartItemId', async (req, res, next) => {
   try {
     const updateItem = await Cart.findByPk(req.params.cartItemId)
-    res.send(await updateItem.update(req.body))
-  } catch (error) {
-    next(error)
-  }
-})
-
-router.post('/', async (req, res, next) => {
-  try {
-    const newCartItem = await Cart.create(req.body)
-    res.send(newCartItem)
+    res.send(updateItem.update(req.body))
   } catch (error) {
     next(error)
   }

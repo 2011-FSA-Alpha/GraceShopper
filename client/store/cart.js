@@ -79,12 +79,9 @@ const initialState = []
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case SHOW_ALL_CART:
-      return {...state, state: action.cartItems}
+      return action.cartItems
     case DELETE_FROM_CART:
-      return {
-        ...state,
-        state: state.filter(cartItem => cartItem.id !== action.cartItem.id)
-      }
+      return state.filter(cartItem => cartItem.id !== action.cartItem.id)
     case UPDATE_CART_ITEM:
       return state.map(
         cartItem =>
