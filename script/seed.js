@@ -41,6 +41,33 @@ async function seed() {
     })
   ])
 
+  const product = await Promise.all([
+    Product.create({
+      title: 'Ned',
+      email: 'ned@email.com',
+      password: '123',
+      adminStatus: true
+    }),
+    Product.create({
+      title: 'Morgan',
+      email: 'morgan@email.com',
+      password: '123',
+      adminStatus: false
+    }),
+    Product.create({
+      title: 'Azriel',
+      email: 'azriel@email.com',
+      password: '123',
+      adminStatus: false
+    }),
+    Product.create({
+      title: 'Ricky',
+      email: 'ricky@email.com',
+      password: '123',
+      adminStatus: false
+    })
+  ])
+
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 }
