@@ -1,7 +1,29 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {getProducts} from '../store/allProducts'
 
-const AllProducts = () => {
-  return <h1>This is an All Products Component. Uppercase!</h1>
+export class AllProducts extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {}
+  }
+
+  componentDidMount() {
+    this.props.getProducts()
+  }
+
+  render() {
+    return <React.Fragment />
+  }
 }
 
-export default AllProducts
+const mapState = state => ({
+  products: state.products
+})
+
+const mapDispatch = dispatch => ({
+  getProducts: () => dispatch(getProducts())
+})
+
+export default connect(mapState, mapDispatch)(AllProducts)
