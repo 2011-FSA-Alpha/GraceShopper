@@ -10,14 +10,14 @@ export class AllProducts extends React.Component {
     this.state = {}
   }
 
-  componentDidMount() {
-    this.props.getProducts()
-  }
+  //componentDidMount() {
+  //  this.props.getProducts()
+  //}
 
   render() {
     return (
       <React.Fragment>
-        {this.props.products[0] ? (
+        {this.props.products ? (
           this.props.products.map(product => {
             return (
               <div key={product.title}>
