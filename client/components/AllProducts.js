@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getProducts} from '../store/allProducts'
+import {getProducts} from '../store/products'
+import {Link} from 'react-router-dom'
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -14,7 +15,24 @@ export class AllProducts extends React.Component {
   }
 
   render() {
-    return <React.Fragment />
+    return (
+      <React.Fragment>
+        {this.props.products[0] ? (
+          this.props.products.map(product => {
+            return (
+              <div key={product.title}>
+                <Link to={`/products/${product.id}`}>
+                  <img src={product.imageUrl} />
+                  <h2>{product.title}</h2>
+                </Link>
+              </div>
+            )
+          })
+        ) : (
+          <div>Loading Products...</div>
+        )}
+      </React.Fragment>
+    )
   }
 }
 
