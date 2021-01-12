@@ -43,30 +43,90 @@ async function seed() {
 
   const product = await Promise.all([
     Product.create({
-      title: 'Ned',
-      email: 'ned@email.com',
-      password: '123',
-      adminStatus: true
+      title: 'Boise Foothills',
+      description: 'A nice picture of Idaho',
+      price: '123.00',
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/rslj1dticwykez0/201024_PRS_Idaho_003.jpg?dl=0',
+      totalDownloads: 60,
+      likes: 200,
+      tags: ['landscape', 'small']
     }),
     Product.create({
-      title: 'Morgan',
-      email: 'morgan@email.com',
-      password: '123',
-      adminStatus: false
+      title: 'Snake River',
+      description: 'A nice picture of Idaho',
+      price: '213.24',
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/r44d4wlfaruvy4t/201025_PRS_Idaho_013.jpg?dl=0',
+      totalDownloads: 2,
+      likes: 100,
+      tags: ['landscape', 'large']
     }),
     Product.create({
-      title: 'Azriel',
-      email: 'azriel@email.com',
-      password: '123',
-      adminStatus: false
+      title: 'Unlawful',
+      description: 'A nice picture of Idaho',
+      price: '99.99',
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/ygws73v6ftwzc7o/201026_PRS_Idaho_018.jpg?dl=0',
+      totalDownloads: 25,
+      likes: 1,
+      tags: ['landscape', 'large']
     }),
     Product.create({
-      title: 'Ricky',
-      email: 'ricky@email.com',
-      password: '123',
-      adminStatus: false
+      title: 'Rockslide',
+      description: 'A nice picture of Idaho',
+      price: '1.00',
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/92j6svuhk89pcnu/201026_PRS_Idaho_026.jpg?dl=0',
+      totalDownloads: 1000,
+      likes: 9,
+      tags: ['landscape', 'small']
+    }),
+    Product.create({
+      title: 'Above The Snake River',
+      description: 'A nice picture of Idaho',
+      price: '1.50',
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/utcqezql0o8zm6d/201026_PRS_Idaho_028.jpg?dl=0',
+      totalDownloads: 256,
+      likes: 5,
+      tags: ['landscape', 'small']
     })
   ])
+
+  const carts = await Promise.all([
+    Cart.create({
+      quantity: 5,
+      total: 52.0,
+      userId: 1
+    }),
+    Cart.create({
+      quantity: 1,
+      total: 100.25,
+      userId: 2
+    }),
+    Cart.create({
+      quantity: 10,
+      total: 925.5,
+      userId: 3
+    })
+  ])
+
+  const ned = await User.findByPk(1)
+  const morgan = await User.findByPk(2)
+  const azriel = await User.findByPk(3)
+  const ricky = await User.findByPk(4)
+
+  const imgOne = await Product.findByPk(1)
+  const imgTwo = await Product.findByPk(2)
+  const imgThree = await Product.findByPk(3)
+  const imgFour = await Product.findByPk(4)
+  const imgFive = await Product.findByPk(5)
+
+  await ned.addProduct(imgOne)
+  await morgan.addProduct(imgTwo)
+  await azriel.addProduct(imgThree)
+  await ricky.addProducts([imgFour, imgFive])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
