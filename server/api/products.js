@@ -9,6 +9,8 @@ router.get('/', async (req, res, next) => {
     res.json(users)
   } catch (err) {
     next(err)
+  }
+})
 
 router.get('/:productId', async (req, res, next) => {
   try {
