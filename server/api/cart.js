@@ -1,7 +1,7 @@
 const router = require('express').Router()
 
 //require cart model from database
-//const {Cart} = require('../db)
+const {Cart} = require('../db')
 
 router.get('/', async (req, res, next) => {
   try {
