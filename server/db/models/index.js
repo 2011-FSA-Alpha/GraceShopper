@@ -14,17 +14,13 @@ const OrderProducts = require('./OrderProducts')
 User.belongsToMany(Product, {through: 'UserProducts'})
 Product.belongsTo(User, {through: 'UserProducts'})
 
+User.hasMany(Order)
 Order.belongsTo(User)
 Order.belongsToMany(Product, {through: OrderProducts})
 Product.belongsToMany(Order, {through: OrderProducts})
 
 User.hasMany(Payment)
 Payment.belongsTo(User)
-
-// Order.belongsToMany(Product, {through: 'OrderHistory'})
-// Product.belongsToMany(Order, {through: 'OrderHistory'})
-// User.hasMany(Order)
-// Order.belongsTo(User)
 
 module.exports = {
   Order,
