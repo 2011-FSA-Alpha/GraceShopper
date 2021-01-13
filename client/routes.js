@@ -11,7 +11,7 @@ import {
   SingleProduct
 } from './components'
 import {me} from './store'
-
+//merge
 /**
  * COMPONENT
  */
