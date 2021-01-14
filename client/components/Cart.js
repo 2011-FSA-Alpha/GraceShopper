@@ -13,7 +13,7 @@ export class Cart extends React.Component {
     return (
       <div>
         <h1> Cart </h1>
-        <div>
+        <div id="root">
           {cart.map(product => (
             <div key={product.id}>
               <h1> Product Name: {product.name} </h1>

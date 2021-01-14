@@ -1,9 +1,8 @@
 const User = require('./user')
 const Product = require('./Product')
 const Order = require('./Order')
-const Cart = require('./Cart')
 const Payment = require('./Payment')
-const CartProduct = require('./CartProduct')
+const OrderProducts = require('./OrderProducts')
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -13,26 +12,20 @@ const CartProduct = require('./CartProduct')
  */
 
 User.belongsToMany(Product, {through: 'UserProducts'})
-Product.belongsToMany(User, {through: 'UserProducts'})
+Product.belongsTo(User, {through: 'UserProducts'})
 
-User.hasOne(Cart)
-Cart.belongsTo(User)
-Cart.belongsToMany(Product, {through: CartProduct})
-Product.belongsToMany(Cart, {through: CartProduct})
+User.hasMany(Order)
+Order.belongsTo(User)
+Order.belongsToMany(Product, {through: OrderProducts})
+Product.belongsToMany(Order, {through: OrderProducts})
 
 User.hasMany(Payment)
 Payment.belongsTo(User)
 
-Order.belongsToMany(Product, {through: 'OrderHistory'})
-Product.belongsToMany(Order, {through: 'OrderHistory'})
-User.hasMany(Order)
-Order.belongsTo(User)
-
 module.exports = {
-  User,
-  Product,
   Order,
-  Cart,
+  OrderProducts,
   Payment,
-  CartProduct
+  Product,
+  User
 }
