@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const initialState = []
+const initialState = {}
+
 const SET_PRODUCTS = 'SET_PRODUCTS'
 
 export const setProducts = productData => ({

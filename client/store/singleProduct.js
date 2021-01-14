@@ -1,7 +1,9 @@
 import axios from 'axios'
 
 //initial state
-const initialState = {}
+const initialState = {
+  product: {}
+}
 
 //action type
 const SET_PRODUCT = 'SET_PRODUCT'
