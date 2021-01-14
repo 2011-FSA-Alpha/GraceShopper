@@ -8,7 +8,8 @@ export class AdminEditProd extends React.Component {
       title: '',
       description: '',
       price: '',
-      verifyPass: ''
+      imageUrl: '',
+      tags: ''
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -24,14 +25,7 @@ export class AdminEditProd extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     try {
-      //call addUser in store/user.js. Need to make POST API route in api/users.js
-      //reset field values?
-      /* this.setState({
-                name: '',
-                email: '',
-                password: '',
-                verifyPass: ''
-            }) */
+      //update the product with new values. call method from store. check API
     } catch (error) {
       console.error(error)
     }
@@ -40,14 +34,15 @@ export class AdminEditProd extends React.Component {
   render() {
     return (
       <div>
-        Sign Up
+        <h1> Edit Product: </h1>
         <AdminEditProdForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           title={this.state.title}
           description={this.state.description}
           price={this.state.price}
-          verifyPass={this.state.verifyPass}
+          imageUrl={this.state.imageUrl}
+          tags={this.state.tags}
         />
       </div>
     )

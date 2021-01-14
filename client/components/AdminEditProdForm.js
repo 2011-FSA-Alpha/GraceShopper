@@ -22,38 +22,26 @@ const AdminEditProdForm = props => {
       <label htmlFor="price"> Price: </label>
       <input
         name="price"
-        type="text"
+        type="number"
         onChange={props.handleChange}
         value={props.price}
       />
 
-      <label htmlFor="verifyPass"> Verify Password: </label>
+      <label htmlFor="imageUrl"> Image Url: </label>
       <input
-        name="verifyPass"
+        name="imageUrl"
         type="text"
         onChange={props.handleChange}
-        value={props.verifyPass}
+        value={props.imageUrl}
       />
-      {props.verifyPass === props.password ? (
-        <span className="warning"> Password does not match! </span>
-      ) : (
-        <span />
-      )}
 
-      {props.name.length > 0 &&
-      props.email.length > 0 &&
-      props.password.length > 0 &&
-      props.verifyPass === props.password ? (
-        <button type="submit" disabled={false}>
-          {' '}
-          Submit{' '}
-        </button>
-      ) : (
-        <button type="submit" disabled={false}>
-          {' '}
-          Submit{' '}
-        </button>
-      )}
+      <label htmlFor="tags"> Tags: </label>
+      <input
+        name="tags"
+        type="text"
+        onChange={props.handleChange}
+        value={props.tags}
+      />
     </form>
   )
 }
