@@ -16,22 +16,23 @@ export class AllProducts extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        {this.props.products ? (
-          this.props.products.map(product => {
-            return (
-              <div key={product.title}>
-                <Link to={`/products/${product.id}`}>
-                  <img src={product.imageUrl} />
-                  <h2>{product.title}</h2>
-                </Link>
-              </div>
-            )
-          })
-        ) : (
-          <div>Loading Products...</div>
-        )}
-      </React.Fragment>
+      <div>Hello</div>
+      // <React.Fragment>
+      //   {this.props.products ? (
+      //     this.props.products.map(product => {
+      //       return (
+      //         <div key={product.title}>
+      //           <Link to={`/products/${product.id}`}>
+      //             <img src={product.imageUrl} />
+      //             <h2>{product.title}</h2>
+      //           </Link>
+      //         </div>
+      //       )
+      //     })
+      //   ) : (
+      //     <div>Loading Products...</div>
+      //   )}
+      // </React.Fragment>
     )
   }
 }
