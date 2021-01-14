@@ -6,3 +6,6 @@ secrets.js
 npm-debug.log
 yarn-error.log
 urls.js
+package-lock.json
+package.json
+server/db/db.js
