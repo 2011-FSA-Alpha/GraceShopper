@@ -1,30 +1,30 @@
 import React from 'react'
 
-const SignupForm = props => {
+const AdminEditProdForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
-      <label htmlFor="name"> Name: </label>
+      <label htmlFor="title"> Title: </label>
       <input
-        name="name"
+        name="title"
         type="text"
         onChange={props.handleChange}
-        value={props.name}
+        value={props.title}
       />
 
-      <label htmlFor="email"> Email: </label>
+      <label htmlFor="description"> Description: </label>
       <input
-        name="email"
+        name="description"
         type="text"
         onChange={props.handleChange}
-        value={props.email}
+        value={props.description}
       />
 
-      <label htmlFor="password"> Password: </label>
+      <label htmlFor="price"> Price: </label>
       <input
-        name="password"
+        name="price"
         type="text"
         onChange={props.handleChange}
-        value={props.password}
+        value={props.price}
       />
 
       <label htmlFor="verifyPass"> Verify Password: </label>
@@ -58,4 +58,4 @@ const SignupForm = props => {
   )
 }
 
-export default SignupForm
+export default AdminEditProdForm

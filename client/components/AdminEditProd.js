@@ -1,13 +1,13 @@
 import React from 'react'
-import SignupForm from './Signup-Form'
+import AdminEditProdForm from './AdminEditProdForm'
 
-export class Signup extends React.Component {
+export class AdminEditProd extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: '',
-      email: '',
-      password: '',
+      title: '',
+      description: '',
+      price: '',
       verifyPass: ''
     }
 
@@ -41,12 +41,12 @@ export class Signup extends React.Component {
     return (
       <div>
         Sign Up
-        <SignupForm
+        <AdminEditProdForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-          name={this.state.name}
-          email={this.state.email}
-          password={this.state.password}
+          title={this.state.title}
+          description={this.state.description}
+          price={this.state.price}
           verifyPass={this.state.verifyPass}
         />
       </div>
