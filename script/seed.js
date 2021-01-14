@@ -3,11 +3,10 @@ const faker = require('faker')
 const db = require('../server/db')
 const {
   User,
-  Cart,
-  CartProduct,
   Order,
   Payment,
-  Product
+  Product,
+  OrderProducts
 } = require('../server/db/models')
 
 async function seed() {
@@ -45,7 +44,7 @@ async function seed() {
     Product.create({
       title: 'Boise Foothills',
       description: 'A nice picture of Idaho',
-      price: '123.00',
+      price: 12300,
       imageUrl:
         'https://dl.dropboxusercontent.com/s/rslj1dticwykez0/201024_PRS_Idaho_003.jpg?dl=0',
       totalDownloads: 60,
@@ -55,7 +54,7 @@ async function seed() {
     Product.create({
       title: 'Snake River',
       description: 'A nice picture of Idaho',
-      price: '213.24',
+      price: 23141,
       imageUrl:
         'https://dl.dropboxusercontent.com/s/r44d4wlfaruvy4t/201025_PRS_Idaho_013.jpg?dl=0',
       totalDownloads: 2,
@@ -65,7 +64,7 @@ async function seed() {
     Product.create({
       title: 'Unlawful',
       description: 'A nice picture of Idaho',
-      price: '99.99',
+      price: 12314,
       imageUrl:
         'https://dl.dropboxusercontent.com/s/ygws73v6ftwzc7o/201026_PRS_Idaho_018.jpg?dl=0',
       totalDownloads: 25,
@@ -75,7 +74,7 @@ async function seed() {
     Product.create({
       title: 'Rockslide',
       description: 'A nice picture of Idaho',
-      price: '1.00',
+      price: 12356,
       imageUrl:
         'https://dl.dropboxusercontent.com/s/92j6svuhk89pcnu/201026_PRS_Idaho_026.jpg?dl=0',
       totalDownloads: 1000,
@@ -85,30 +84,12 @@ async function seed() {
     Product.create({
       title: 'Above The Snake River',
       description: 'A nice picture of Idaho',
-      price: '1.50',
+      price: 1257732,
       imageUrl:
         'https://dl.dropboxusercontent.com/s/utcqezql0o8zm6d/201026_PRS_Idaho_028.jpg?dl=0',
       totalDownloads: 256,
       likes: 5,
       tags: ['landscape', 'small']
-    })
-  ])
-
-  const carts = await Promise.all([
-    Cart.create({
-      quantity: 5,
-      total: 52.0,
-      userId: 1
-    }),
-    Cart.create({
-      quantity: 1,
-      total: 100.25,
-      userId: 2
-    }),
-    Cart.create({
-      quantity: 10,
-      total: 925.5,
-      userId: 3
     })
   ])
 
@@ -127,6 +108,24 @@ async function seed() {
   await morgan.addProduct(imgTwo)
   await azriel.addProduct(imgThree)
   await ricky.addProducts([imgFour, imgFive])
+
+  const orderTable = await Order.findOrCreate({
+    where: {
+      userId: ricky.id,
+      paid: false
+    }
+  })
+
+  const firstOrder = await Order.findByPk(1)
+
+  await OrderProducts.findOrCreate({
+    where: {
+      orderId: 1,
+      productId: 1
+    }
+  })
+
+  await firstOrder.addProduct(imgTwo)
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
