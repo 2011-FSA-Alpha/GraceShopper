@@ -90,6 +90,16 @@ async function seed() {
       totalDownloads: 256,
       likes: 5,
       tags: ['landscape', 'small']
+    }),
+    Product.create({
+      title: 'Shoshone Falls River Valley',
+      description: 'A nice picture of Idaho',
+      price: 2456,
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/kykpsi3w8ziedrs/201026_PRS_Idaho_063.jpg?dl=0',
+      totalDownloads: 5,
+      likes: 24623,
+      tags: ['landscape', 'large']
     })
   ])
 
@@ -103,20 +113,30 @@ async function seed() {
   const imgThree = await Product.findByPk(3)
   const imgFour = await Product.findByPk(4)
   const imgFive = await Product.findByPk(5)
+  const imgSix = await Product.findByPk(5)
 
   await ned.addProduct(imgOne)
-  await morgan.addProduct(imgTwo)
+  await morgan.addProducts([imgTwo, imgSix])
   await azriel.addProduct(imgThree)
   await ricky.addProducts([imgFour, imgFive])
 
-  const orderTable = await Order.findOrCreate({
+  // Creating an order
+  await Order.findOrCreate({
     where: {
       userId: ricky.id,
       paid: false
     }
   })
 
+  await Order.findOrCreate({
+    where: {
+      userId: morgan.id,
+      paid: false
+    }
+  })
+
   const firstOrder = await Order.findByPk(1)
+  const secondOrder = await Order.findByPk(2)
 
   await OrderProducts.findOrCreate({
     where: {
@@ -125,7 +145,8 @@ async function seed() {
     }
   })
 
-  await firstOrder.addProduct(imgTwo)
+  await firstOrder.addProducts([imgTwo, imgSix, imgThree])
+  await firstOrder.addProducts([imgTwo, imgSix, imgThree])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
