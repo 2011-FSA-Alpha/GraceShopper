@@ -1,7 +1,7 @@
 const router = require('express').Router()
 
 //require order model from database
-const {Order} = require('../db')
+const {Order, User, OrderProducts} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -11,6 +11,22 @@ router.get('/', async (req, res, next) => {
     next(error)
   }
 })
+
+router.get('/cart/:userId', async (req, res, next) => {
+  try {
+    res.send(Order.prototype)
+    //const userOrder = await Order.findOrCreate({
+    //  where: {
+    //    userId: req.params.userId,
+    //    paid: false
+    //  }
+    //})
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.post('/cart/:userId?')
 
 router.post('/', async (req, res, next) => {
   try {

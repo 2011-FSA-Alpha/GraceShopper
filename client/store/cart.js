@@ -31,7 +31,7 @@ const addToCart = product => ({
 export const showCart = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get('/api/cart')
+      const {data} = await axios.get(`/api/order/${user.id}`)
       dispatch(showAllCart(data))
     } catch (error) {
       console.error(error)
