@@ -10,8 +10,8 @@ class AddProductForm extends React.Component {
       description: '',
       price: ''
     }
-    this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleSubmit(evt) {
