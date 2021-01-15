@@ -9,7 +9,7 @@ const NotFound = props => {
         <h4 onClick={() => props.history.goBack()}>Go Back</h4>
       ) : (
         <Link to="/">
-          <h4>404 - Not Found</h4>
+          <h4>Go Home</h4>
         </Link>
       )}
     </div>
