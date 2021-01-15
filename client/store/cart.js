@@ -28,10 +28,10 @@ const addToCart = product => ({
 })
 
 //Thunks
-export const showCart = () => {
+export const showCart = userId => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/order/${user.id}`)
+      const {data} = await axios.get(`/api/order/cart/${userId}`)
       dispatch(showAllCart(data))
     } catch (error) {
       console.error(error)
@@ -79,7 +79,7 @@ const initialState = []
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case SHOW_ALL_CART:
-      return action.cartItems
+      return (state = action.cartItems)
     case DELETE_FROM_CART:
       return state.filter(cartItem => cartItem.id !== action.cartItem.id)
     case UPDATE_CART_ITEM:
