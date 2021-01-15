@@ -5,7 +5,7 @@ const {Order, User, Product, OrderProducts} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    const orderItems = await Order.findAll()
+    const orderItems = await OrderProducts.findAll()
     res.send(orderItems)
   } catch (error) {
     next(error)
@@ -21,7 +21,8 @@ router.get('/cart/:userId', async (req, res, next) => {
       },
       include: [
         {
-          model: Product
+          model: Product,
+          include: [Order]
         }
       ]
     })
@@ -33,15 +34,17 @@ router.get('/cart/:userId', async (req, res, next) => {
 
 router.post('/cart/:userId', async (req, res, next) => {
   try {
-    console.log(req.body)
-    const newOrderItem = await Order.findOrCreate({
+    const orderProduct = await OrderProducts.findOrCreate({
       where: {
-        userId: req.params.userId
+        orderId: req.params.userId,
+        productId: req.body.productId
       }
     })
-    const productToAdd = await Product.findByPk(req.body.productId)
-    newOrderItem[0].addProduct(productToAdd)
-    res.send()
+    if (!orderProduct[1]) {
+      orderProduct[0].quantity += 1
+      await orderProduct[0].save()
+    }
+    res.send(orderProduct)
   } catch (error) {
     next(error)
   }

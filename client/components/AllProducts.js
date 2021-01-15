@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {getProducts} from '../store/products'
 import {Link} from 'react-router-dom'
 import {addItemToCart} from '../store/cart'
+import {SingleProduct, fetchProduct} from './SingleProduct'
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -50,6 +51,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
+  fetchProduct: id => dispatch(fetchProduct(id)),
   addItemToCart: (userId, productId) =>
     dispatch(addItemToCart(userId, productId)),
   getProducts: () => dispatch(getProducts())

@@ -3,6 +3,12 @@ import {connect} from 'react-redux'
 import {showCart} from '../store/cart'
 
 export class Cart extends React.Component {
+  componentDidMount() {
+    if (this.props.user.id) {
+      this.props.showCart(this.props.user.id)
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.user !== this.props.user) {
       this.props.showCart(this.props.user.id)
@@ -21,9 +27,7 @@ export class Cart extends React.Component {
               <div key={product.id}>
                 <h1> Product Name: {product.title} </h1>
                 <h3> Price: {product.price} </h3>
-                {
-                  //<h3> Quantity: {product.quantity} </h3>
-                }
+                <h3> Quantity: {product.orderproducts.quantity} </h3>
                 <h3> Picture of product </h3>
               </div>
             ))
