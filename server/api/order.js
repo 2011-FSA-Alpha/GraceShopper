@@ -31,12 +31,17 @@ router.get('/cart/:userId', async (req, res, next) => {
   }
 })
 
-router.post('/cart/:userId')
-
-router.post('/', async (req, res, next) => {
+router.post('/cart/:userId', async (req, res, next) => {
   try {
-    const newOrderItem = await Order.findOrCreate({})
-    res.send(neworderItem)
+    console.log(req.body)
+    const newOrderItem = await Order.findOrCreate({
+      where: {
+        userId: req.params.userId
+      }
+    })
+    const productToAdd = await Product.findByPk(req.body.productId)
+    newOrderItem[0].addProduct(productToAdd)
+    res.send()
   } catch (error) {
     next(error)
   }

@@ -10,7 +10,7 @@ export class Cart extends React.Component {
   }
 
   render() {
-    const cart = this.props
+    const {cart} = this.props
 
     return (
       <div>

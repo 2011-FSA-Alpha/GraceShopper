@@ -7,24 +7,39 @@ export class SingleProduct extends React.Component {
     this.props.fetchProduct(this.props.match.params.productId)
   }
 
+  componentDidUpdate(prevProps) {
+    console.log('ran')
+    if (prevProps.product !== this.props.product) {
+      this.forceUpdate()
+    }
+  }
+
   render() {
-    const {product} = this.props
+    console.log('rendered')
+    let singleProduct = this.props.singleProduct
     return (
-      <div>
-        <h3>Product Info:</h3>
-        <div>Product Title: {product.title}</div>
-        <div>Product Description: {product.description}</div>
-        <div>Product Price: ${product.price}</div>
-        <img src={product.imageUrl} />
-        <div>Total downloads: {product.totalDownloads}</div>
-        <div>Total # of Likes: {product.likes}</div>
-        <div>Tags: {product.tags}</div>
-      </div>
+      <React.Fragment>
+        {singleProduct ? (
+          <div>
+            <h3>Product Info:</h3>
+            <div>Product Title: {singleProduct.title}</div>
+            <div>Product Description: {singleProduct.description}</div>
+            <div>Product Price: ${singleProduct.price}</div>
+            <img src={singleProduct.imageUrl} />
+            <div>Total downloads: {singleProduct.totalDownloads}</div>
+            <div>Total # of Likes: {singleProduct.likes}</div>
+            <div>Tags: {singleProduct.tags}</div>
+          </div>
+        ) : (
+          <h1>No product found</h1>
+        )}
+      </React.Fragment>
     )
   }
 }
 
 const mapState = state => ({product: state.product})
+
 const mapDispatch = dispatch => ({
   fetchProduct: id => dispatch(fetchProduct(id))
 })

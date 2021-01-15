@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getProducts} from '../store/products'
 import {Link} from 'react-router-dom'
+import {addItemToCart} from '../store/cart'
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -25,6 +26,13 @@ export class AllProducts extends React.Component {
                   <img src={product.imageUrl} />
                   <h2>{product.title}</h2>
                 </Link>
+                <button
+                  onClick={() =>
+                    this.props.addItemToCart(this.props.user.id, product.id)
+                  }
+                >
+                  Add To Cart
+                </button>
               </div>
             )
           })
@@ -37,10 +45,13 @@ export class AllProducts extends React.Component {
 }
 
 const mapState = state => ({
-  products: state.products
+  products: state.products,
+  user: state.user
 })
 
 const mapDispatch = dispatch => ({
+  addItemToCart: (userId, productId) =>
+    dispatch(addItemToCart(userId, productId)),
   getProducts: () => dispatch(getProducts())
 })
 
