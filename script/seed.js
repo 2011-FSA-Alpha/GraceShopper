@@ -113,14 +113,14 @@ async function seed() {
   const imgThree = await Product.findByPk(3)
   const imgFour = await Product.findByPk(4)
   const imgFive = await Product.findByPk(5)
-  const imgSix = await Product.findByPk(5)
+  const imgSix = await Product.findByPk(6)
 
   await ned.addProduct(imgOne)
   await morgan.addProducts([imgTwo, imgSix])
   await azriel.addProduct(imgThree)
   await ricky.addProducts([imgFour, imgFive])
 
-  // Creating an order
+  // Creating carts
   await Order.findOrCreate({
     where: {
       userId: ricky.id,
@@ -135,20 +135,79 @@ async function seed() {
     }
   })
 
-  const firstOrder = await Order.findByPk(1)
-  const secondOrder = await Order.findByPk(2)
-
-  await OrderProducts.findOrCreate({
+  await Order.findOrCreate({
     where: {
-      orderId: 1,
-      productId: 1
+      userId: azriel.id,
+      paid: false
     }
   })
 
-  await firstOrder.addProducts([imgTwo, imgSix, imgThree])
-  await firstOrder.addProducts([imgTwo, imgSix, imgThree])
+  await Order.findOrCreate({
+    where: {
+      userId: ned.id,
+      paid: false
+    }
+  })
+
+  const firstCart = await Order.findByPk(1)
+  const secondCart = await Order.findByPk(2)
+  const thirdCart = await Order.findByPk(3)
+  const fourthCart = await Order.findByPk(4)
+
+  await firstCart.addProducts([imgOne, imgTwo, imgThree])
+  await secondCart.addProducts([imgFour, imgSix])
+  await thirdCart.addProducts([imgOne, imgSix, imgFour])
+  await fourthCart.addProducts([imgTwo, imgOne, imgThree])
+
+  // Create Order History
+  const closedOrderRicky = await Order.findOrCreate({
+    where: {
+      userId: ricky.id,
+      paid: true
+    }
+  })
+
+  const closedOrderMorgan = await Order.findOrCreate({
+    where: {
+      userId: morgan.id,
+      paid: true
+    }
+  })
+
+  const closedOrderAzriel = await Order.findOrCreate({
+    where: {
+      userId: azriel.id,
+      paid: true
+    }
+  })
+
+  const closedOrderNed = await Order.findOrCreate({
+    where: {
+      userId: ned.id,
+      paid: true
+    }
+  })
+
+  await closedOrderRicky[0].addProducts([
+    imgOne,
+    imgTwo,
+    imgThree,
+    imgFour,
+    imgSix
+  ])
+  await closedOrderMorgan[0].addProducts([
+    imgFour,
+    imgSix,
+    imgOne,
+    imgTwo,
+    imgThree
+  ])
+
+  await closedOrderAzriel[0].addProducts([imgTwo, imgOne, imgThree])
+  await closedOrderNed[0].addProducts([imgOne])
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${product.length} cart`)
   console.log(`seeded successfully`)
 }
 
