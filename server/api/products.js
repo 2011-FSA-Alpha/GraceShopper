@@ -38,3 +38,29 @@ router.post('/:productId', adminOnly, async (req, res, next) => {
     next(error)
   }
 })
+
+router.put(':/productId', adminOnly, async (req, res, next) => {
+  try {
+    const updateProd = await Product.findByPk(req.params.productId)
+    const {title, description, price, imageURL, tags} = req.body
+    res.send(
+      updateProd.update({
+        title,
+        description,
+        price,
+        imageURL,
+        tags
+      })
+    )
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.delete(':/productId', adminOnly, (req, res, next) => {
+  try {
+    res.send(Product.destroy({where: {id: req.params.productId}}))
+  } catch (error) {
+    next(error)
+  }
+})
