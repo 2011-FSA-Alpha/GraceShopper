@@ -98,7 +98,7 @@ router.put('/cart/:userId', async (req, res, next) => {
   }
 })
 
-// DELETE api/orders/car/:userId
+// DELETE api/orders/cart/:userId
 // deletes specified instance from orderProducts Model
 
 router.delete('/cart/:userId', async (req, res, next) => {
@@ -113,6 +113,31 @@ router.delete('/cart/:userId', async (req, res, next) => {
     res.send()
   } catch (error) {
     next(error)
+  }
+})
+
+// PUT api/orders/cart/:userId/checkout
+// Sets the Users cart to Paid moving it into order history
+
+router.put('/cart/:userId/checkout', async (req, res, next) => {
+  try {
+    let userOrder = await Order.findOrCreate({
+      where: {
+        userId: req.params.userId,
+        paid: false
+      },
+      include: [
+        {
+          model: Product
+        }
+      ]
+    })
+
+    userOrder[0].paid = true
+    await userOrder[0].save()
+    res.send(userOrder)
+  } catch (error) {
+    next(err)
   }
 })
 
