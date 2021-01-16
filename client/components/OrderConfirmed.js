@@ -1,6 +1,6 @@
 import React from 'react'
 
-const OrderConfirmed = props => {
+export default (OrderConfirmed = props => {
   return (
     <div>
       <h1>🥳 Order Confirmed 🥳</h1>
@@ -8,6 +8,4 @@ const OrderConfirmed = props => {
       <h3 className="order-total">Your total is: {props.total}</h3>
     </div>
   )
-}
-
-export default OrderConfirmed
+})
