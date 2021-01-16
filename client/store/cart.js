@@ -28,10 +28,10 @@ const addToCart = product => ({
 })
 
 //Thunks
-export const showCart = () => {
+export const showCart = userId => {
   return async dispatch => {
     try {
-      const {data} = await axios.get('/api/cart')
+      const {data} = await axios.get(`/api/order/cart/${userId}`)
       dispatch(showAllCart(data))
     } catch (error) {
       console.error(error)
@@ -39,11 +39,15 @@ export const showCart = () => {
   }
 }
 
-export const deleteCartItem = cartItem => {
+export const deleteCartItem = (userId, requestInfo) => {
   return async dispatch => {
     try {
-      await axios.delete(`/api/cart/${cartItem.id}`)
-      dispatch(deleteFromCart(cartItem))
+      const {data} = await axios.delete(
+        `/api/order/cart/${userId}?productId=${requestInfo.productId}&orderId=${
+          requestInfo.orderId
+        }`
+      )
+      dispatch(showCart(userId))
     } catch (error) {
       console.error(error)
     }
@@ -61,11 +65,22 @@ export const updateCartQuantity = cartItem => {
   }
 }
 
-export const addItemToCart = product => {
+export const addItemToCart = (userId, orderInfo) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post('/api/cart', product)
+      const {data} = await axios.post(`/api/order/cart/${userId}`, orderInfo)
       dispatch(addToCart(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const incrementQuantity = (userId, orderInfo) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/order/cart/${userId}`, orderInfo)
+      dispatch(showCart(userId))
     } catch (error) {
       console.error(error)
     }
