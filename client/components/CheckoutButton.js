@@ -6,8 +6,15 @@ import {Link} from 'react-router-dom'
 const CheckoutButton = props => {
   const {cart} = props
   return (
-    <Link to="/order-confirmed">
-      <button disabled={cart.length ? 'false' : 'true'}>Checkout</button>
+    <Link
+      to={{
+        pathname: '/order-confirmed',
+        cartProps: {
+          cart: cart
+        }
+      }}
+    >
+      <button disabled={!!cart.length}>Checkout</button>
     </Link>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {showCart, deleteCartItem, incrementQuantity} from '../store/cart'
+import CheckoutButton from './CheckoutButton'
 
 export class Cart extends React.Component {
   constructor() {
@@ -84,6 +85,9 @@ export class Cart extends React.Component {
             )}
           </div>
         )}
+        <div>
+          <CheckoutButton cart={cart} />
+        </div>
       </div>
     )
   }
