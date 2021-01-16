@@ -1,10 +1,17 @@
 import React from 'react'
 
 export default function OrderConfirmed(props) {
-  console.log('PRODUCTS', props.location.cartProps.cart.products)
-  const total = props.location.cartProps.cart.products.reduce(
-    (a, b) => b.price + a.price
-  )
+  let total
+  if (props.location.cartProps.cart.products.length === 1) {
+    total =
+      props.location.cartProps.cart.products[0].price *
+      props.location.cartProps.cart.products[0].orderproducts.quantity
+  } else {
+    total = props.location.cartProps.cart.products.reduce(
+      (a, b) => b.price * b.orderproducts.quantity + a.price
+    )
+  }
+
   const cartId = props.location.cartProps.cart.id
   console.log('CURRENT TOTAL', total)
   return (
