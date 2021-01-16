@@ -1,6 +1,6 @@
 import React from 'react'
 
-const OrderConfirmed = props => {
+export const OrderConfirmed = props => {
   return (
     <div>
       <h1>🥳 Order Confirmed 🥳</h1>
@@ -9,5 +9,3 @@ const OrderConfirmed = props => {
     </div>
   )
 }
-
-export default OrderConfirmed
