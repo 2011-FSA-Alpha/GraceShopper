@@ -55,7 +55,10 @@ export class Cart extends React.Component {
                 <button
                   type="button"
                   onClick={() =>
-                    this.props.deleteCartItem(this.props.user.id, product.id)
+                    this.props.deleteCartItem(this.props.user.id, {
+                      productId: product.id,
+                      orderId: this.props.cart.id
+                    })
                   }
                 >
                   Delete
@@ -79,8 +82,8 @@ const mapToState = state => ({
 const mapToDispatch = dispatch => ({
   incrementQuantity: (userId, orderInfo) =>
     dispatch(incrementQuantity(userId, orderInfo)),
-  deleteCartItem: (userId, productId) =>
-    dispatch(deleteCartItem(userId, productId)),
+  deleteCartItem: (userId, requestInfo) =>
+    dispatch(deleteCartItem(userId, requestInfo)),
   showCart: userId => dispatch(showCart(userId))
 })
 

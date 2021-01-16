@@ -72,7 +72,7 @@ router.delete('/cart/:userId', async (req, res, next) => {
     console.log(req.params, req.query)
     await OrderProducts.destroy({
       where: {
-        orderId: req.params.orderId,
+        orderId: req.query.orderId,
         productId: req.query.productId
       }
     })

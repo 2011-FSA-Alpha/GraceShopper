@@ -39,11 +39,13 @@ export const showCart = userId => {
   }
 }
 
-export const deleteCartItem = (userId, productId) => {
+export const deleteCartItem = (userId, requestInfo) => {
   return async dispatch => {
     try {
       const {data} = await axios.delete(
-        `/api/order/cart/${userId}?productId=${productId}`
+        `/api/order/cart/${userId}?productId=${requestInfo.productId}&orderId=${
+          requestInfo.orderId
+        }`
       )
       dispatch(showCart(userId))
     } catch (error) {
