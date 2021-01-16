@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getProducts} from '../store/products'
 import {Link} from 'react-router-dom'
+import {addItemToCart, showCart} from '../store/cart'
+import {SingleProduct, fetchProduct} from './SingleProduct'
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -12,6 +14,12 @@ export class AllProducts extends React.Component {
 
   componentDidMount() {
     this.props.getProducts()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.products !== this.props.products) {
+      this.props.showCart(this.props.user.id)
+    }
   }
 
   render() {
@@ -25,6 +33,18 @@ export class AllProducts extends React.Component {
                   <img src={product.imageUrl} />
                   <h2>{product.title}</h2>
                 </Link>
+                <button
+                  type="button"
+                  onClick={() =>
+                    this.props.addItemToCart(this.props.user.id, {
+                      productId: product.id,
+                      props: this.props,
+                      orderId: this.props.cart.id
+                    })
+                  }
+                >
+                  Add To Cart
+                </button>
               </div>
             )
           })
@@ -37,10 +57,16 @@ export class AllProducts extends React.Component {
 }
 
 const mapState = state => ({
-  products: state.products
+  products: state.products,
+  user: state.user,
+  cart: state.cart
 })
 
 const mapDispatch = dispatch => ({
+  showCart: id => dispatch(showCart(id)),
+  fetchProduct: id => dispatch(fetchProduct(id)),
+  addItemToCart: (userId, productId) =>
+    dispatch(addItemToCart(userId, productId)),
   getProducts: () => dispatch(getProducts())
 })
 
