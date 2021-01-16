@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 
 const CheckoutButton = props => {
   const {cart} = props
+  console.log('CART BTN PROPS', cart)
   return (
     <Link
       to={{
@@ -14,7 +15,7 @@ const CheckoutButton = props => {
         }
       }}
     >
-      <button disabled={!!cart.length}>Checkout</button>
+      <button disabled={!cart.products.length}>Checkout</button>
     </Link>
   )
 }
