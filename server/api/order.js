@@ -21,8 +21,8 @@ router.get('/cart/:userId', async (req, res, next) => {
       },
       include: [
         {
-          model: Product,
-          include: [Order]
+          model: Product
+          //include: Order
         }
       ]
     })
@@ -36,7 +36,7 @@ router.post('/cart/:userId', async (req, res, next) => {
   try {
     const orderProduct = await OrderProducts.findOrCreate({
       where: {
-        orderId: req.params.userId,
+        orderId: req.body.orderId,
         productId: req.body.productId
       }
     })
@@ -44,15 +44,39 @@ router.post('/cart/:userId', async (req, res, next) => {
       orderProduct[0].quantity += 1
       await orderProduct[0].save()
     }
-    res.send(orderProduct)
+    res.send(orderProduct[0])
   } catch (error) {
     next(error)
   }
 })
 
-router.delete('/:orderItemId', (req, res, next) => {
+router.put('/cart/:userId', async (req, res, next) => {
   try {
-    res.send(Order.destroy({where: {id: req.params.orderItemId}}))
+    console.log(req.body)
+    let userOrder = await OrderProducts.findAll({
+      where: {
+        orderId: req.body.orderId,
+        productId: req.body.productId
+      }
+    })
+    userOrder[0].quantity += parseInt(req.body.quantity)
+    await userOrder[0].save()
+    res.send(userOrder)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.delete('/cart/:userId', async (req, res, next) => {
+  try {
+    console.log(req.params, req.query)
+    await OrderProducts.destroy({
+      where: {
+        orderId: req.params.orderId,
+        productId: req.query.productId
+      }
+    })
+    res.send()
   } catch (error) {
     next(error)
   }

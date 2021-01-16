@@ -39,11 +39,13 @@ export const showCart = userId => {
   }
 }
 
-export const deleteCartItem = cartItem => {
+export const deleteCartItem = (userId, productId) => {
   return async dispatch => {
     try {
-      await axios.delete(`/api/cart/${cartItem.id}`)
-      dispatch(deleteFromCart(cartItem))
+      const {data} = await axios.delete(
+        `/api/order/cart/${userId}?productId=${productId}`
+      )
+      dispatch(showCart(userId))
     } catch (error) {
       console.error(error)
     }
@@ -61,13 +63,22 @@ export const updateCartQuantity = cartItem => {
   }
 }
 
-export const addItemToCart = (userId, productId) => {
+export const addItemToCart = (userId, orderInfo) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post(`/api/order/cart/${userId}`, {
-        productId: productId
-      })
+      const {data} = await axios.post(`/api/order/cart/${userId}`, orderInfo)
       dispatch(addToCart(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const incrementQuantity = (userId, orderInfo) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/order/cart/${userId}`, orderInfo)
+      dispatch(showCart(userId))
     } catch (error) {
       console.error(error)
     }
@@ -81,7 +92,7 @@ const initialState = []
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case SHOW_ALL_CART:
-      return (state = action.cartItems)
+      return action.cartItems
     case DELETE_FROM_CART:
       return state.filter(cartItem => cartItem.id !== action.cartItem.id)
     case UPDATE_CART_ITEM:
