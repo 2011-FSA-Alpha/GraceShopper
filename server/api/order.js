@@ -1,7 +1,11 @@
 const router = require('express').Router()
 
-//require order model from database
-const {Order, User, Product, OrderProducts} = require('../db/models')
+//require order, product and orderProducts model from database
+const {Order, Product, OrderProducts} = require('../db/models')
+
+// (ADMIN ROUTE)
+// GET api/orders
+// returns ALL orders with no filter
 
 router.get('/', async (req, res, next) => {
   try {
@@ -11,6 +15,24 @@ router.get('/', async (req, res, next) => {
     next(error)
   }
 })
+
+// (ADMIN ROUTE)
+// PUT api/:orderItemId
+// can update any order
+
+router.put('/:orderItemId', async (req, res, next) => {
+  try {
+    const updateItem = await Order.findByPk(req.params.orderItemId)
+    res.send(updateItem.update(req.body))
+  } catch (error) {
+    next(error)
+  }
+})
+
+// GET api/orders/cart/:userId
+// finds or creates a unique cart for the logged in user
+// includes Product model in order to have access to
+// quatity information
 
 router.get('/cart/:userId', async (req, res, next) => {
   try {
@@ -32,6 +54,11 @@ router.get('/cart/:userId', async (req, res, next) => {
   }
 })
 
+// POST api/orders/cart/:userId
+// finds or creates an instance of the product -> req.body.productId
+// within the cart -> req.body.orderId
+// If an instance exists it increments quantity
+
 router.post('/cart/:userId', async (req, res, next) => {
   try {
     const orderProduct = await OrderProducts.findOrCreate({
@@ -50,6 +77,10 @@ router.post('/cart/:userId', async (req, res, next) => {
   }
 })
 
+// PUT api/orders/cart/:userId
+// increments quantity userOrder.quantity with amount
+// spcified within req.body.quantity (either 1 or -1)
+
 router.put('/cart/:userId', async (req, res, next) => {
   try {
     console.log(req.body)
@@ -67,6 +98,9 @@ router.put('/cart/:userId', async (req, res, next) => {
   }
 })
 
+// DELETE api/orders/car/:userId
+// deletes specified instance from orderProducts Model
+
 router.delete('/cart/:userId', async (req, res, next) => {
   try {
     console.log(req.params, req.query)
@@ -77,15 +111,6 @@ router.delete('/cart/:userId', async (req, res, next) => {
       }
     })
     res.send()
-  } catch (error) {
-    next(error)
-  }
-})
-
-router.put('/:orderItemId', async (req, res, next) => {
-  try {
-    const updateItem = await Order.findByPk(req.params.orderItemId)
-    res.send(updateItem.update(req.body))
   } catch (error) {
     next(error)
   }
