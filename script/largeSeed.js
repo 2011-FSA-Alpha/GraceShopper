@@ -28,7 +28,7 @@ async function largeSeed() {
     randomProduct.push({
       title: faker.commerce.productName(),
       description: faker.commerce.productDescription(),
-      price: faker.commerce.price(),
+      price: faker.random.number(),
       imageUrl: faker.image.imageUrl(),
       totalDownloads: faker.random.number(),
       likes: faker.random.number(),
@@ -36,6 +36,18 @@ async function largeSeed() {
       userId: randomUserId
     })
   }
+
+  await Promise.all(
+    randomUser.map(user => {
+      return User.create(user)
+    })
+  )
+
+  await Promise.all(
+    randomProduct.map(product => {
+      return Product.create(product)
+    })
+  )
 
   for (let i = 0; i <= 1000; i++) {
     const randomUser = Math.floor(Math.random() * 200)
@@ -77,9 +89,6 @@ async function largeSeed() {
   }
 }
 
-// We've separated the `seed` function from the `runSeed` function.
-// This way we can isolate the error handling and exit trapping.
-// The `seed` function is concerned only with modifying the database.
 async function runSeed() {
   console.log('seeding...')
   try {
@@ -94,12 +103,8 @@ async function runSeed() {
   }
 }
 
-// Execute the `seed` function, IF we ran this module directly (`node seed`).
-// `Async` functions always return a promise, so we can use `catch` to handle
-// any errors that might occur inside of `seed`.
 if (module === require.main) {
   runSeed()
 }
 
-// we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+module.exports = largeSeed

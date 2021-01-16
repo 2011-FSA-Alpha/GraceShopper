@@ -16,8 +16,7 @@ const Product = db.define('product', {
   },
   imageUrl: {
     type: Sequelize.TEXT,
-    allowNull: false,
-    unique: true
+    allowNull: false
   },
   totalDownloads: {
     type: Sequelize.INTEGER,
