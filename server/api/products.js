@@ -44,7 +44,7 @@ router.put(':/productId', adminOnly, async (req, res, next) => {
     const updateProd = await Product.findByPk(req.params.productId)
     const {title, description, price, imageURL, tags} = req.body
     res.send(
-      updateProd.update({
+      await updateProd.update({
         title,
         description,
         price,
@@ -57,9 +57,9 @@ router.put(':/productId', adminOnly, async (req, res, next) => {
   }
 })
 
-router.delete(':/productId', adminOnly, (req, res, next) => {
+router.delete(':/productId', adminOnly, async (req, res, next) => {
   try {
-    res.send(Product.destroy({where: {id: req.params.productId}}))
+    res.send(await Product.destroy({where: {id: req.params.productId}}))
   } catch (error) {
     next(error)
   }
