@@ -4,6 +4,7 @@ import {getProducts} from '../store/products'
 import {Link} from 'react-router-dom'
 import {addItemToCart, showCart} from '../store/cart'
 import {SingleProduct, fetchProduct} from './SingleProduct'
+import FilterBar from './FilterBar'
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ export class AllProducts extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <FilterBar {...this.props} />
         {this.props.products[0] ? (
           this.props.products.map(product => {
             return (

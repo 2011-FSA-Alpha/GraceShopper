@@ -8,16 +8,31 @@ class FilterBar extends Component {
   }
 
   render() {
-    // Lopp through this to find all tags
+    // Loop through this to find all tags
     console.log('AllProducts props', this.props.products)
     let tags = []
     console.log(
       this.props.products.map(product =>
-        product.tags.forEach(tag => tags.push(tag))
+        product.tags.forEach(tag => {
+          if (!tags.includes(tag)) tags.push(tag)
+        })
       )
     )
     console.log(tags)
-    return <div>Hello</div>
+    return (
+      <div>
+        <span>Filter by:</span>
+        <select onChange={this.props.handleChange}>
+          {tags.map(tag => {
+            return (
+              <option value={`${tag}`} key={tag}>
+                {tag}
+              </option>
+            )
+          })}
+        </select>
+      </div>
+    )
   }
 }
 
