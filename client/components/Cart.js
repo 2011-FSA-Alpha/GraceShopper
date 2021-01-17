@@ -24,6 +24,9 @@ export class Cart extends React.Component {
     if (prevProps.user !== this.props.user) {
       this.props.showCart(this.props.user.id)
     }
+    //if (prevProps.cart.products !== this.props.cart.products) {
+    //  this.setState
+    //}
   }
 
   render() {

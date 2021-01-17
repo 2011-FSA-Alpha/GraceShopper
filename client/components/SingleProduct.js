@@ -28,7 +28,7 @@ export class SingleProduct extends React.Component {
               onClick={() =>
                 this.props.addItemToCart(this.props.user.id, {
                   productId: product.id,
-                  orderId: this.props.cart.id
+                  orderId: this.props.user.orders[0].id
                 })
               }
             >

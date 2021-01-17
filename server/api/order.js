@@ -61,6 +61,7 @@ router.get('/cart/:userId', async (req, res, next) => {
 
 router.post('/cart/:userId', async (req, res, next) => {
   try {
+    console.log(req.body, req.params)
     const orderProduct = await OrderProducts.findOrCreate({
       where: {
         orderId: req.body.orderId,
@@ -103,7 +104,6 @@ router.put('/cart/:userId', async (req, res, next) => {
 
 router.delete('/cart/:userId', async (req, res, next) => {
   try {
-    console.log(req.params, req.query)
     await OrderProducts.destroy({
       where: {
         orderId: req.query.orderId,
