@@ -2,10 +2,6 @@ import React, {Component} from 'react'
 import AllProducts from './AllProducts'
 
 class Home extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <div>
