@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {getProducts} from '../store/products'
 import {Link} from 'react-router-dom'
 import {addItemToCart, showCart} from '../store/cart'
-import {SingleProduct, fetchProduct} from './SingleProduct'
+import {fetchProduct} from './SingleProduct'
 import FilterBar from './FilterBar'
 
 export class AllProducts extends React.Component {
@@ -11,7 +11,7 @@ export class AllProducts extends React.Component {
     super(props)
 
     this.state = {
-      currentlyDisplayed: this.props.products
+      currentlyDisplayed: []
     }
   }
 
@@ -22,19 +22,25 @@ export class AllProducts extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.products !== this.props.products) {
       this.props.showCart(this.props.user.id)
+      this.setState({currentlyDisplayed: [...this.props.products]})
     }
   }
 
   handleChange = e => {
-    console.log(e.target.value)
+    const filteredProducts = this.props.products.filter(image => {
+      if (image.tags.includes(e.target.value)) {
+        return image
+      }
+    })
+    this.setState({currentlyDisplayed: filteredProducts})
   }
 
   render() {
     return (
       <React.Fragment>
         <FilterBar {...this.props} handleChange={this.handleChange} />
-        {this.props.products[0] ? (
-          this.props.products.map(product => {
+        {this.state.currentlyDisplayed ? (
+          this.state.currentlyDisplayed.map(product => {
             return (
               <div key={product.title}>
                 <Link to={`/products/${product.id}`}>
