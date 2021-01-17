@@ -9,7 +9,7 @@ const {Order, Product, OrderProducts} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    const orderItems = await OrderProducts.findAll()
+    const orderItems = await OrderProducts.findAll({})
     res.send(orderItems)
   } catch (error) {
     next(error)
@@ -83,7 +83,6 @@ router.post('/cart/:userId', async (req, res, next) => {
 
 router.put('/cart/:userId', async (req, res, next) => {
   try {
-    console.log(req.body)
     let userOrder = await OrderProducts.findAll({
       where: {
         orderId: req.body.orderId,
@@ -103,7 +102,6 @@ router.put('/cart/:userId', async (req, res, next) => {
 
 router.delete('/cart/:userId', async (req, res, next) => {
   try {
-    console.log(req.params, req.query)
     await OrderProducts.destroy({
       where: {
         orderId: req.query.orderId,
