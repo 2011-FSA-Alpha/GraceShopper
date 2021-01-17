@@ -9,9 +9,11 @@ enzyme.configure({adapter})
 
 describe('OrderConfirmed', () => {
   let orderConfirmed
+  let cartId = 9
+  let total = 100
 
   beforeEach(() => {
-    orderConfirmed = shallow(<OrderConfirmed orderId="952" total="100.00" />)
+    orderConfirmed = shallow(<OrderConfirmed />)
   })
 
   it('renders a confirmed message', () => {
@@ -20,17 +22,5 @@ describe('OrderConfirmed', () => {
 
   it('renders a summary', () => {
     expect(orderConfirmed.find('h3').length).to.equal(2)
-  })
-
-  it('renders an order number', () => {
-    expect(orderConfirmed.find('h3.order-id').text()).to.equal(
-      'Your order number is: #952'
-    )
-  })
-
-  it('renders an order total', () => {
-    expect(orderConfirmed.find('h3.order-total').text()).to.contain(
-      'Your total is: 100.00'
-    )
   })
 })
