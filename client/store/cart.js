@@ -76,6 +76,20 @@ export const incrementQuantity = (userId, cartItem) => {
   }
 }
 
+export const checkoutOrder = userId => {
+  return async dispatch => {
+    try {
+      const {data} = await Promise.all([
+        axios.put(`/api/order/cart/${userId}/checkout`),
+        axios.get(`/api/order/cart/${userId}`)
+      ])
+      dispatch(showAllCart(userId))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 //Initial State
 const initialState = {}
 

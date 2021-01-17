@@ -30,7 +30,10 @@ export class AllProducts extends React.Component {
             return (
               <div key={product.title}>
                 <Link to={`/products/${product.id}`}>
-                  <img src={product.imageUrl} />
+                  <img
+                    style={{height: '65%', width: '65%'}}
+                    src={product.imageUrl}
+                  />
                   <h2>{product.title}</h2>
                 </Link>
                 <button
