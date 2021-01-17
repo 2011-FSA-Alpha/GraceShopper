@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 
 const CheckoutButton = props => {
   const {cart} = props
-  console.log('CART BTN PROPS', cart)
   return (
     <Link
       to={{

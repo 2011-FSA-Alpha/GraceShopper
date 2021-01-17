@@ -32,7 +32,7 @@ router.put('/:orderItemId', async (req, res, next) => {
 // GET api/order/cart/:userId
 // finds or creates a unique cart for the logged in user
 // includes Product model in order to have access to
-// quatity information
+// quantity information
 
 router.get('/cart/:userId', async (req, res, next) => {
   try {

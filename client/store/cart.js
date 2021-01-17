@@ -90,7 +90,10 @@ export const incrementQuantity = (userId, orderInfo) => {
 export const checkoutOrder = userId => {
   return async dispatch => {
     try {
-      const {data} = await axios.put(`/api/order/cart/${userId}/checkout`)
+      const {data} = await Promise.all([
+        axios.put(`/api/order/cart/${userId}/checkout`),
+        axios.get(`/api/order/cart/${userId}`)
+      ])
       dispatch(showAllCart(userId))
     } catch (error) {
       console.error(error)
