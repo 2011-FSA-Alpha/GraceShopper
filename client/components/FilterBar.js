@@ -3,13 +3,12 @@ import React, {Component} from 'react'
 class FilterBar extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {}
   }
 
   render() {
     // Loop through this to find all tags
-    console.log('AllProducts props', this.props.products)
+    console.log('FilterBar products props', this.props.products)
+    console.log('FilterBar products props', this.props)
     let tags = []
     console.log(
       this.props.products.map(product =>

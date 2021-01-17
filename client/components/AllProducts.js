@@ -10,7 +10,9 @@ export class AllProducts extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+      currentlyDisplayed: this.props.products
+    }
   }
 
   componentDidMount() {
@@ -23,10 +25,14 @@ export class AllProducts extends React.Component {
     }
   }
 
+  handleChange = e => {
+    console.log(e.target.value)
+  }
+
   render() {
     return (
       <React.Fragment>
-        <FilterBar {...this.props} />
+        <FilterBar {...this.props} handleChange={this.handleChange} />
         {this.props.products[0] ? (
           this.props.products.map(product => {
             return (
