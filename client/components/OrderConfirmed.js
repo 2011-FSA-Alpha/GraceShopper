@@ -1,6 +1,11 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import store from '../store'
+import {checkoutOrder} from '../store/cart'
 
 export default function OrderConfirmed(props) {
+  console.log('PROPS LOCATION', props.location.cartProps)
+  const userId = props.location.cartProps.cart.userId
+  const cartId = props.location.cartProps.cart.id
   let total
   if (props.location.cartProps.cart.products.length === 1) {
     total =
@@ -12,8 +17,10 @@ export default function OrderConfirmed(props) {
     )
   }
 
-  const cartId = props.location.cartProps.cart.id
-  console.log('CURRENT TOTAL', total)
+  useEffect(() => {
+    store.dispatch(checkoutOrder(userId))
+  })
+
   return (
     <div>
       <h1>🥳 Order Confirmed 🥳</h1>
