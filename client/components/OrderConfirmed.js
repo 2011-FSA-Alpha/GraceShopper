@@ -3,7 +3,6 @@ import store from '../store'
 import {checkoutOrder} from '../store/cart'
 
 export default function OrderConfirmed(props) {
-  console.log('PROPS LOCATION', props.location.cartProps)
   const userId = props.location.cartProps.cart.userId
   const cartId = props.location.cartProps.cart.id
   const cartLength = props.location.cartProps.cart.products.length
