@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {loadState} from '../loadState'
 
 /**
  * ACTION TYPES
@@ -39,11 +40,20 @@ const removeUser = () => ({type: REMOVE_USER})
 
 export const getDefaultUser = () => async dispatch => {
   try {
-    console.log(defaultUser)
-    const res = await axios.get(
-      `/api/users?name=${defaultUser.name}&email=${defaultUser.email}`
-    )
-    dispatch(getUser(res.data))
+    const storedState = loadState()
+    if (storedState) {
+      const res = await axios.get(
+        `/api/users?name=${storedState.user.name}&email=${
+          storedState.user.email
+        }`
+      )
+      dispatch(getUser(res.data))
+    } else {
+      const res = await axios.get(
+        `/api/users?name=${defaultUser.name}&email=${defaultUser.email}`
+      )
+      dispatch(getUser(res.data))
+    }
   } catch (error) {
     console.error(error)
   }
