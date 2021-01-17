@@ -4,13 +4,14 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ['id', 'email', 'name']
+    console.log('hello', req.query)
+    const users = await User.findOrCreate({
+      where: {
+        name: req.query.name,
+        email: req.query.email
+      }
     })
-    res.json(users)
+    res.send(users[0])
   } catch (err) {
     next(err)
   }

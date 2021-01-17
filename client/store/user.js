@@ -10,7 +10,22 @@ const REMOVE_USER = 'REMOVE_USER'
 /**
  * INITIAL STATE
  */
-const defaultUser = {}
+const defaultUser = {
+  name: Math.random()
+    .toString(36)
+    .replace(/[^a-z]+/g, '')
+    .substr(0, 10),
+  email:
+    Math.random()
+      .toString(36)
+      .replace(/[^a-z]+/g, '')
+      .substr(0, 10) +
+    '@' +
+    Math.random()
+      .toString(36)
+      .replace(/[^a-z]+/g, '')
+      .substr(0, 10)
+}
 
 /**
  * ACTION CREATORS
@@ -21,10 +36,27 @@ const removeUser = () => ({type: REMOVE_USER})
 /**
  * THUNK CREATORS
  */
+
+export const getDefaultUser = () => async dispatch => {
+  try {
+    console.log(defaultUser)
+    const res = await axios.get(
+      `/api/users?name=${defaultUser.name}&email=${defaultUser.email}`
+    )
+    dispatch(getUser(res.data))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    if (res.data) {
+      dispatch(getUser(res.data))
+    } else {
+      dispatch(getDefaultUser())
+    }
   } catch (err) {
     console.error(err)
   }
