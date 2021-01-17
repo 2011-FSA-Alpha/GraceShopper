@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import NavBar from './navbar'
 import AllProducts from './AllProducts'
 
 class Home extends Component {
