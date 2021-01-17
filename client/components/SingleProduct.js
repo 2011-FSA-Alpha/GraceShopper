@@ -8,6 +8,12 @@ export class SingleProduct extends React.Component {
     this.props.fetchProduct(this.props.match.params.id)
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.products !== this.props.products) {
+      this.props.showCart(this.props.user.id)
+    }
+  }
+
   render() {
     console.log(this.props)
     let product = this.props.product
@@ -28,7 +34,7 @@ export class SingleProduct extends React.Component {
               onClick={() =>
                 this.props.addItemToCart(this.props.user.id, {
                   productId: product.id,
-                  orderId: this.props.user.orders[0].id
+                  orderId: this.props.cart.id
                 })
               }
             >

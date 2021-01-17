@@ -9,7 +9,7 @@ const {Order, Product, OrderProducts} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    const orderItems = await OrderProducts.findAll()
+    const orderItems = await OrderProducts.findAll({})
     res.send(orderItems)
   } catch (error) {
     next(error)
@@ -61,7 +61,6 @@ router.get('/cart/:userId', async (req, res, next) => {
 
 router.post('/cart/:userId', async (req, res, next) => {
   try {
-    console.log(req.body, req.params)
     const orderProduct = await OrderProducts.findOrCreate({
       where: {
         orderId: req.body.orderId,
@@ -84,7 +83,6 @@ router.post('/cart/:userId', async (req, res, next) => {
 
 router.put('/cart/:userId', async (req, res, next) => {
   try {
-    console.log(req.body)
     let userOrder = await OrderProducts.findAll({
       where: {
         orderId: req.body.orderId,

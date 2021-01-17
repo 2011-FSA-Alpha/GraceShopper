@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 //Action Types
-const GET_CART = 'SHOW_ALL_CART'
+const GET_CART = 'GET_CART'
 const DELETE_FROM_CART = 'DELETE_FROM_CART'
 const UPDATE_CART_ITEM = 'UPDATE_CART_ITEM'
 const ADD_TO_CART = 'ADD_TO_CART'
@@ -57,7 +57,6 @@ export const deleteCartItem = (userId, cartItem) => {
 export const addItemToCart = (userId, cartItem) => {
   return async dispatch => {
     try {
-      console.log(cartItem)
       const {data} = await axios.post(`/api/order/cart/${userId}`, cartItem)
       dispatch(addToCart(data))
     } catch (error) {
@@ -84,6 +83,12 @@ const initialState = {}
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
+      if (!action.cartItems.products) {
+        return {
+          ...action.cartItems,
+          products: []
+        }
+      }
       return action.cartItems
     case DELETE_FROM_CART:
       return {
