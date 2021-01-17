@@ -9,7 +9,8 @@ import {
   Cart,
   AllProducts,
   SingleProduct,
-  OrderConfirmed
+  OrderConfirmed,
+  Home
 } from './components'
 import {me} from './store'
 
@@ -27,7 +28,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed hort.authenticate('google', {scope: ['email', 'profile']})ere are available to all visitors */}
-        <Route exact path="/" component={AllProducts} />
+        <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/product" component={SingleProduct} />
