@@ -88,7 +88,6 @@ export const incrementQuantity = (userId, orderInfo) => {
 }
 
 export const checkoutOrder = userId => {
-  console.log('CHECKOUT_THUNK_HIT')
   return async dispatch => {
     try {
       const {data} = await axios.put(`/api/order/cart/${userId}/checkout`)

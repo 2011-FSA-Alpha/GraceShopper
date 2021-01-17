@@ -6,13 +6,19 @@ export default function OrderConfirmed(props) {
   console.log('PROPS LOCATION', props.location.cartProps)
   const userId = props.location.cartProps.cart.userId
   const cartId = props.location.cartProps.cart.id
+  const cartLength = props.location.cartProps.cart.products.length
   let total
-  if (props.location.cartProps.cart.products.length === 1) {
-    total =
-      props.location.cartProps.cart.products[0].price *
+
+  if (cartLength === 1) {
+    const price = props.location.cartProps.cart.products[0].price
+    const quantity =
       props.location.cartProps.cart.products[0].orderproducts.quantity
+
+    total = price * quantity
   } else {
-    total = props.location.cartProps.cart.products.reduce(
+    const products = props.location.cartProps.cart.products
+
+    total = products.reduce(
       (a, b) => b.price * b.orderproducts.quantity + a.price
     )
   }
