@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import OrderHistory from './OrderHistory'
 
 /**
  * COMPONENT
@@ -11,6 +12,8 @@ export const UserHome = props => {
   return (
     <div>
       <h3>Welcome to your Wallpaper account, {firstName}!</h3>
+      <h4>Past Orders:</h4>
+      <OrderHistory />
     </div>
   )
 }

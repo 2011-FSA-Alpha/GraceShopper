@@ -160,42 +160,46 @@ async function seed() {
   await fourthCart.addProducts([imgTwo, imgOne, imgThree])
 
   // Create Order History
-  const closedOrderRicky = await Order.findOrCreate({
-    where: {
-      userId: ricky.id,
-      paid: true
-    }
+  const closedOrderRicky = await Order.create({
+    userId: ricky.id,
+    paid: true
   })
 
-  const closedOrderMorgan = await Order.findOrCreate({
-    where: {
-      userId: morgan.id,
-      paid: true
-    }
+  const closedOrderMorgan = await Order.create({
+    userId: morgan.id,
+    paid: true
   })
 
-  const closedOrderAzriel = await Order.findOrCreate({
-    where: {
-      userId: azriel.id,
-      paid: true
-    }
+  const closedOrderAzriel = await Order.create({
+    userId: azriel.id,
+    paid: true
   })
 
-  const closedOrderNed = await Order.findOrCreate({
-    where: {
-      userId: ned.id,
-      paid: true
-    }
+  const closedOrderNed = await Order.create({
+    userId: ned.id,
+    paid: true
+  })
+  const closedOrderNedTwo = await Order.create({
+    userId: ned.id,
+    paid: true
+  })
+  const closedOrderNedThree = await Order.create({
+    userId: ned.id,
+    paid: true
+  })
+  const closedOrderNedFour = await Order.create({
+    userId: ned.id,
+    paid: true
   })
 
-  await closedOrderRicky[0].addProducts([
+  await closedOrderRicky.addProducts([
     imgOne,
     imgTwo,
     imgThree,
     imgFour,
     imgSix
   ])
-  await closedOrderMorgan[0].addProducts([
+  await closedOrderMorgan.addProducts([
     imgFour,
     imgSix,
     imgOne,
@@ -203,8 +207,11 @@ async function seed() {
     imgThree
   ])
 
-  await closedOrderAzriel[0].addProducts([imgTwo, imgOne, imgThree])
-  await closedOrderNed[0].addProducts([imgOne])
+  await closedOrderAzriel.addProducts([imgTwo, imgOne, imgThree])
+  await closedOrderNed.addProducts([imgOne, imgTwo, imgThree])
+  await closedOrderNedTwo.addProducts([imgOne, imgThree])
+  await closedOrderNedThree.addProducts([imgFour, imgFive, imgSix])
+  await closedOrderNedFour.addProducts([imgOne, imgFour])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${product.length} cart`)
