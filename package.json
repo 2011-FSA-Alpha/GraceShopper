@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "node start & webpack -p",
+    "build": "node server & webpack -p",
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
