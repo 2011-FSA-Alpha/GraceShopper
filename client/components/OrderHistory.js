@@ -4,12 +4,10 @@ import {fetchOrderHistory} from '../store/orderHistory'
 
 export class OrderHistory extends Component {
   componentDidMount() {
-    console.log('OrderHistory PROPS', this.props)
     this.props.fetchOrderHistory(this.props.user.id)
   }
 
   render() {
-    console.log(this.props.orderHistory)
     const {orderHistory} = this.props
 
     return (

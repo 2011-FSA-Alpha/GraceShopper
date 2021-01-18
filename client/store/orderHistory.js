@@ -12,7 +12,6 @@ export const fetchOrderHistory = userId => {
     try {
       const {data} = await axios.get(`/api/order/history/${userId}`)
       const pastOrders = data
-      console.log('pastOrders', pastOrders)
       dispatch(getOrderHistory(pastOrders))
     } catch (error) {
       console.error(error)
