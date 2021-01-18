@@ -1,8 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {fetchOrderHistory} from '../store/orderHistory'
 
 export class OrderHistory extends Component {
+  componentDidMount() {
+    console.log('OrderHistory PROPS', this.props)
+    this.props.fetchOrderHistory(this.props.user.id)
+  }
+
   render() {
+    console.log(this.props)
     return (
       <div>
         {/* Map through the order history */}
@@ -13,7 +20,12 @@ export class OrderHistory extends Component {
 }
 
 const mapState = state => ({
-  orderHistory: state.orders
+  user: state.user,
+  orderHistory: state.orderHistory
 })
 
-export default connect(mapState, null)(OrderHistory)
+const mapDispatch = dispatch => ({
+  fetchOrderHistory: userId => dispatch(fetchOrderHistory(userId))
+})
+
+export default connect(mapState, mapDispatch)(OrderHistory)

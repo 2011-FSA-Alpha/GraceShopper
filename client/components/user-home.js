@@ -13,7 +13,7 @@ export const UserHome = props => {
     <div>
       <h3>Welcome to your Wallpaper account, {firstName}!</h3>
       <h4>Past Orders:</h4>
-      {/* <OrderHistory /> */}
+      <OrderHistory />
     </div>
   )
 }
