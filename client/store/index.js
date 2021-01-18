@@ -7,12 +7,14 @@ import cartReducer from './cart'
 import productsReducer from './products'
 import singleProduct from './singleProduct'
 import {saveState} from '../loadState'
+import historyReducer from './orderHistory'
 
 const reducer = combineReducers({
   user,
   cart: cartReducer,
   products: productsReducer,
-  product: singleProduct
+  product: singleProduct,
+  orderHistory: historyReducer
 })
 
 const middleware = composeWithDevTools(

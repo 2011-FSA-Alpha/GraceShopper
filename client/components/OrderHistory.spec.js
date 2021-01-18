@@ -7,4 +7,8 @@ import OrderHistory from './OrderHistory'
 const adapter = new Adapter()
 enzyme.configure({adapter})
 
-describe('OrderHistory', () => {})
+describe('OrderHistory', () => {
+  beforeEach(() => {
+    const wrapper = shallow(<OrderHistory />)
+  })
+})
