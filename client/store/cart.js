@@ -1,14 +1,14 @@
 import axios from 'axios'
 
 //Action Types
-const SHOW_ALL_CART = 'SHOW_ALL_CART'
+const GET_CART = 'GET_CART'
 const DELETE_FROM_CART = 'DELETE_FROM_CART'
 const UPDATE_CART_ITEM = 'UPDATE_CART_ITEM'
 const ADD_TO_CART = 'ADD_TO_CART'
 
 //Action Creators
 const showAllCart = cartItems => ({
-  type: SHOW_ALL_CART,
+  type: GET_CART,
   cartItems
 })
 
@@ -39,36 +39,25 @@ export const showCart = userId => {
   }
 }
 
-export const deleteCartItem = (userId, requestInfo) => {
+export const deleteCartItem = (userId, cartItem) => {
   return async dispatch => {
     try {
       const {data} = await axios.delete(
-        `/api/order/cart/${userId}?productId=${requestInfo.productId}&orderId=${
-          requestInfo.orderId
+        `/api/order/cart/${userId}?productId=${cartItem.productId}&orderId=${
+          cartItem.orderId
         }`
       )
-      dispatch(showCart(userId))
+      dispatch(deleteFromCart(cartItem))
     } catch (error) {
       console.error(error)
     }
   }
 }
 
-export const updateCartQuantity = cartItem => {
+export const addItemToCart = (userId, cartItem) => {
   return async dispatch => {
     try {
-      const {data} = await axios.put(`/api/cart/${cartItem.id}`, cartItem)
-      dispatch(updateCartItem(data))
-    } catch (error) {
-      console.error(error)
-    }
-  }
-}
-
-export const addItemToCart = (userId, orderInfo) => {
-  return async dispatch => {
-    try {
-      const {data} = await axios.post(`/api/order/cart/${userId}`, orderInfo)
+      const {data} = await axios.post(`/api/order/cart/${userId}`, cartItem)
       dispatch(addToCart(data))
     } catch (error) {
       console.error(error)
@@ -76,11 +65,25 @@ export const addItemToCart = (userId, orderInfo) => {
   }
 }
 
-export const incrementQuantity = (userId, orderInfo) => {
+export const incrementQuantity = (userId, cartItem) => {
   return async dispatch => {
     try {
-      const {data} = await axios.put(`/api/order/cart/${userId}`, orderInfo)
-      dispatch(showCart(userId))
+      const {data} = await axios.put(`/api/order/cart/${userId}`, cartItem)
+      dispatch(updateCartItem(cartItem))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const checkoutOrder = userId => {
+  return async dispatch => {
+    try {
+      const {data} = await Promise.all([
+        axios.put(`/api/order/cart/${userId}/checkout`),
+        axios.get(`/api/order/cart/${userId}`)
+      ])
+      dispatch(showAllCart(userId))
     } catch (error) {
       console.error(error)
     }
@@ -88,23 +91,50 @@ export const incrementQuantity = (userId, orderInfo) => {
 }
 
 //Initial State
-const initialState = []
+const initialState = {}
 
 //Reducer
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
-    case SHOW_ALL_CART:
+    case GET_CART:
+      if (!action.cartItems.products) {
+        return {
+          ...action.cartItems,
+          products: []
+        }
+      }
       return action.cartItems
     case DELETE_FROM_CART:
-      return state.filter(cartItem => cartItem.id !== action.cartItem.id)
+      return {
+        ...state,
+        products: state.products.filter(product => {
+          if (product.id !== action.cartItem.productId) {
+            return product
+          }
+        })
+      }
     case UPDATE_CART_ITEM:
-      return state.map(
-        cartItem =>
-          cartItem.id === action.cartItem.id ? action.cartItem : cartItem
-      )
+      return {
+        ...state,
+        products: state.products.map(product => {
+          if (product.id === action.cartItem.productId) {
+            product.orderproducts.quantity += action.cartItem.quantity
+            return product
+          }
+          return product
+        })
+      }
     case ADD_TO_CART:
-      return [...state, action.product]
-
+      return {
+        ...state,
+        products: state.products.map(product => {
+          if (product.id === action.product.productId) {
+            product.orderproducts = action.product
+            return product
+          }
+          return product
+        })
+      }
     default:
       return state
   }

@@ -4,14 +4,14 @@ import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import {logout} from '../store'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const NavBar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>BOILERMAKER</h1>
+    <h1>wallpaper</h1>
     <nav>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <NavLink to="/home" color="blue">
+          <NavLink to="/" color="blue">
             Home
           </NavLink>
           <NavLink to="/products" color="blue">
@@ -20,8 +20,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <NavLink to="/cart" color="blue">
             Cart
           </NavLink>
-          <NavLink to="/user" color="blue">
-            User Profile
+          <NavLink to="/profile" color="blue">
+            Profile
           </NavLink>
           <a href="#" onClick={handleClick}>
             Logout
@@ -29,7 +29,6 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         </div>
       ) : (
         <div>
-          {/*before login*/}
           {/* The navbar will show these links before you log in */}
           <NavLink to="/home" color="blue">
             Home
@@ -40,15 +39,14 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <NavLink to="/cart" color="blue">
             Cart
           </NavLink>
-          <NavLink to="/user" color="blue">
-            User Profile
+          <NavLink to="/profile" color="blue">
+            Profile
           </NavLink>
           <NavLink to="/login">Login</NavLink>
           <NavLink to="/signup">Sign Up</NavLink>
         </div>
       )}
     </nav>
-    <hr />
   </div>
 )
 
@@ -69,12 +67,12 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(NavBar)
 
 /**
  * PROP TYPES
  */
-Navbar.propTypes = {
+NavBar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }
