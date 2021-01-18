@@ -15,7 +15,6 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     let product = this.props.product
     return (
       <React.Fragment>
