@@ -9,12 +9,16 @@ export class OrderHistory extends Component {
 
   render() {
     const {orderHistory} = this.props
-
+    console.log(this.props)
     return (
       <div>
         {orderHistory.map(order => {
           return (
-            <div key={order.id} style={{width: '80%'}}>
+            <div
+              key={order.id}
+              style={{width: '80%'}}
+              className="order-history"
+            >
               <h3>Order #: {order.id}</h3>
               {order.products.map(product => {
                 return (
