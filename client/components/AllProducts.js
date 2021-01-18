@@ -42,7 +42,7 @@ export class AllProducts extends React.Component {
         {this.state.currentlyDisplayed ? (
           this.state.currentlyDisplayed.map(product => {
             return (
-              <div key={product.title}>
+              <div key={Math.ceil(Math.random() * 1000)}>
                 <Link to={`/products/${product.id}`}>
                   <img
                     style={{height: '65%', width: '65%'}}
