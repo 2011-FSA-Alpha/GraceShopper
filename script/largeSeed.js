@@ -6,6 +6,7 @@ const {User, Order, Product} = require('../server/db/models')
 const randomUser = []
 const randomProduct = []
 
+// eslint-disable-next-line complexity
 async function largeSeed() {
   for (let i = 0; i <= 200; i++) {
     const randomUserId = Math.ceil(Math.random() * 200)
@@ -67,7 +68,7 @@ async function largeSeed() {
     // Build Order History
     const [closedOrder] = await Order.findOrCreate({
       where: {
-        userId: Math.random() * 200,
+        userId: Math.ceil(Math.random() * 200),
         paid: true
       }
     })
@@ -75,6 +76,7 @@ async function largeSeed() {
     const randomOrderHistoryLength = Math.ceil(Math.random() * 10)
     let randomOrderHistory = []
     for (let n = 0; n < randomOrderHistoryLength; n++) {
+      console.log(n)
       randomOrderHistory.push(Math.ceil(Math.random() * 200))
     }
 
