@@ -20,8 +20,8 @@ const NavBar = ({handleClick, isLoggedIn}) => (
           <NavLink to="/cart" color="blue">
             Cart
           </NavLink>
-          <NavLink to="/user" color="blue">
-            User Profile
+          <NavLink to="/profile" color="blue">
+            Profile
           </NavLink>
           <a href="#" onClick={handleClick}>
             Logout
@@ -40,8 +40,8 @@ const NavBar = ({handleClick, isLoggedIn}) => (
           <NavLink to="/cart" color="blue">
             Cart
           </NavLink>
-          <NavLink to="/user" color="blue">
-            User Profile
+          <NavLink to="/profile" color="blue">
+            Profile
           </NavLink>
           <NavLink to="/login">Login</NavLink>
           <NavLink to="/signup">Sign Up</NavLink>
