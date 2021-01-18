@@ -138,4 +138,19 @@ router.put('/cart/:userId/checkout', async (req, res, next) => {
   }
 })
 
+// GET /api/order/history/:userId
+// Gets a Users order history
+
+router.get('/history/:userId', async (req, res, next) => {
+  try {
+    const history = await Order.findAll({
+      where: {paid: true, userId: req.params.userId},
+      include: Product
+    })
+    res.send(history)
+  } catch (error) {
+    next(err)
+  }
+})
+
 module.exports = router
