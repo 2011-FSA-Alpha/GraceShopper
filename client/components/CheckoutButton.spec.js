@@ -1,8 +1,8 @@
 import {expect} from 'chai'
-import React from 'react'
+import React, {useState} from 'react'
 import enzyme, {shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import CheckoutButton from './CheckoutButton'
+import CheckoutButton, {setLoading} from './CheckoutButton'
 
 const adapter = new Adapter()
 enzyme.configure({adapter})
@@ -10,11 +10,12 @@ enzyme.configure({adapter})
 describe('CheckoutButton', () => {
   let checkoutButton
 
-  beforeEach(() => {
-    checkoutButton = shallow(<CheckoutButton />)
+  it('renders', () => {
+    shallow(<CheckoutButton />)
   })
 
-  it('renders a button', () => {
-    expect(checkoutButton.find('button')).to.have.length(1)
+  it('renders a loading screen', () => {
+    checkoutButton = shallow(<CheckoutButton />)
+    expect(checkoutButton.find('div').text()).to.contain('Loading...')
   })
 })
