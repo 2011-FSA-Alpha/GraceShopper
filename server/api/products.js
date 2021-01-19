@@ -7,7 +7,7 @@ module.exports = router
 // GET /api/products
 router.get('/', async (req, res, next) => {
   try {
-    const users = await Product.findAll({})
+    const users = await Product.findAll()
     res.json(users)
   } catch (err) {
     next(err)
@@ -23,7 +23,7 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
-router.post('/:productId', adminOnly, async (req, res, next) => {
+router.post('/', adminOnly, async (req, res, next) => {
   try {
     const {title, description, price, imageUrl, tags} = req.body
     const newProduct = await Product.create({
