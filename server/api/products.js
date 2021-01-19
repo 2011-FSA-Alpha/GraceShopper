@@ -7,7 +7,6 @@ module.exports = router
 // GET /api/products
 router.get('/', async (req, res, next) => {
   try {
-    console.log('REQ.USER---->', req.user.adminStatus)
     const users = await Product.findAll({})
     res.json(users)
   } catch (err) {

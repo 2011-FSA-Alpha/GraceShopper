@@ -135,20 +135,24 @@ router.delete('/cart/:userId', async (req, res, next) => {
 
 router.put('/cart/:userId/checkout', async (req, res, next) => {
   try {
-    const userOrder = await Order.findOrCreate({
-      where: {
-        userId: req.params.userId,
-        paid: false
-      },
-      include: [
-        {
-          model: Product
-        }
-      ]
-    })
-    userOrder[0].paid = true
-    await userOrder[0].save()
-    res.send(userOrder)
+    if (!req.user || req.user.id != req.params.userId) {
+      res.send("INVALID CART! You cannot view another user's order history")
+    } else {
+      const userOrder = await Order.findOrCreate({
+        where: {
+          userId: req.params.userId,
+          paid: false
+        },
+        include: [
+          {
+            model: Product
+          }
+        ]
+      })
+      userOrder[0].paid = true
+      await userOrder[0].save()
+      res.send(userOrder)
+    }
   } catch (error) {
     next(err)
   }
@@ -159,13 +163,17 @@ router.put('/cart/:userId/checkout', async (req, res, next) => {
 
 router.get('/history/:userId', async (req, res, next) => {
   try {
-    const history = await Order.findAll({
-      where: {paid: true, userId: req.params.userId},
-      include: Product
-    })
-    res.send(history)
+    if (!req.user || req.user.id != req.params.userId) {
+      res.send("INVALID CART! You cannot view another user's order history")
+    } else {
+      const history = await Order.findAll({
+        where: {paid: true, userId: req.params.userId},
+        include: Product
+      })
+      res.send(history)
+    }
   } catch (error) {
-    next(err)
+    next(error)
   }
 })
 
