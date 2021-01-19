@@ -23,8 +23,10 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
-router.post('/', adminOnly, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
+    console.log(req.body)
+    console.log(req.user)
     const {title, description, price, imageUrl, tags} = req.body
     const newProduct = await Product.create({
       title,
