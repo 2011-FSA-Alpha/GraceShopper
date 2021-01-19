@@ -27,7 +27,6 @@ describe('OrderProducts model', async () => {
     await newCart.addProduct(item)
 
     let orderProduct = await OrderProducts.findAndCountAll()
-    console.log(orderProduct)
 
     expect(orderProduct.count).to.equal(1)
   })
