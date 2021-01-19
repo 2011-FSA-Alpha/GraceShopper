@@ -39,19 +39,20 @@ router.post('/:productId', adminOnly, async (req, res, next) => {
   }
 })
 
-router.put(':/productId', adminOnly, async (req, res, next) => {
+router.put(':/productId', async (req, res, next) => {
   try {
     const updateProd = await Product.findByPk(req.params.productId)
+
     const {title, description, price, imageURL, tags} = req.body
-    res.send(
-      await updateProd.update({
-        title,
-        description,
-        price,
-        imageURL,
-        tags
-      })
-    )
+    const updatedProduct = await updateProd.update({
+      title,
+      description,
+      price,
+      imageURL,
+      tags
+    })
+
+    res.json(updatedProduct)
   } catch (error) {
     next(error)
   }
