@@ -29,7 +29,7 @@ export class SingleProduct extends React.Component {
 
   render() {
     const {showEdit} = this.state
-    //console.log(this.props)
+
     let product = this.props.product
     return (
       <React.Fragment>

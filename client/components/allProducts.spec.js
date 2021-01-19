@@ -3,8 +3,9 @@ import {expect} from 'chai'
 import {configure, shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import {AllProducts} from './AllProducts'
+import FilterBar from './FilterBar'
 
-configure({adapter: new Adapter()})
+configure({adapter: new Adapter(), disableLifecycleMethods: true})
 
 describe('AllProducts component', () => {
   let wrapper
@@ -15,23 +16,24 @@ describe('AllProducts component', () => {
       {id: 2, title: 'Skyline', imageUrl: 'some text'}
     ]
 
-    wrapper = shallow(<AllProducts products={products} />)
+    let currentlyDisplayed = [
+      {id: 1, title: 'Sunset', imageUrl: 'some text'},
+      {id: 2, title: 'Skyline', imageUrl: 'some text'}
+    ]
+
+    wrapper = shallow(
+      <AllProducts
+        products={products}
+        currentlyDisplayed={currentlyDisplayed}
+      />
+    )
   })
 
-  it('renders a div', () => {
-    expect(wrapper.find('div')).to.have.length(2)
+  it('renders a container div', () => {
+    expect(wrapper.find('div.container')).to.have.length(1)
   })
 
-  it('renders an h2 tag', () => {
-    expect(wrapper.find('h2')).to.have.length(2)
-  })
-
-  it('renders a message "Loading products..." if passed an empty array', () => {
-    let products = []
-    let message = 'Loading Products...'
-
-    wrapper = shallow(<AllProducts products={products} />)
-
-    expect(wrapper.find('div')).to.contain(message)
+  it('renders FilterBar component', () => {
+    expect(wrapper.find(FilterBar)).to.be.lengthOf(1)
   })
 })

@@ -37,7 +37,7 @@ export class AllProducts extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div className="container">
         <FilterBar {...this.props} handleChange={this.handleChange} />
         {this.state.currentlyDisplayed ? (
           this.state.currentlyDisplayed.map(product => {
@@ -66,9 +66,9 @@ export class AllProducts extends React.Component {
             )
           })
         ) : (
-          <div>Loading Products...</div>
+          <div className="loading">Loading Products...</div>
         )}
-      </React.Fragment>
+      </div>
     )
   }
 }
