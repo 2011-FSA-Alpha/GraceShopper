@@ -7,7 +7,7 @@ module.exports = router
 // GET /api/products
 router.get('/', async (req, res, next) => {
   try {
-    const users = await Product.findAll({})
+    const users = await Product.findAll()
     res.json(users)
   } catch (err) {
     next(err)
@@ -23,8 +23,10 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
-router.post('/:productId', adminOnly, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
+    console.log(req.body)
+    console.log(req.user)
     const {title, description, price, imageUrl, tags} = req.body
     const newProduct = await Product.create({
       title,
@@ -34,6 +36,34 @@ router.post('/:productId', adminOnly, async (req, res, next) => {
       tags
     })
     res.status(201).json(newProduct)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/:productId', async (req, res, next) => {
+  try {
+    const updateProd = await Product.findByPk(req.params.productId)
+    const {title, description, price, imageUrl} = req.body
+    let tags = req.body.tags.split(',')
+
+    const updatedProduct = await updateProd.update({
+      title,
+      description,
+      price,
+      imageUrl,
+      tags: tags
+    })
+
+    res.json(updatedProduct)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.delete('/:productId', async (req, res, next) => {
+  try {
+    res.send(await Product.destroy({where: {id: req.params.productId}}))
   } catch (error) {
     next(error)
   }
