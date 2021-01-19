@@ -9,7 +9,7 @@ import OrderHistory from './OrderHistory'
 export const UserHome = props => {
   const {email, name, adminStatus} = props
   const firstName = name.split(' ')[0]
-  //const lastName = name.split(' ')[1]
+
   return (
     <div>
       <h2>Welcome to your Wallpaper account, {firstName}!</h2>
