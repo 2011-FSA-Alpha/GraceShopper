@@ -39,7 +39,7 @@ router.post('/:productId', adminOnly, async (req, res, next) => {
   }
 })
 
-router.put('/:productId', async (req, res, next) => {
+router.put('/:productId', adminOnly, async (req, res, next) => {
   try {
     const updateProd = await Product.findByPk(req.params.productId)
     const {title, description, price, imageUrl} = req.body
@@ -59,7 +59,7 @@ router.put('/:productId', async (req, res, next) => {
   }
 })
 
-router.delete('/:productId', async (req, res, next) => {
+router.delete('/:productId', adminOnly, async (req, res, next) => {
   try {
     res.send(await Product.destroy({where: {id: req.params.productId}}))
   } catch (error) {

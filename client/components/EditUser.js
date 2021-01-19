@@ -1,8 +1,9 @@
 import React from 'react'
 import EditUserForm from './EditUserForm'
 import {connect} from 'react-redux'
+import editUserProfile from '../store/user'
 
-export class EditUser extends React.Component {
+export default class EditUser extends React.Component {
   constructor(props) {
     super(props)
     this.state = {

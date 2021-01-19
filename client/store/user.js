@@ -7,6 +7,7 @@ import {loadState} from '../loadState'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const EDIT_USER = 'EDIT_USER'
 
 /**
  * INITIAL STATE
@@ -33,6 +34,11 @@ const defaultUser = {
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+
+const editUser = user => ({
+  type: EDIT_USER,
+  user
+})
 
 /**
  * THUNK CREATORS
@@ -95,6 +101,17 @@ export const logout = () => async dispatch => {
     history.push('/login')
   } catch (err) {
     console.error(err)
+  }
+}
+
+export const editUserProfile = user => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/users/${user.id}`, user)
+      dispatch(editUser(data))
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 
