@@ -2,8 +2,21 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {addItemToCart} from '../store/cart'
 import {fetchProduct} from '../store/singleProduct'
+import AdminEditProd from './AdminEditProd'
 
 export class SingleProduct extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showEdit: false
+    }
+    this.toggleEdit = this.toggleEdit.bind(this)
+  }
+
+  toggleEdit() {
+    this.setState(prevState => ({showEdit: !prevState.showEdit}))
+  }
+
   componentDidMount() {
     this.props.fetchProduct(this.props.match.params.id)
   }
@@ -15,12 +28,22 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
+    const {showEdit} = this.state
+
     let product = this.props.product
     return (
       <React.Fragment>
         {product ? (
           <div>
             <h3>Product Info:</h3>
+
+            <button type="button" onClick={this.toggleEdit}>
+              {' '}
+              Edit Product{' '}
+            </button>
+
+            {showEdit ? <AdminEditProd product={product} /> : null}
+
             <div>Product Title: {product.title}</div>
             <div>Product Description: {product.description}</div>
             <div>Product Price: ${product.price}</div>

@@ -1,5 +1,9 @@
+/* eslint-disable react/button-has-type */
+
 import React from 'react'
 import AdminEditProdForm from './AdminEditProdForm'
+import {connect} from 'react-redux'
+import {adminDeleteProduct, adminEditProduct} from '../store/singleProduct'
 
 export class AdminEditProd extends React.Component {
   constructor(props) {
@@ -26,6 +30,8 @@ export class AdminEditProd extends React.Component {
     event.preventDefault()
     try {
       //update the product with new values. call method from store. check API
+
+      this.props.adminEditProduct({...this.props.product, ...this.state})
     } catch (error) {
       console.error(error)
     }
@@ -44,7 +50,26 @@ export class AdminEditProd extends React.Component {
           imageUrl={this.state.imageUrl}
           tags={this.state.tags}
         />
+        <div>
+          <button
+            className="remove"
+            onClick={() => this.props.adminDeleteProduct(this.props.product)}
+          >
+            Remove
+          </button>
+        </div>
       </div>
     )
   }
 }
+
+/* const mapToState = state => ({
+  product: state.product
+}) */
+
+const mapToDispatch = dispatch => ({
+  adminDeleteProduct: product => dispatch(adminDeleteProduct(product)),
+  adminEditProduct: product => dispatch(adminEditProduct(product))
+})
+
+export default connect(null, mapToDispatch)(AdminEditProd)
