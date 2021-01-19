@@ -3,13 +3,16 @@ import {connect} from 'react-redux'
 import {getProducts} from '../store/products'
 import {Link} from 'react-router-dom'
 import {addItemToCart, showCart} from '../store/cart'
-import {SingleProduct, fetchProduct} from './SingleProduct'
+import {fetchProduct} from './SingleProduct'
+import FilterBar from './FilterBar'
 
 export class AllProducts extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+      currentlyDisplayed: []
+    }
   }
 
   componentDidMount() {
@@ -19,18 +22,32 @@ export class AllProducts extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.products !== this.props.products) {
       this.props.showCart(this.props.user.id)
+      this.setState({currentlyDisplayed: [...this.props.products]})
     }
+  }
+
+  handleChange = e => {
+    const filteredProducts = this.props.products.filter(image => {
+      if (image.tags.includes(e.target.value)) {
+        return image
+      }
+    })
+    this.setState({currentlyDisplayed: filteredProducts})
   }
 
   render() {
     return (
       <React.Fragment>
-        {this.props.products[0] ? (
-          this.props.products.map(product => {
+        <FilterBar {...this.props} handleChange={this.handleChange} />
+        {this.state.currentlyDisplayed ? (
+          this.state.currentlyDisplayed.map(product => {
             return (
-              <div key={product.title}>
+              <div key={product.title + Math.random() * 1000}>
                 <Link to={`/products/${product.id}`}>
-                  <img src={product.imageUrl} />
+                  <img
+                    style={{height: '65%', width: '65%'}}
+                    src={product.imageUrl}
+                  />
                   <h2>{product.title}</h2>
                 </Link>
                 <button

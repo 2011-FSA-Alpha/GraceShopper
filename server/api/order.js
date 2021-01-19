@@ -4,12 +4,12 @@ const router = require('express').Router()
 const {Order, Product, OrderProducts} = require('../db/models')
 
 // (ADMIN ROUTE)
-// GET api/orders
-// returns ALL orders with no filter
+// GET api/order
+// returns ALL order with no filter
 
 router.get('/', async (req, res, next) => {
   try {
-    const orderItems = await OrderProducts.findAll()
+    const orderItems = await OrderProducts.findAll({})
     res.send(orderItems)
   } catch (error) {
     next(error)
@@ -29,10 +29,10 @@ router.put('/:orderItemId', async (req, res, next) => {
   }
 })
 
-// GET api/orders/cart/:userId
+// GET api/order/cart/:userId
 // finds or creates a unique cart for the logged in user
 // includes Product model in order to have access to
-// quatity information
+// quantity information
 
 router.get('/cart/:userId', async (req, res, next) => {
   try {
@@ -54,7 +54,7 @@ router.get('/cart/:userId', async (req, res, next) => {
   }
 })
 
-// POST api/orders/cart/:userId
+// POST api/order/cart/:userId
 // finds or creates an instance of the product -> req.body.productId
 // within the cart -> req.body.orderId
 // If an instance exists it increments quantity
@@ -77,13 +77,12 @@ router.post('/cart/:userId', async (req, res, next) => {
   }
 })
 
-// PUT api/orders/cart/:userId
+// PUT api/order/cart/:userId
 // increments quantity userOrder.quantity with amount
 // spcified within req.body.quantity (either 1 or -1)
 
 router.put('/cart/:userId', async (req, res, next) => {
   try {
-    console.log(req.body)
     let userOrder = await OrderProducts.findAll({
       where: {
         orderId: req.body.orderId,
@@ -98,12 +97,11 @@ router.put('/cart/:userId', async (req, res, next) => {
   }
 })
 
-// DELETE api/orders/car/:userId
+// DELETE api/order/cart/:userId
 // deletes specified instance from orderProducts Model
 
 router.delete('/cart/:userId', async (req, res, next) => {
   try {
-    console.log(req.params, req.query)
     await OrderProducts.destroy({
       where: {
         orderId: req.query.orderId,
@@ -113,6 +111,45 @@ router.delete('/cart/:userId', async (req, res, next) => {
     res.send()
   } catch (error) {
     next(error)
+  }
+})
+
+// PUT api/order/cart/:userId/checkout
+// Sets the Users cart to Paid moving it into order history
+
+router.put('/cart/:userId/checkout', async (req, res, next) => {
+  try {
+    const userOrder = await Order.findOrCreate({
+      where: {
+        userId: req.params.userId,
+        paid: false
+      },
+      include: [
+        {
+          model: Product
+        }
+      ]
+    })
+    userOrder[0].paid = true
+    await userOrder[0].save()
+    res.send(userOrder)
+  } catch (error) {
+    next(err)
+  }
+})
+
+// GET /api/order/history/:userId
+// Gets a Users order history
+
+router.get('/history/:userId', async (req, res, next) => {
+  try {
+    const history = await Order.findAll({
+      where: {paid: true, userId: req.params.userId},
+      include: Product
+    })
+    res.send(history)
+  } catch (error) {
+    next(err)
   }
 })
 

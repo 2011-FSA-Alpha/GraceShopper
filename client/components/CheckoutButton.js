@@ -1,14 +1,43 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 
 // This is a dummy button that will eventually lead to a Checkout page to prompt the user for payment details
 
 const CheckoutButton = props => {
   const {cart} = props
+
+  console.log('CART', cart)
+  const [isLoading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 200)
+  }, [])
+
   return (
-    <Link to="/order-confirmed">
-      <button disabled={cart.length ? 'false' : 'true'}>Checkout</button>
-    </Link>
+    <div>
+      {isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <Link
+          to={{
+            pathname: '/order-confirmed',
+            cartProps: {
+              cart: cart
+            }
+          }}
+        >
+          <button
+            disabled={
+              !(Array.isArray(cart.products) && cart.products.length)
+            }
+          >
+            Checkout
+          </button>
+        </Link>
+      )}
+    </div>
   )
 }
 

@@ -9,7 +9,8 @@ import {
   Cart,
   AllProducts,
   SingleProduct,
-  OrderConfirmed
+  OrderConfirmed,
+  Home
 } from './components'
 import {me} from './store'
 
@@ -26,19 +27,19 @@ class Routes extends Component {
 
     return (
       <Switch>
-        {/* Routes placed hort.authenticate('google', {scope: ['email', 'profile']})ere are available to all visitors */}
-        <Route exact path="/" component={AllProducts} />
+        {/* Routes placed here are available to all visitors */}
+        <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/product" component={SingleProduct} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/order-confirmed" component={OrderConfirmed} />
+        <Route exact path="/products/:id" component={SingleProduct} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-            <Route path="/products/:id" component={SingleProduct} />
+            <Route path="/profile" component={UserHome} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
