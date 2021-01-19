@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import AllProducts from './AllProducts'
+import Carousel from './Carousel'
 
 class Home extends Component {
   render() {
     return (
       <div>
         <div>
-          {/* Header Will Go Here */}
+          <Carousel />
           <div
             style={{
               height: '48vh',

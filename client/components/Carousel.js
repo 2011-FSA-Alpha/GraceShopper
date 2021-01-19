@@ -1,9 +1,7 @@
 import React from 'react'
 import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 
-export default function SimpleSlider() {
+export default function Carousel() {
   var settings = {
     dots: false,
     infinite: true,
