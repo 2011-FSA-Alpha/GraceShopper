@@ -30,7 +30,7 @@ export class AdminEditProd extends React.Component {
     event.preventDefault()
     try {
       //update the product with new values. call method from store. check API
-      //console.log({ ...this.props.product, ...this.state })
+
       this.props.adminEditProduct({...this.props.product, ...this.state})
     } catch (error) {
       console.error(error)
@@ -38,8 +38,6 @@ export class AdminEditProd extends React.Component {
   }
 
   render() {
-    //console.log(this.props.product)
-    //console.log(this.state)
     return (
       <div>
         <h1> Edit Product: </h1>
