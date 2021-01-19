@@ -7,6 +7,7 @@ module.exports = router
 // GET /api/products
 router.get('/', async (req, res, next) => {
   try {
+    console.log('REQ.USER---->', req.user.adminStatus)
     const users = await Product.findAll({})
     res.json(users)
   } catch (err) {
@@ -39,7 +40,7 @@ router.post('/:productId', adminOnly, async (req, res, next) => {
   }
 })
 
-router.put('/:productId', async (req, res, next) => {
+router.put('/:productId', adminOnly, async (req, res, next) => {
   try {
     const updateProd = await Product.findByPk(req.params.productId)
     const {title, description, price, imageUrl} = req.body
@@ -59,7 +60,7 @@ router.put('/:productId', async (req, res, next) => {
   }
 })
 
-router.delete('/:productId', async (req, res, next) => {
+router.delete('/:productId', adminOnly, async (req, res, next) => {
   try {
     res.send(await Product.destroy({where: {id: req.params.productId}}))
   } catch (error) {

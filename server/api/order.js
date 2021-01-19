@@ -2,12 +2,13 @@ const router = require('express').Router()
 
 //require order, product and orderProducts model from database
 const {Order, Product, OrderProducts} = require('../db/models')
+const adminOnly = require('../util/adminOnly')
 
 // (ADMIN ROUTE)
 // GET api/order
 // returns ALL order with no filter
 
-router.get('/', async (req, res, next) => {
+router.get('/', adminOnly, async (req, res, next) => {
   try {
     const orderItems = await OrderProducts.findAll({})
     res.send(orderItems)
@@ -20,7 +21,7 @@ router.get('/', async (req, res, next) => {
 // PUT api/:orderItemId
 // can update any order
 
-router.put('/:orderItemId', async (req, res, next) => {
+router.put('/:orderItemId', adminOnly, async (req, res, next) => {
   try {
     const updateItem = await Order.findByPk(req.params.orderItemId)
     res.send(updateItem.update(req.body))
@@ -36,19 +37,22 @@ router.put('/:orderItemId', async (req, res, next) => {
 
 router.get('/cart/:userId', async (req, res, next) => {
   try {
-    let userOrder = await Order.findOrCreate({
-      where: {
-        userId: req.params.userId,
-        paid: false
-      },
-      include: [
-        {
-          model: Product
-          //include: Order
-        }
-      ]
-    })
-    res.send(userOrder[0])
+    if (req.user.id != req.params.userId) {
+      res.send("INVALID CART! You cannot access another user's cart")
+    } else {
+      let userOrder = await Order.findOrCreate({
+        where: {
+          userId: req.params.userId,
+          paid: false
+        },
+        include: [
+          {
+            model: Product
+          }
+        ]
+      })
+      res.send(userOrder[0])
+    }
   } catch (error) {
     next(error)
   }
@@ -61,17 +65,21 @@ router.get('/cart/:userId', async (req, res, next) => {
 
 router.post('/cart/:userId', async (req, res, next) => {
   try {
-    const orderProduct = await OrderProducts.findOrCreate({
-      where: {
-        orderId: req.body.orderId,
-        productId: req.body.productId
+    if (req.user.id != req.params.userId) {
+      res.send("INVALID CART! You cannot modify another user's cart")
+    } else {
+      const orderProduct = await OrderProducts.findOrCreate({
+        where: {
+          orderId: req.body.orderId,
+          productId: req.body.productId
+        }
+      })
+      if (!orderProduct[1]) {
+        orderProduct[0].quantity += 1
+        await orderProduct[0].save()
       }
-    })
-    if (!orderProduct[1]) {
-      orderProduct[0].quantity += 1
-      await orderProduct[0].save()
+      res.send(orderProduct[0])
     }
-    res.send(orderProduct[0])
   } catch (error) {
     next(error)
   }
@@ -83,15 +91,19 @@ router.post('/cart/:userId', async (req, res, next) => {
 
 router.put('/cart/:userId', async (req, res, next) => {
   try {
-    let userOrder = await OrderProducts.findAll({
-      where: {
-        orderId: req.body.orderId,
-        productId: req.body.productId
-      }
-    })
-    userOrder[0].quantity += parseInt(req.body.quantity)
-    await userOrder[0].save()
-    res.send(userOrder)
+    if (req.user.id != req.params.userId) {
+      res.send("INVALID CART! You cannot modify another user's cart")
+    } else {
+      let userOrder = await OrderProducts.findAll({
+        where: {
+          orderId: req.body.orderId,
+          productId: req.body.productId
+        }
+      })
+      userOrder[0].quantity += parseInt(req.body.quantity)
+      await userOrder[0].save()
+      res.send(userOrder)
+    }
   } catch (error) {
     next(error)
   }
@@ -102,13 +114,17 @@ router.put('/cart/:userId', async (req, res, next) => {
 
 router.delete('/cart/:userId', async (req, res, next) => {
   try {
-    await OrderProducts.destroy({
-      where: {
-        orderId: req.query.orderId,
-        productId: req.query.productId
-      }
-    })
-    res.send()
+    if (req.user.id != req.params.userId) {
+      res.send("INVALID CART! You cannot modify another user's cart")
+    } else if (res.user === req.params.userId || req.user.adminStatus) {
+      await OrderProducts.destroy({
+        where: {
+          orderId: req.query.orderId,
+          productId: req.query.productId
+        }
+      })
+      res.send()
+    }
   } catch (error) {
     next(error)
   }
