@@ -12,18 +12,17 @@ export class Cart extends React.Component {
     }
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({loading: false})
-    }, 200)
+  async componentDidMount() {
     if (this.props.user.id) {
-      this.props.showCart(this.props.user.id)
+      await this.props.showCart(this.props.user.id)
+      this.setState({loading: false})
     }
   }
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     if (prevProps.user !== this.props.user) {
-      this.props.showCart(this.props.user.id)
+      await this.props.showCart(this.props.user.id)
+      this.setState({loading: false})
     }
   }
 
@@ -83,11 +82,11 @@ export class Cart extends React.Component {
             ) : (
               <h2>Your cart is empty</h2>
             )}
+            <div>
+              <CheckoutButton cart={cart} />
+            </div>
           </div>
         )}
-        <div>
-          <CheckoutButton cart={cart} />
-        </div>
       </div>
     )
   }

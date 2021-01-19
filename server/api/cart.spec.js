@@ -1,5 +1,6 @@
 const {expect} = require('chai')
-const {db, models: {Cart}} = require('../db')
+const {Cart} = require('../db')
+const db = require('../db')
 const _app = require('../index')
 const app = require('supertest')(_app)
 

@@ -20,8 +20,10 @@ export class AllProducts extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.products !== this.props.products) {
+    if (prevProps.user !== this.props.user) {
       this.props.showCart(this.props.user.id)
+    }
+    if (prevProps.products !== this.props.products) {
       this.setState({currentlyDisplayed: [...this.props.products]})
     }
   }
@@ -55,7 +57,6 @@ export class AllProducts extends React.Component {
                   onClick={() =>
                     this.props.addItemToCart(this.props.user.id, {
                       productId: product.id,
-                      props: this.props,
                       orderId: this.props.cart.id
                     })
                   }
