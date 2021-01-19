@@ -30,12 +30,16 @@ export class AdminEditProd extends React.Component {
     event.preventDefault()
     try {
       //update the product with new values. call method from store. check API
+      //console.log({ ...this.props.product, ...this.state })
+      this.props.adminEditProduct({...this.props.product, ...this.state})
     } catch (error) {
       console.error(error)
     }
   }
 
   render() {
+    //console.log(this.props.product)
+    //console.log(this.state)
     return (
       <div>
         <h1> Edit Product: </h1>
@@ -48,23 +52,26 @@ export class AdminEditProd extends React.Component {
           imageUrl={this.state.imageUrl}
           tags={this.state.tags}
         />
-        {/*         <div>
-          <button className='remove' onClick={() => this.props.adminDeleteProduct()}>
+        <div>
+          <button
+            className="remove"
+            onClick={() => this.props.adminDeleteProduct(this.props.product)}
+          >
             Remove
           </button>
-        </div> */}
+        </div>
       </div>
     )
   }
 }
 
-const mapToState = state => ({
+/* const mapToState = state => ({
   product: state.product
-})
+}) */
 
 const mapToDispatch = dispatch => ({
   adminDeleteProduct: product => dispatch(adminDeleteProduct(product)),
   adminEditProduct: product => dispatch(adminEditProduct(product))
 })
 
-export default connect(mapToState, mapToDispatch)(AdminEditProd)
+export default connect(null, mapToDispatch)(AdminEditProd)
