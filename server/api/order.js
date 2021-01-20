@@ -1,13 +1,10 @@
 const router = require('express').Router()
-
-//require order, product and orderProducts model from database
 const {Order, Product, OrderProducts} = require('../db/models')
 const adminOnly = require('../util/adminOnly')
 
-// (ADMIN ROUTE)
-// GET api/order
+// GET /api/order
 // returns ALL order with no filter
-
+// NOTE: Must be an Admin to access
 router.get('/', adminOnly, async (req, res, next) => {
   try {
     const orderItems = await OrderProducts.findAll({})
@@ -17,10 +14,8 @@ router.get('/', adminOnly, async (req, res, next) => {
   }
 })
 
-// (ADMIN ROUTE)
-// PUT api/:orderItemId
+// PUT /api/:orderItemId
 // can update any order
-
 router.put('/:orderItemId', adminOnly, async (req, res, next) => {
   try {
     const updateItem = await Order.findByPk(req.params.orderItemId)
@@ -34,7 +29,6 @@ router.put('/:orderItemId', adminOnly, async (req, res, next) => {
 // finds or creates a unique cart for the logged in user
 // includes Product model in order to have access to
 // quantity information
-
 router.get('/cart/:userId', async (req, res, next) => {
   try {
     if (req.user.id != req.params.userId) {
