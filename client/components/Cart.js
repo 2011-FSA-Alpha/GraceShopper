@@ -5,14 +5,22 @@ import {connect} from 'react-redux'
 import {showCart, deleteCartItem, incrementQuantity} from '../store/cart'
 import StripeCheckout from 'react-stripe-checkout'
 import CheckoutButton from './CheckoutButton'
+import axios from 'axios'
 
 export class Cart extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
-      loading: true
+      loading: true,
+      product: [
+        {
+          name: 'Tesla Roadster',
+          price: 64998.67
+        }
+      ]
     }
+    this.handleToken = this.handleToken.bind(this)
   }
 
   async componentDidMount() {
@@ -29,9 +37,14 @@ export class Cart extends React.Component {
     }
   }
 
-  handleToken = (token, addresses) => {
-    console.log({token, addresses})
+  async handleToken(token) {
+    console.log('HANDLE TOKEN HIT')
+    const response = await axios.post('/api/payment/checkout', {
+      token: token,
+      product: this.state.product
+    })
   }
+
   render() {
     const {cart} = this.props
     console.log(this.props.cart.products)

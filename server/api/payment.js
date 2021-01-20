@@ -2,11 +2,14 @@ const router = require('express').Router()
 const stripe = require('stripe')(
   'sk_test_51IBgClBOhqQyDiVzyJbg010oMYzMS3uabbC5ngPIULdfl5IUTvp0y5tmoIIRIcrNnjKMmbAQuhM9njNxOOhkRTs700oEcH0V4d'
 )
+const {uuid} = require('uuidv4')
 
+// POST /api/payment
 router.get('/', (req, res) => {
   res.send("Add your Stripe Secret Key to the .require('stripe') statement!")
 })
 
+// POST /api/payment/checkout
 router.post('/checkout', async (req, res) => {
   console.log('Request:', req.body)
 
