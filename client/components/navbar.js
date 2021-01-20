@@ -3,49 +3,63 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import {logout} from '../store'
+import {AppBar, Button, Typography, Toolbar} from '@material-ui/core'
 
 const NavBar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>wallpaper</h1>
     <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <NavLink to="/" color="blue">
-            Home
-          </NavLink>
-          <NavLink to="/products" color="blue">
-            All Products
-          </NavLink>
-          <NavLink to="/cart" color="blue">
-            Cart
-          </NavLink>
-          <NavLink to="/profile" color="blue">
-            Profile
-          </NavLink>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <NavLink to="/home" color="blue">
-            Home
-          </NavLink>
-          <NavLink to="/products" color="blue">
-            All Products
-          </NavLink>
-          <NavLink to="/cart" color="blue">
-            Cart
-          </NavLink>
-          <NavLink to="/profile" color="blue">
-            Profile
-          </NavLink>
-          <NavLink to="/login">Login</NavLink>
-          <NavLink to="/signup">Sign Up</NavLink>
-        </div>
-      )}
+      <AppBar
+        position="static"
+        display="flex"
+        margin="10px"
+        style={{backgroundColor: '#333333'}}
+      >
+        <Toolbar>
+          <Typography variant="h4">Wallpaper</Typography>
+          {isLoggedIn ? (
+            <div>
+              {/* The navbar will show these links after you log in */}
+              <Button href="/" color="inherit">
+                Home
+              </Button>
+              <Button href="/products" color="inherit">
+                All Products
+              </Button>
+              <Button href="/cart" color="inherit">
+                Cart
+              </Button>
+              <Button href="/profile" color="inherit">
+                Profile
+              </Button>
+              <Button href="#" onClick={handleClick} color="inherit">
+                Logout
+              </Button>
+            </div>
+          ) : (
+            <div>
+              {/* The navbar will show these links before you log in */}
+              <Button href="/home" color="inherit">
+                Home
+              </Button>
+              <Button href="/products" color="inherit">
+                All Products
+              </Button>
+              <Button href="/cart" color="inherit">
+                Cart
+              </Button>
+              <Button href="/profile" color="inherit">
+                Profile
+              </Button>
+              <Button href="/login" color="inherit">
+                Login
+              </Button>
+              <Button href="/signup" color="inherit">
+                Sign Up
+              </Button>
+            </div>
+          )}
+        </Toolbar>
+      </AppBar>
     </nav>
   </div>
 )
