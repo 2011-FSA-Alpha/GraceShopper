@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
 import {logout} from '../store'
 import {AppBar, Button, Typography, Toolbar} from '@material-ui/core'
 
@@ -23,7 +22,7 @@ const NavBar = ({handleClick, isLoggedIn}) => (
                 Home
               </Button>
               <Button href="/products" color="inherit">
-                All Products
+                Browse Images
               </Button>
               <Button href="/cart" color="inherit">
                 Cart
@@ -42,7 +41,7 @@ const NavBar = ({handleClick, isLoggedIn}) => (
                 Home
               </Button>
               <Button href="/products" color="inherit">
-                All Products
+                Browse Images
               </Button>
               <Button href="/cart" color="inherit">
                 Cart
