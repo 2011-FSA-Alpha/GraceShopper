@@ -1,105 +1,66 @@
 import React, {useState, useEffect} from 'react'
-import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js'
-export default function StripeCheckout() {
-  const [succeeded, setSucceeded] = useState(false)
-  const [error, setError] = useState(null)
-  const [processing, setProcessing] = useState('')
-  const [disabled, setDisabled] = useState(true)
-  const [clientSecret, setClientSecret] = useState('')
-  const [email, setEmail] = useState('')
-
-  const stripe = useStripe()
-  const elements = useElements()
+import {loadStripe} from '@stripe/stripe-js'
+// import './App.css'
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(
+  'pk_test_51IBgClBOhqQyDiVzsvnoaVghaiscD06pGqSREyOAk3iPMECcM8tZPW8ZHEzzbm7G5KYeqHf5w9SnSsd4r7I6vYSV00rfo3YMLB'
+)
+const ProductDisplay = ({handleClick}) => (
+  <section>
+    <div className="product">
+      <img
+        src="https://i.imgur.com/EHyR2nP.png"
+        alt="The cover of Stubborn Attachments"
+      />
+      <div className="description">
+        <h3>Stubborn Attachments</h3>
+        <h5>$20.00</h5>
+      </div>
+    </div>
+    <button id="checkout-button" role="link" onClick={handleClick}>
+      Checkout
+    </button>
+  </section>
+)
+const Message = ({message}) => (
+  <section>
+    <p>{message}</p>
+  </section>
+)
+export default function App() {
+  const [message, setMessage] = useState('')
   useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    window
-      .fetch('/api/payment/create-payment-intent', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({items: [{id: 'xl-tshirt'}]})
-      })
-      .then(res => {
-        return res.json()
-      })
-      .then(data => {
-        setClientSecret(data.clientSecret)
-      })
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search)
+    if (query.get('success')) {
+      setMessage('Order placed! You will receive an email confirmation.')
+    }
+    if (query.get('canceled')) {
+      setMessage(
+        "Order canceled -- continue to shop around and checkout when you're ready."
+      )
+    }
   }, [])
-  const cardStyle = {
-    style: {
-      base: {
-        color: '#5EA7FF',
-        fontFamily: 'Arial, sans-serif',
-        fontSmoothing: 'antialiased',
-        fontSize: '16px',
-        '::placeholder': {
-          color: '#5EA7FF'
-        }
-      },
-      invalid: {
-        color: '#fa755a',
-        iconColor: '#fa755a'
-      }
-    }
-  }
-  const handleChange = async event => {
-    // Listen for changes in the CardElement
-    // and display any errors as the customer types their card details
-    setDisabled(event.empty)
-    setError(event.error ? event.error.message : '')
-  }
-  const handleSubmit = async ev => {
-    ev.preventDefault()
-    setProcessing(true)
-    const payload = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement)
-      }
+  const handleClick = async event => {
+    const stripe = await stripePromise
+    const response = await fetch('/create-checkout-session', {
+      method: 'POST'
     })
-    if (payload.error) {
-      setError(`Payment failed ${payload.error.message}`)
-      setProcessing(false)
-    } else {
-      setError(null)
-      setProcessing(false)
-      setSucceeded(true)
+    const session = await response.json()
+    // When the customer clicks on the button, redirect them to Checkout.
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id
+    })
+    if (result.error) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer
+      // using `result.error.message`.
     }
   }
-  return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        placeholder="Enter email address"
-      />
-      <CardElement
-        id="card-element"
-        options={cardStyle}
-        onChange={handleChange}
-      />
-      <button disabled={processing || disabled || succeeded} id="submit">
-        <span id="button-text">
-          {processing ? <div className="spinner" id="spinner" /> : 'Pay'}
-        </span>
-      </button>
-      {/* Show any error that happens when processing the payment */}
-      {error && (
-        <div className="card-error" role="alert">
-          {error}
-        </div>
-      )}
-      {/* Show a success message upon completion */}
-      <p className={succeeded ? 'result-message' : 'result-message hidden'}>
-        Payment succeeded, see the result in your
-        <a href="https://dashboard.stripe.com/test/payments">
-          {' '}
-          Stripe dashboard.
-        </a>{' '}
-        Refresh the page to pay again.
-      </p>
-    </form>
+  return message ? (
+    <Message message={message} />
+  ) : (
+    <ProductDisplay handleClick={handleClick} />
   )
 }

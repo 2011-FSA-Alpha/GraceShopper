@@ -3,7 +3,8 @@ import {loadStripe} from '@stripe/stripe-js'
 import {Elements} from '@stripe/react-stripe-js'
 import {connect} from 'react-redux'
 import {showCart, deleteCartItem, incrementQuantity} from '../store/cart'
-import StripeCheckout from './StripeCheckout'
+// import StripeCheckout from './StripeCheckout'
+import StripeCheckout from 'react-stripe-checkout'
 import CheckoutButton from './CheckoutButton'
 
 const promise = loadStripe(
@@ -33,6 +34,9 @@ export class Cart extends React.Component {
     }
   }
 
+  handleToken = (token, addresses) => {
+    console.log({token, addresses})
+  }
   render() {
     const {cart} = this.props
     console.log(this.props.cart.products)
@@ -42,6 +46,7 @@ export class Cart extends React.Component {
           (a, b) => b.price * b.orderproducts.quantity + a.price
         )
       : '0.00'
+
     return (
       <div>
         <h1> Cart </h1>
@@ -101,9 +106,13 @@ export class Cart extends React.Component {
               <h2>Your cart is empty</h2>
             )}
             <div>
-              <Elements stripe={promise}>
-                <StripeCheckout />
-              </Elements>
+              <StripeCheckout
+                stripeKey="pk_test_51IBgClBOhqQyDiVzsvnoaVghaiscD06pGqSREyOAk3iPMECcM8tZPW8ZHEzzbm7G5KYeqHf5w9SnSsd4r7I6vYSV00rfo3YMLB"
+                token={this.handleToken}
+                billingAddress
+                amount={totalPrice}
+                name={cart.id}
+              />
               <CheckoutButton cart={cart} />
             </div>
           </div>
