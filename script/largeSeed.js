@@ -2,6 +2,10 @@
 const faker = require('faker')
 const db = require('../server/db')
 const {User, Order, Product} = require('../server/db/models')
+const fs = require('fs')
+
+const imageArr = fs.readFileSync('urls.txt', 'utf8').split('\n')
+console.log(imageArr)
 
 const randomUser = []
 const randomProduct = []
@@ -76,7 +80,6 @@ async function largeSeed() {
     const randomOrderHistoryLength = Math.ceil(Math.random() * 10)
     let randomOrderHistory = []
     for (let n = 0; n < randomOrderHistoryLength; n++) {
-      console.log(n)
       randomOrderHistory.push(Math.ceil(Math.random() * 200))
     }
 
@@ -84,9 +87,6 @@ async function largeSeed() {
       if (!closedOrder.hasProduct(randomOrderHistory[y]))
         await closedOrder.addProduct(randomOrderHistory[y])
     }
-
-    console.log(randomCart)
-    console.log(randomOrderHistory)
   }
 }
 

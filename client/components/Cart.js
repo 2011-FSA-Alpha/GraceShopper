@@ -28,6 +28,12 @@ export class Cart extends React.Component {
 
   render() {
     const {cart} = this.props
+    const productCheck = cart.products ? cart.products.length >= 1 : false
+    const totalPrice = productCheck
+      ? cart.products.reduce(
+          (a, b) => b.price * b.orderproducts.quantity + a.price
+        )
+      : '0.00'
     return (
       <div>
         <h1> Cart </h1>
@@ -77,6 +83,10 @@ export class Cart extends React.Component {
                   >
                     Delete
                   </button>
+                  <div>
+                    <div>Subtotal:</div>
+                    <div>${totalPrice / 100}</div>
+                  </div>
                 </div>
               ))
             ) : (
