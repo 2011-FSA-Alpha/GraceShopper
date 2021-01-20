@@ -3,13 +3,8 @@ import {loadStripe} from '@stripe/stripe-js'
 import {Elements} from '@stripe/react-stripe-js'
 import {connect} from 'react-redux'
 import {showCart, deleteCartItem, incrementQuantity} from '../store/cart'
-// import StripeCheckout from './StripeCheckout'
 import StripeCheckout from 'react-stripe-checkout'
 import CheckoutButton from './CheckoutButton'
-
-const promise = loadStripe(
-  'pk_test_51IBgClBOhqQyDiVzsvnoaVghaiscD06pGqSREyOAk3iPMECcM8tZPW8ZHEzzbm7G5KYeqHf5w9SnSsd4r7I6vYSV00rfo3YMLB'
-)
 
 export class Cart extends React.Component {
   constructor() {

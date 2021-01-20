@@ -3,11 +3,11 @@ const stripe = require('stripe')(
   'sk_test_51IBgClBOhqQyDiVzyJbg010oMYzMS3uabbC5ngPIULdfl5IUTvp0y5tmoIIRIcrNnjKMmbAQuhM9njNxOOhkRTs700oEcH0V4d'
 )
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   res.send("Add your Stripe Secret Key to the .require('stripe') statement!")
 })
 
-app.post('/checkout', async (req, res) => {
+router.post('/checkout', async (req, res) => {
   console.log('Request:', req.body)
 
   let error
