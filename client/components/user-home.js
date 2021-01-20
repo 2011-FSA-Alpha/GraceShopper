@@ -8,7 +8,11 @@ import {
   Typography,
   Box,
   Paper,
-  Button
+  Button,
+  Form,
+  Input,
+  InputLabel,
+  FormControl
 } from '@material-ui/core'
 import EditUser from './EditUser'
 
@@ -71,11 +75,17 @@ export class UserHome extends React.Component {
             </CardContent>
           </Paper>
         </Box>
-        <Box>
-          <Button type="button" onClick={this.toggleEdit}>
+        <Box position="relative" paddingTop="40px" paddingLeft="40px">
+          <Button
+            style={{
+              background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+              color: 'white'
+            }}
+            onClick={this.toggleEdit}
+          >
             Edit User Profile
           </Button>
-          {showEdit ? <EditUser user={user} /> : null}
+          {/*showEdit ? <EditUser user={user} /> : null*/}
         </Box>
         <Box position="relative" paddingTop="40px" paddingLeft="40px">
           <Typography variant="h5" style={{color: 'lightgray'}}>
