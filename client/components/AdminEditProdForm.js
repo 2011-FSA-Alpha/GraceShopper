@@ -11,6 +11,7 @@ const AdminEditProdForm = props => {
           onChange={props.handleChange}
           value={props.title}
         />
+        {props.title.length === 0 ? <span>Field is required</span> : null}
 
         <label htmlFor="description"> Description: </label>
         <input
@@ -27,6 +28,7 @@ const AdminEditProdForm = props => {
           onChange={props.handleChange}
           value={props.price}
         />
+        {props.price.length === 0 ? <span>Field is required</span> : null}
 
         <label htmlFor="imageUrl"> Image Url: </label>
         <input
@@ -35,6 +37,7 @@ const AdminEditProdForm = props => {
           onChange={props.handleChange}
           value={props.imageUrl}
         />
+        {props.imageUrl.length === 0 ? <span>Field is required</span> : null}
 
         <label htmlFor="tags"> Tags: </label>
         <input
@@ -44,7 +47,19 @@ const AdminEditProdForm = props => {
           value={props.tags}
         />
         <div>
-          <button type="submit"> Submit Changes </button>
+          {props.title.length === 0 ||
+          props.price.length === 0 ||
+          props.imageUrl.length === 0 ? (
+            <button type="submit" disabled={true}>
+              {' '}
+              Submit Changes{' '}
+            </button>
+          ) : (
+            <button type="submit" disabled={false}>
+              {' '}
+              Submit Changes{' '}
+            </button>
+          )}
         </div>
       </form>
     </div>

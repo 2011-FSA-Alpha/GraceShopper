@@ -20,6 +20,7 @@ const EditUserForm = props => {
             onChange={props.handleChange}
             value={props.name}
           />
+          {props.name.length === 0 ? <span>Field is required</span> : null}
         </FormControl>
 
         <FormControl>
@@ -30,8 +31,23 @@ const EditUserForm = props => {
             onChange={props.handleChange}
             value={props.email}
           />
+          {props.email.length === 0 ? (
+            <span>Field is required</span>
+          ) : props.email.includes('@') || props.email.includes('.com') ? (
+            <span>Must be a valid email!</span>
+          ) : null}
         </FormControl>
-        <Button type="submit"> Submit Changes </Button>
+        {props.email.length === 0 || props.name.length === 0 ? (
+          <button type="submit" disabled={true}>
+            {' '}
+            Submit Changes{' '}
+          </button>
+        ) : (
+          <button type="submit" disabled={false}>
+            {' '}
+            Submit Changes{' '}
+          </button>
+        )}
       </Form>
     </Box>
   )

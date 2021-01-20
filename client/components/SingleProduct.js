@@ -36,11 +36,12 @@ export class SingleProduct extends React.Component {
         {product ? (
           <div>
             <h3>Product Info:</h3>
-
-            <button type="button" onClick={this.toggleEdit}>
-              {' '}
-              Edit Product{' '}
-            </button>
+            {this.props.user.adminStatus ? (
+              <button type="button" onClick={this.toggleEdit}>
+                {' '}
+                Edit Product{' '}
+              </button>
+            ) : null}
 
             {showEdit ? <AdminEditProd product={product} /> : null}
 
