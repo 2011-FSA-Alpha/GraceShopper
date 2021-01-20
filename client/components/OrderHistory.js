@@ -9,7 +9,6 @@ export class OrderHistory extends Component {
 
   render() {
     const {orderHistory} = this.props
-    console.log(this.props)
     return (
       <div>
         {orderHistory.map(order => {

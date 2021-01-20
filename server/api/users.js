@@ -4,7 +4,6 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log('hello', req.query)
     const users = await User.findOrCreate({
       where: {
         name: req.query.name,
