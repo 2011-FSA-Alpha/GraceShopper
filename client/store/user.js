@@ -35,10 +35,12 @@ const defaultUser = {
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 
-const editUser = user => ({
-  type: EDIT_USER,
-  user
-})
+const editUser = user => {
+  return {
+    type: EDIT_USER,
+    user
+  }
+}
 
 /**
  * THUNK CREATORS
@@ -104,14 +106,12 @@ export const logout = () => async dispatch => {
   }
 }
 
-export const editUserProfile = user => {
-  return async dispatch => {
-    try {
-      const {data} = await axios.put(`/api/users/${user.id}`, user)
-      dispatch(editUser(data))
-    } catch (error) {
-      console.error(error)
-    }
+export const editUserProfile = user => async dispatch => {
+  try {
+    const {data} = await axios.put(`/api/users/${user.id}`, user)
+    dispatch(editUser(data))
+  } catch (error) {
+    console.error(error)
   }
 }
 
@@ -124,6 +124,8 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case EDIT_USER:
+      return action.user
     default:
       return state
   }

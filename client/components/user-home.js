@@ -22,6 +22,8 @@ export class UserHome extends React.Component {
 
   render() {
     const {email, name, adminStatus} = this.props
+
+    let user = this.props.user
     const firstName = name.split(' ')[0]
     const {showEdit} = this.state
 
@@ -34,7 +36,7 @@ export class UserHome extends React.Component {
           Edit User Profile
         </button>
 
-        {showEdit ? <EditUser name={name} email={email} /> : null}
+        {showEdit ? <EditUser user={user} /> : null}
 
         <h4> Name: {name}</h4>
         <h4> Email: {email}</h4>
@@ -53,7 +55,8 @@ const mapState = state => {
   return {
     email: state.user.email,
     name: state.user.name,
-    adminStatus: state.user.adminStatus
+    adminStatus: state.user.adminStatus,
+    user: state.user
   }
 }
 

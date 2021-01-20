@@ -1,9 +1,9 @@
 import React from 'react'
 import EditUserForm from './EditUserForm'
 import {connect} from 'react-redux'
-import editUserProfile from '../store/user'
+import {editUserProfile} from '../store/user'
 
-export default class EditUser extends React.Component {
+export class EditUser extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -25,6 +25,9 @@ export default class EditUser extends React.Component {
     event.preventDefault()
     try {
       //update user. API
+      const user = {...this.props.user, ...this.state}
+      console.log(user)
+      this.props.editUserProfile(user)
     } catch (error) {
       console.error(error)
     }
@@ -44,3 +47,11 @@ export default class EditUser extends React.Component {
     )
   }
 }
+
+const mapToDispatch = dispatch => {
+  return {
+    editUserProfile: user => dispatch(editUserProfile(user))
+  }
+}
+
+export default connect(null, mapToDispatch)(EditUser)
