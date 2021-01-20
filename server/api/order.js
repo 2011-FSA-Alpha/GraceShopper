@@ -79,8 +79,7 @@ router.post('/cart/:userId', async (req, res, next) => {
 
 // PUT api/order/cart/:userId
 // increments quantity userOrder.quantity with amount
-// spcified within req.body.quantity (either 1 or -1)
-
+// specified within req.body.quantity (either 1 or -1)
 router.put('/cart/:userId', async (req, res, next) => {
   try {
     if (req.user.id != req.params.userId) {
