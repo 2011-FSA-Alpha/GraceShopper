@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const {Product} = require('../db/models')
 const adminOnly = require('../util/adminOnly')
+const passport = require('passport')
 
 module.exports = router
 
@@ -23,7 +24,7 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', adminOnly, async (req, res, next) => {
   try {
     console.log(req.body)
     console.log(req.user)
