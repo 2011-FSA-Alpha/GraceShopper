@@ -18,6 +18,7 @@ class AddProductForm extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault()
+    this.props.addProductThunk()
   }
 
   handleChange(evt) {
@@ -71,6 +72,6 @@ class AddProductForm extends React.Component {
 }
 
 const mapDispatch = dispatch => ({
-  addProductThunk: (id, product) => dispatch(addProductThunk(id, product))
+  addProductThunk: product => dispatch(addProductThunk(product))
 })
 export default connect(null, mapDispatch)(AddProductForm)

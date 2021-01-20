@@ -37,10 +37,10 @@ export const fetchProduct = id => {
   }
 }
 
-export const addProductThunk = (id, product) => {
+export const addProductThunk = product => {
   return async dispatch => {
     try {
-      const res = await axios.post(`/api/products/${id}`, product)
+      const res = await axios.post('/api/products', product)
       const newProduct = res.data
       dispatch(addProduct(newProduct))
     } catch (error) {
