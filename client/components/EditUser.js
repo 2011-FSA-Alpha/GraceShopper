@@ -1,7 +1,8 @@
 import React from 'react'
-import EditUserForm from './EditUserForm'
+import {EditUserForm} from './EditUserForm'
 import {connect} from 'react-redux'
 import {editUserProfile} from '../store/user'
+import {Form, Box, Button} from '@material-ui/core'
 
 export class EditUser extends React.Component {
   constructor(props) {
@@ -35,7 +36,7 @@ export class EditUser extends React.Component {
 
   render() {
     return (
-      <div>
+      <Box>
         <h1> Edit User Profile</h1>
         <EditUserForm
           handleChange={this.handleChange}
@@ -43,7 +44,7 @@ export class EditUser extends React.Component {
           name={this.state.name}
           email={this.state.email}
         />
-      </div>
+      </Box>
     )
   }
 }
