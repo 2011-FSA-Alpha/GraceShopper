@@ -102,7 +102,6 @@ router.put('/cart/:userId', async (req, res, next) => {
 
 // DELETE api/order/cart/:userId
 // deletes specified instance from orderProducts Model
-
 router.delete('/cart/:userId', async (req, res, next) => {
   try {
     if (req.user.id != req.params.userId) {
