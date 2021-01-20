@@ -53,9 +53,7 @@ export const addProductThunk = (id, product) => {
 export const adminEditProduct = product => {
   return async dispatch => {
     try {
-      //console.log(product)
       const {data} = await axios.put(`/api/products/${product.id}`, product)
-      console.log(data)
       dispatch(editProduct(data))
     } catch (error) {
       console.error(error)

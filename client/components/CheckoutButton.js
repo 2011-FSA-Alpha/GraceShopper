@@ -5,8 +5,6 @@ import {Link} from 'react-router-dom'
 
 const CheckoutButton = props => {
   const {cart} = props
-
-  console.log('CART', cart)
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -29,9 +27,7 @@ const CheckoutButton = props => {
           }}
         >
           <button
-            disabled={
-              !(Array.isArray(cart.products) && cart.products.length)
-            }
+            disabled={!(Array.isArray(cart.products) && cart.products.length)}
           >
             Checkout
           </button>
