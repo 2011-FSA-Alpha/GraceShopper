@@ -4,24 +4,17 @@ import {getProducts} from '../store/products'
 import {Link} from 'react-router-dom'
 import {addItemToCart, showCart} from '../store/cart'
 import {fetchProduct} from './SingleProduct'
-import FilterBar from './FilterBar'
 import {
   Grid,
   Typography,
   Box,
   Button,
-  Card,
   CardContent,
   Select,
   MenuItem,
-  FormControl,
   FormGroup,
-  InputLabel,
   Paper,
-  CardActionArea,
-  CardActions,
-  GridList,
-  GridListTile
+  CardActions
 } from '@material-ui/core'
 
 export class AllProducts extends React.Component {
