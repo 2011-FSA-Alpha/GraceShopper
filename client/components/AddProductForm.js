@@ -66,6 +66,7 @@ class AddProductForm extends React.Component {
           onChange={this.handleChange}
           value={tags}
         />
+        <button type="submit">Add Product</button>
       </form>
     )
   }

@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {getProducts} from '../store/products'
 import {getUsersThunk} from '../store/users'
+import AddProductForm from './AddProductForm'
+import AdminEditProd from './AdminEditProd'
 
 export class AdminDashboard extends React.Component {
   componentDidMount() {
@@ -10,11 +12,21 @@ export class AdminDashboard extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
-      <React.Fragment>
+      <div id="container">
+        <h3>All Users:</h3>
+        {this.props.users.allUsers.map(user => (
+          <div key={user.id}>
+            <div>Name: {user.name}</div>
+            <div>Email: {user.email}</div>
+          </div>
+        ))}
+
+        <h3>All Products:</h3>
+        <AddProductForm />
         {this.props.products.map(product => (
           <div key={product.id}>
+            <AdminEditProd />
             <div>Product Title: {product.title}</div>
             <div>Product Description: {product.description}</div>
             <div>Product Price: ${product.price}</div>
@@ -24,7 +36,7 @@ export class AdminDashboard extends React.Component {
             <div>Tags: {product.tags}</div>
           </div>
         ))}
-      </React.Fragment>
+      </div>
     )
   }
 }
