@@ -7,12 +7,12 @@ export default class Carousel extends React.Component {
   render() {
     const settings = {
       useTransform: true,
-      dots: true,
+      dots: false,
       infinite: true,
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true,
-      speed: 5000,
+      speed: 200,
       autoplaySpeed: 2000,
       cssEase: 'ease-out'
     }
