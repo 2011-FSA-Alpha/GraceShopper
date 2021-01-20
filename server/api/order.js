@@ -14,8 +14,9 @@ router.get('/', adminOnly, async (req, res, next) => {
   }
 })
 
-// PUT /api/:orderItemId
+// PUT /api/order/:orderItemId
 // can update any order
+// NOTE: Must be admin to access
 router.put('/:orderItemId', adminOnly, async (req, res, next) => {
   try {
     const updateItem = await Order.findByPk(req.params.orderItemId)
