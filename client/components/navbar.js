@@ -14,7 +14,13 @@ const NavBar = ({handleClick, isLoggedIn}) => (
         style={{backgroundColor: '#333333'}}
       >
         <Toolbar>
-          <Typography variant="h4">Wallpaper</Typography>
+          <Typography variant="h4">
+            <img
+              src="https://dl.dropboxusercontent.com/s/vi19joy6hboavgo/wallpaper_logo_web.png?dl=0"
+              style={{width: '30px', height: '25px'}}
+            />
+            allpaper
+          </Typography>
           {isLoggedIn ? (
             <div>
               {/* The navbar will show these links after you log in */}
