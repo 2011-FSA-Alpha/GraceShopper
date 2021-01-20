@@ -14,6 +14,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// GET /api/products/:productId
 router.get('/:productId', async (req, res, next) => {
   try {
     const user = await Product.findByPk(req.params.productId)
@@ -23,7 +24,9 @@ router.get('/:productId', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+// POST /api/products/:productId
+// NOTE: only Admins can add products
+router.post('/:productId', adminOnly, async (req, res, next) => {
   try {
     console.log(req.body)
     console.log(req.user)
@@ -41,7 +44,9 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.put('/:productId', async (req, res, next) => {
+// PUT /api/products/:productId
+// NOTE: only Admins can edit products
+router.put('/:productId', adminOnly, async (req, res, next) => {
   try {
     const updateProd = await Product.findByPk(req.params.productId)
     const {title, description, price, imageUrl} = req.body
@@ -61,7 +66,9 @@ router.put('/:productId', async (req, res, next) => {
   }
 })
 
-router.delete('/:productId', async (req, res, next) => {
+// DELETE /api/products/:productId
+// NOTE: only Admins can delete products
+router.delete('/:productId', adminOnly, async (req, res, next) => {
   try {
     res.send(await Product.destroy({where: {id: req.params.productId}}))
   } catch (error) {

@@ -7,12 +7,12 @@ export default class Carousel extends React.Component {
   render() {
     const settings = {
       useTransform: true,
-      dots: true,
+      dots: false,
       infinite: true,
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true,
-      speed: 5000,
+      speed: 200,
       autoplaySpeed: 2000,
       cssEase: 'ease-out'
     }
@@ -22,23 +22,26 @@ export default class Carousel extends React.Component {
         className="container"
         style={{
           display: 'block',
-          width: '100vw',
+          width: '100%',
           maxHeight: '60vh',
           overflow: 'hidden'
         }}
       >
         <Slider {...settings}>
           <div>
-            <img src="https://dl.dropboxusercontent.com/s/ljunlmb1o0uvzbn/RickyRhodes_TVC_Midtown_135.jpg?dl=0" />
+            <img
+              src="https://dl.dropboxusercontent.com/s/pv51nbbwa8j3dct/201029_PRS_Idaho_197.jpg?dl=0
+"
+            />
           </div>
           <div>
-            <img src="https://dl.dropboxusercontent.com/s/utcqezql0o8zm6d/201026_PRS_Idaho_028.jpg?dl=0" />
+            <img src="https://dl.dropboxusercontent.com/s/x4p3x6o07aur78j/RickyRhodes_TVC_Midtown_135.jpg?dl=0" />
           </div>
           <div>
-            <img src="https://dl.dropboxusercontent.com/s/d5tmoo75ibk3bn6/RickyRhodes_TVC_Midtown_180-Edit.jpg?dl=0" />
+            <img src="https://dl.dropboxusercontent.com/s/42o2q7cdmcsh1jp/201028_PRS_Idaho_117.jpg?dl=0" />
           </div>
           <div>
-            <img src="https://dl.dropboxusercontent.com/s/kykpsi3w8ziedrs/201026_PRS_Idaho_063.jpg?dl=0" />
+            <img src="https://dl.dropboxusercontent.com/s/jmnx0e0d48h3i0n/RickyRhodes_TVC_Midtown_180-Edit.jpg?dl=0" />
           </div>
         </Slider>
       </div>
