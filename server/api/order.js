@@ -122,7 +122,6 @@ router.delete('/cart/:userId', async (req, res, next) => {
 
 // PUT api/order/cart/:userId/checkout
 // Sets the Users cart to Paid moving it into order history
-
 router.put('/cart/:userId/checkout', async (req, res, next) => {
   try {
     if (!req.user || req.user.id != req.params.userId) {
