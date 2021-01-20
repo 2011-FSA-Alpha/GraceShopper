@@ -38,7 +38,7 @@ export default class Carousel extends React.Component {
             <img src="https://dl.dropboxusercontent.com/s/x4p3x6o07aur78j/RickyRhodes_TVC_Midtown_135.jpg?dl=0" />
           </div>
           <div>
-            <img src="https://dl.dropboxusercontent.com/s/42o2q7cdmcsh1jp/201028_PRS_Idaho_117.jpg?dl=0" />
+            <img src="https://dl.dropboxusercontent.com/s/n8xby9m7h4lkrp4/201029_PRS_Idaho_236.jpg?dl=0" />
           </div>
           <div>
             <img src="https://dl.dropboxusercontent.com/s/jmnx0e0d48h3i0n/RickyRhodes_TVC_Midtown_180-Edit.jpg?dl=0" />
