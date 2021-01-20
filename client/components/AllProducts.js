@@ -18,6 +18,8 @@ import {
   FormGroup,
   InputLabel,
   Paper,
+  CardActionArea,
+  CardActions,
   GridList,
   GridListTile
 } from '@material-ui/core'
@@ -58,7 +60,7 @@ export class AllProducts extends React.Component {
       <Box className="container">
         <FormGroup>
           <Box paddingTop="30px" paddingBottom="20px" paddingLeft="20px">
-            <Select sm={6} onChange={this.handleChange}>
+            <Select sm={6} onChange={this.handleChange} value="">
               <MenuItem value="small">Small</MenuItem>
               <MenuItem value="large">Large</MenuItem>
               <MenuItem value="Landscape">Landscape</MenuItem>
@@ -87,23 +89,29 @@ export class AllProducts extends React.Component {
                     <CardContent>
                       <Link to={`/products/${product.id}`}>
                         <img style={{height: '20vw'}} src={product.imageUrl} />
-                        <Typography style={{color: 'white'}}>
+                        <Typography variant="h5" style={{color: 'lightgray'}}>
                           {product.title}
                         </Typography>
                       </Link>
-                      <Button
-                        type="button"
-                        variant="contained"
-                        style={{backgroundColor: '#2F4F4F'}}
-                        onClick={() =>
-                          this.props.addItemToCart(this.props.user.id, {
-                            productId: product.id,
-                            orderId: this.props.cart.id
-                          })
-                        }
-                      >
-                        Add To Cart
-                      </Button>
+                      <CardActions>
+                        <Button
+                          type="button"
+                          variant="contained"
+                          style={{
+                            background:
+                              'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
+                          }}
+                          color="secondary"
+                          onClick={() =>
+                            this.props.addItemToCart(this.props.user.id, {
+                              productId: product.id,
+                              orderId: this.props.cart.id
+                            })
+                          }
+                        >
+                          Add To Cart
+                        </Button>
+                      </CardActions>
                     </CardContent>
                   </Paper>
                 </Grid>
