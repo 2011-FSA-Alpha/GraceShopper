@@ -1,22 +1,31 @@
 const router = require('express').Router()
-const Stripe = require('stripe')
-// ADD ENV VAR
-const stripe = Stripe(
+const stripe = require('stripe')(
   'sk_test_51IBgClBOhqQyDiVzyJbg010oMYzMS3uabbC5ngPIULdfl5IUTvp0y5tmoIIRIcrNnjKMmbAQuhM9njNxOOhkRTs700oEcH0V4d'
 )
 
 // Mounted on /api/payment
 
-router.post('/add', async (req, res, next) => {
+const calculateOrderAmount = items => {
+  // Replace this constant with a calculation of the order's amount
+  // Calculate the order total on the server to prevent
+  // people from directly manipulating the amount on the client
+
+  const totalcost = items.reduce(
+    (a, b) => b.price * b.orderproducts.quantity + a.price
+  )
+  return totalCost
+}
+
+// REQ.BODY should include array of items to checkout
+router.post('/create-payment-intent', async (req, res, next) => {
   try {
+    const {items} = req.body
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1000,
-      currency: 'usd',
-      payment_method_types: ['card'],
-      receipt_email: 'jenny.rosen@example.com'
+      amount: calculateOrderAmount(items),
+      currency: 'usd'
     })
 
-    res.json(paymentIntent)
+    res.json({clientSecret: paymentIntent.client_secret})
   } catch (err) {
     console.error(err)
   }
