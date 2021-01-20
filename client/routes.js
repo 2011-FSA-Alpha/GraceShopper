@@ -11,7 +11,8 @@ import {
   SingleProduct,
   OrderConfirmed,
   Home,
-  NotFound
+  NotFound,
+  AdminDashboard
 } from './components'
 import {me} from './store'
 
@@ -41,6 +42,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/profile" component={UserHome} />
+            <Route path="/dash" component={AdminDashboard} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
