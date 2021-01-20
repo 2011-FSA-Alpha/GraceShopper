@@ -14,6 +14,8 @@
     "heroku-token": "script/encrypt-heroku-auth-token.js",
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint-fix": "npm run lint -- --fix",
+    "prepare": "if [ -d .git ]; then npm-merge-driver install; fi",
+    "postinstall": "touch secrets.js",
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "seed": "node script/seed.js",
     "large-seed": "node script/largeSeed.js",
