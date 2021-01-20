@@ -32,22 +32,18 @@ router.put('/:orderItemId', adminOnly, async (req, res, next) => {
 // quantity information
 router.get('/cart/:userId', async (req, res, next) => {
   try {
-    if (req.user.id != req.params.userId) {
-      res.send("INVALID CART! You cannot access another user's cart")
-    } else {
-      let userOrder = await Order.findOrCreate({
-        where: {
-          userId: req.params.userId,
-          paid: false
-        },
-        include: [
-          {
-            model: Product
-          }
-        ]
-      })
-      res.send(userOrder[0])
-    }
+    let userOrder = await Order.findOrCreate({
+      where: {
+        userId: req.params.userId,
+        paid: false
+      },
+      include: [
+        {
+          model: Product
+        }
+      ]
+    })
+    res.send(userOrder[0])
   } catch (error) {
     next(error)
   }
@@ -57,10 +53,11 @@ router.get('/cart/:userId', async (req, res, next) => {
 // finds or creates an instance of the product -> req.body.productId
 // within the cart -> req.body.orderId
 // If an instance exists it increments quantity
-
 router.post('/cart/:userId', async (req, res, next) => {
+  console.log('USER--->', req.user)
+  console.log('BODY--->', req.body)
   try {
-    if (req.user.id != req.params.userId) {
+    if (req.user === undefined || req.user.id != req.params.userId) {
       res.send("INVALID CART! You cannot modify another user's cart")
     } else {
       const orderProduct = await OrderProducts.findOrCreate({
