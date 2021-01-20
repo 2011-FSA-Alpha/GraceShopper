@@ -1,7 +1,14 @@
 import React from 'react'
+import {loadStripe} from '@stripe/stripe-js'
+import {Elements} from '@stripe/react-stripe-js'
 import {connect} from 'react-redux'
 import {showCart, deleteCartItem, incrementQuantity} from '../store/cart'
+import StripeCheckout from './StripeCheckout'
 import CheckoutButton from './CheckoutButton'
+
+const promise = loadStripe(
+  'pk_test_51IBgClBOhqQyDiVzsvnoaVghaiscD06pGqSREyOAk3iPMECcM8tZPW8ZHEzzbm7G5KYeqHf5w9SnSsd4r7I6vYSV00rfo3YMLB'
+)
 
 export class Cart extends React.Component {
   constructor() {
@@ -28,6 +35,7 @@ export class Cart extends React.Component {
 
   render() {
     const {cart} = this.props
+    console.log(this.props.cart.products)
     const productCheck = cart.products ? cart.products.length >= 1 : false
     const totalPrice = productCheck
       ? cart.products.reduce(
@@ -93,6 +101,9 @@ export class Cart extends React.Component {
               <h2>Your cart is empty</h2>
             )}
             <div>
+              <Elements stripe={promise}>
+                <StripeCheckout />
+              </Elements>
               <CheckoutButton cart={cart} />
             </div>
           </div>

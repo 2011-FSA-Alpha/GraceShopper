@@ -10,16 +10,17 @@ const calculateOrderAmount = items => {
   // Calculate the order total on the server to prevent
   // people from directly manipulating the amount on the client
 
-  const totalcost = items.reduce(
-    (a, b) => b.price * b.orderproducts.quantity + a.price
-  )
-  return totalCost
+  // const totalCost = items.reduce(
+  //   (a, b) => b.price * b.orderproducts.quantity + a.price
+  // )
+  // console.log(totalCost)
+  return 2000
 }
 
 // REQ.BODY should include array of items to checkout
 router.post('/create-payment-intent', async (req, res, next) => {
+  const {items} = req.body
   try {
-    const {items} = req.body
     const paymentIntent = await stripe.paymentIntents.create({
       amount: calculateOrderAmount(items),
       currency: 'usd'

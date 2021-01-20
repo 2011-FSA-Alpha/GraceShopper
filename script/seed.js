@@ -62,11 +62,11 @@ async function seed() {
       tags: ['landscape', 'large']
     }),
     Product.create({
-      title: 'Unlawful',
-      description: 'A nice picture of Idaho',
+      title: 'Avenue',
+      description: 'New York City',
       price: 12314,
       imageUrl:
-        'https://dl.dropboxusercontent.com/s/ygws73v6ftwzc7o/201026_PRS_Idaho_018.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/d5tmoo75ibk3bn6/RickyRhodes_TVC_Midtown_180-Edit.jpg?dl=0',
       totalDownloads: 25,
       likes: 1,
       tags: ['landscape', 'large']
