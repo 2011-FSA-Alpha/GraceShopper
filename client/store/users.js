@@ -16,6 +16,7 @@ export const getUsersThunk = () => {
     try {
       const res = await axios.get('/api/users')
       const usersData = res.data
+      console.log(usersData)
       dispatch(getUsers(usersData))
     } catch (error) {
       console.log('Unable to get all users', error)
