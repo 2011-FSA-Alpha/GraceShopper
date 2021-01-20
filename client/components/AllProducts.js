@@ -5,6 +5,24 @@ import {Link} from 'react-router-dom'
 import {addItemToCart, showCart} from '../store/cart'
 import {fetchProduct} from './SingleProduct'
 import FilterBar from './FilterBar'
+import {
+  Grid,
+  Typography,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Select,
+  MenuItem,
+  FormControl,
+  FormGroup,
+  InputLabel,
+  Paper,
+  CardActionArea,
+  CardActions,
+  GridList,
+  GridListTile
+} from '@material-ui/core'
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -20,8 +38,10 @@ export class AllProducts extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.products !== this.props.products) {
+    if (prevProps.user !== this.props.user) {
       this.props.showCart(this.props.user.id)
+    }
+    if (prevProps.products !== this.props.products) {
       this.setState({currentlyDisplayed: [...this.props.products]})
     }
   }
@@ -37,38 +57,71 @@ export class AllProducts extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <FilterBar {...this.props} handleChange={this.handleChange} />
+      <Box className="container">
+        <FormGroup>
+          <Box paddingTop="30px" paddingBottom="20px" paddingLeft="20px">
+            <Select sm={6} onChange={this.handleChange} value="">
+              <MenuItem value="small">Small</MenuItem>
+              <MenuItem value="large">Large</MenuItem>
+              <MenuItem value="Landscape">Landscape</MenuItem>
+            </Select>
+          </Box>
+        </FormGroup>
         {this.state.currentlyDisplayed ? (
-          this.state.currentlyDisplayed.map(product => {
-            return (
-              <div key={product.title + Math.random() * 1000}>
-                <Link to={`/products/${product.id}`}>
-                  <img
-                    style={{height: '65%', width: '65%'}}
-                    src={product.imageUrl}
-                  />
-                  <h2>{product.title}</h2>
-                </Link>
-                <button
-                  type="button"
-                  onClick={() =>
-                    this.props.addItemToCart(this.props.user.id, {
-                      productId: product.id,
-                      props: this.props,
-                      orderId: this.props.cart.id
-                    })
-                  }
+          <Grid
+            cols={3}
+            paddingtop="40px"
+            container
+            spacing={3}
+            justify="center"
+          >
+            {this.state.currentlyDisplayed.map(product => {
+              return (
+                <Grid
+                  key={product.title + Math.random() * 1000}
+                  container
+                  item
+                  md={4}
+                  spacing={1}
+                  justify="center"
                 >
-                  Add To Cart
-                </button>
-              </div>
-            )
-          })
+                  <Paper elevation={10} style={{backgroundColor: '#333333'}}>
+                    <CardContent>
+                      <Link to={`/products/${product.id}`}>
+                        <img style={{height: '20vw'}} src={product.imageUrl} />
+                        <Typography variant="h5" style={{color: 'lightgray'}}>
+                          {product.title}
+                        </Typography>
+                      </Link>
+                      <CardActions>
+                        <Button
+                          type="button"
+                          variant="contained"
+                          style={{
+                            background:
+                              'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
+                          }}
+                          color="secondary"
+                          onClick={() =>
+                            this.props.addItemToCart(this.props.user.id, {
+                              productId: product.id,
+                              orderId: this.props.cart.id
+                            })
+                          }
+                        >
+                          Add To Cart
+                        </Button>
+                      </CardActions>
+                    </CardContent>
+                  </Paper>
+                </Grid>
+              )
+            })}
+          </Grid>
         ) : (
           <div className="loading">Loading Products...</div>
         )}
-      </div>
+      </Box>
     )
   }
 }
