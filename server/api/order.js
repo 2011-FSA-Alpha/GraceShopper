@@ -149,7 +149,6 @@ router.put('/cart/:userId/checkout', async (req, res, next) => {
 
 // GET /api/order/history/:userId
 // Gets a Users order history
-
 router.get('/history/:userId', async (req, res, next) => {
   try {
     if (!req.user || req.user.id != req.params.userId) {
