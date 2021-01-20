@@ -4,6 +4,7 @@ import {getProducts} from '../store/products'
 import {getUsersThunk} from '../store/users'
 import AddProductForm from './AddProductForm'
 import AdminEditProd from './AdminEditProd'
+import EditUser from './EditUser'
 
 export class AdminDashboard extends React.Component {
   componentDidMount() {
@@ -14,19 +15,20 @@ export class AdminDashboard extends React.Component {
   render() {
     return (
       <div id="container">
-        <h3>All Users:</h3>
+        <h1>All Users:</h1>
         {this.props.users.allUsers.map(user => (
           <div key={user.id}>
+            {/* <EditUser user={user} /> */}
             <div>Name: {user.name}</div>
             <div>Email: {user.email}</div>
           </div>
         ))}
 
-        <h3>All Products:</h3>
+        <h1>All Products:</h1>
         <AddProductForm />
         {this.props.products.map(product => (
           <div key={product.id}>
-            <AdminEditProd />
+            {/* <AdminEditProd product={} /> */}
             <div>Product Title: {product.title}</div>
             <div>Product Description: {product.description}</div>
             <div>Product Price: ${product.price}</div>

@@ -15,7 +15,7 @@ import {
   FormControl
 } from '@material-ui/core'
 import EditUser from './EditUser'
-
+import {Link} from 'react-router-dom'
 /**
  * COMPONENT
  */
@@ -67,10 +67,13 @@ export class UserHome extends React.Component {
                 Email: {email}
               </Typography>
               {adminStatus ? (
-                <Typography variant="h5" style={{color: 'lightgray'}}>
-                  {' '}
-                  Admin Status: You are a Wallpaper administrator
-                </Typography>
+                <div>
+                  <Link to="/dash">To the Admin Dashboard</Link>
+                  <Typography variant="h5" style={{color: 'lightgray'}}>
+                    {' '}
+                    Admin Status: You are a Wallpaper administrator
+                  </Typography>
+                </div>
               ) : null}
             </CardContent>
           </Paper>
