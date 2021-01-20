@@ -51,12 +51,14 @@ export class AdminEditProd extends React.Component {
           tags={this.state.tags}
         />
         <div>
-          <button
-            className="remove"
-            onClick={() => this.props.adminDeleteProduct(this.props.product)}
-          >
-            Remove
-          </button>
+          <div>
+            <button
+              className="remove"
+              onClick={() => this.props.adminDeleteProduct(this.props.product)}
+            >
+              Remove
+            </button>
+          </div>
         </div>
       </div>
     )

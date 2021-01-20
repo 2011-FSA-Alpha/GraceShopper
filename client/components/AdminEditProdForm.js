@@ -43,8 +43,9 @@ const AdminEditProdForm = props => {
           onChange={props.handleChange}
           value={props.tags}
         />
-
-        <button type="submit"> Submit Changes </button>
+        <div>
+          <button type="submit"> Submit Changes </button>
+        </div>
       </form>
     </div>
   )

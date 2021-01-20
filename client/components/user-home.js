@@ -3,10 +3,13 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import OrderHistory from './OrderHistory'
 import {Card, CardContent, Typography, Box, Paper} from '@material-ui/core'
+import EditUser from './EditUser'
+
 
 /**
  * COMPONENT
  */
+
 export const UserHome = props => {
   const {email, name, adminStatus} = props
   const firstName = name.split(' ')[0]
@@ -56,6 +59,7 @@ export const UserHome = props => {
       <OrderHistory />
     </React.Fragment>
   )
+
 }
 
 /**
@@ -65,7 +69,8 @@ const mapState = state => {
   return {
     email: state.user.email,
     name: state.user.name,
-    adminStatus: state.user.adminStatus
+    adminStatus: state.user.adminStatus,
+    user: state.user
   }
 }
 
