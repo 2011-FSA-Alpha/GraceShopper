@@ -31,7 +31,10 @@ const EditUserForm = props => {
             value={props.email}
           />
         </FormControl>
-        <Button type="submit"> Submit Changes </Button>
+        <Button onSubmit={props.handleSubmit} type="submit">
+          {' '}
+          Submit Changes{' '}
+        </Button>
       </FormGroup>
     </Box>
   )
