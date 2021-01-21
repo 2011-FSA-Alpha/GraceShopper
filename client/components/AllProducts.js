@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {getProducts} from '../store/products'
 import {Link} from 'react-router-dom'
 import {addItemToCart, showCart} from '../store/cart'
-import {fetchProduct} from './SingleProduct'
+import {fetchProduct} from '../store/singleProduct'
 import Footer from './Footer'
 import {
   Grid,
