@@ -57,49 +57,64 @@ export class AllProducts extends React.Component {
       <div className="fade-in">
         <Box className="container">
           <FormGroup m={2}>
-            <Box paddingTop="30px" paddingBottom="20px" paddingLeft="20px">
-              <Select sm={6} onChange={this.handleChange} value="">
-                <MenuItem disabled>Filter By</MenuItem>
-                <MenuItem value="all">All</MenuItem>
-                <MenuItem value="small">Small</MenuItem>
-                <MenuItem value="large">Large</MenuItem>
-                <MenuItem value="landscape">Landscape</MenuItem>
-              </Select>
+            <Box
+              width="700px"
+              display="flex"
+              justifyContent="space-around"
+              paddingTop="30px"
+              paddingBottom="20px"
+              paddingLeft="20px"
+            >
+              <Typography style={{color: 'white'}} variant="h5">
+                Filter By:
+              </Typography>
               <Chip
-                color="primary"
+                color="secondary"
+                style={{
+                  background: 'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                }}
                 label="All"
-                clickable="true"
                 onClick={() => this.props.getProducts()}
               />
 
               <Chip
-                color="primary"
+                color="secondary"
+                style={{
+                  background: 'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                }}
                 label="Small"
-                clickable="true"
                 onClick={() => this.handleChange('small')}
               />
               <Chip
-                color="primary"
+                color="secondary"
+                style={{
+                  background: 'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                }}
                 label="Large"
-                clickable="true"
                 onClick={() => this.handleChange('large')}
               />
               <Chip
-                color="primary"
+                color="secondary"
+                style={{
+                  background: 'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                }}
                 label="Landscape"
-                clickable="true"
                 onClick={() => this.handleChange('landscape')}
               />
               <Chip
-                color="primary"
+                color="secondary"
+                style={{
+                  background: 'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                }}
                 label="Mountains"
-                clickable="true"
                 onClick={() => this.handleChange('mountains')}
               />
               <Chip
-                color="primary"
+                color="secondary"
+                style={{
+                  background: 'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                }}
                 label="Water"
-                clickable="true"
                 onClick={() => this.handleChange('water')}
               />
             </Box>
@@ -139,9 +154,13 @@ export class AllProducts extends React.Component {
                             variant="contained"
                             style={{
                               background:
-                                'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
+                                'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
                             }}
                             color="secondary"
+                            style={{
+                              background:
+                                'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                            }}
                             onClick={() =>
                               this.props.addItemToCart(this.props.user.id, {
                                 productId: product.id,
