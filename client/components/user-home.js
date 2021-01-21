@@ -80,6 +80,7 @@ export class UserHome extends React.Component {
         </Box>
         <Box position="relative" paddingTop="40px" paddingLeft="40px">
           <Button
+            type="button"
             style={{
               background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
               color: 'white'
@@ -88,10 +89,10 @@ export class UserHome extends React.Component {
           >
             Edit User Profile
           </Button>
-          {/*showEdit ? <EditUser user={user} /> : null*/}
+          {showEdit ? <EditUser user={user} /> : null}
         </Box>
         <Box position="relative" paddingTop="40px" paddingLeft="40px">
-          <Typography variant="h5" style={{color: 'lightgray'}}>
+          <Typography variant="h4" style={{color: 'lightgray'}}>
             Order History:
           </Typography>
         </Box>{' '}

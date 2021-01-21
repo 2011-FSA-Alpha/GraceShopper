@@ -22,13 +22,14 @@ export class EditUser extends React.Component {
     })
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault()
     try {
       //update user. API
+      console.log('hey')
       const user = {...this.props.user, ...this.state}
       console.log(user)
-      this.props.editUserProfile(user)
+      await this.props.editUserProfile(user)
     } catch (error) {
       console.error(error)
     }
@@ -36,8 +37,7 @@ export class EditUser extends React.Component {
 
   render() {
     return (
-      <Box>
-        <h1> Edit User Profile</h1>
+      <Box width="600px">
         <EditUserForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
