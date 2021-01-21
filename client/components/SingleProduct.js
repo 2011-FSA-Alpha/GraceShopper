@@ -32,7 +32,7 @@ export class SingleProduct extends React.Component {
 
     let product = this.props.product
     return (
-      <React.Fragment>
+      <div className="fade-in">
         {product ? (
           <div>
             <h3>Product Info:</h3>
@@ -47,7 +47,7 @@ export class SingleProduct extends React.Component {
             <div>Product Title: {product.title}</div>
             <div>Product Description: {product.description}</div>
             <div>Product Price: ${product.price}</div>
-            <img src={product.imageUrl} />
+            <img style={{width: '50%', height: '50%'}} src={product.imageUrl} />
             <div>Total downloads: {product.totalDownloads}</div>
             <div>Total # of Likes: {product.likes}</div>
             <div>Tags: {product.tags}</div>
@@ -66,7 +66,7 @@ export class SingleProduct extends React.Component {
         ) : (
           <h1>No product found</h1>
         )}
-      </React.Fragment>
+      </div>
     )
   }
 }
