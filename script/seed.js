@@ -8,6 +8,9 @@ const {
   Product,
   OrderProducts
 } = require('../server/db/models')
+const fs = require('fs')
+
+const imageArr = fs.readFileSync('urls.txt', 'utf8').split('\n')
 
 async function seed() {
   await db.sync({force: true})
@@ -42,64 +45,166 @@ async function seed() {
 
   const product = await Promise.all([
     Product.create({
-      title: 'Boise Foothills',
-      description: 'A nice picture of Idaho',
-      price: 12300,
+      title: 'Plateaus',
+      description: 'Along the River',
+      price: 1314,
       imageUrl:
-        'https://dl.dropboxusercontent.com/s/rslj1dticwykez0/201024_PRS_Idaho_003.jpg?dl=0',
-      totalDownloads: 60,
-      likes: 200,
-      tags: ['landscape', 'small']
+        'https://dl.dropboxusercontent.com/s/cnklqqwz1c9ai0z/201025_PRS_Idaho_013.jpg?dl=0',
+      totalDownloads: 25,
+      likes: 1,
+      tags: ['landscape', 'large', 'water']
     }),
+
     Product.create({
-      title: 'Snake River',
+      title: 'Rockslide',
       description: 'A nice picture of Idaho',
-      price: 23141,
+      price: 2311,
       imageUrl:
-        'https://dl.dropboxusercontent.com/s/r44d4wlfaruvy4t/201025_PRS_Idaho_013.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/64e2u0tlu3iqwoz/201026_PRS_Idaho_026.jpg?dl=0',
       totalDownloads: 2,
       likes: 100,
       tags: ['landscape', 'large']
     }),
     Product.create({
-      title: 'Unlawful',
+      title: 'Above The Snake River',
       description: 'A nice picture of Idaho',
-      price: 12314,
+      price: 1252,
       imageUrl:
-        'https://dl.dropboxusercontent.com/s/ygws73v6ftwzc7o/201026_PRS_Idaho_018.jpg?dl=0',
-      totalDownloads: 25,
-      likes: 1,
+        'https://dl.dropboxusercontent.com/s/tm1xhepeq179ugp/201026_PRS_Idaho_028.jpg?dl=0',
+      totalDownloads: 256,
+      likes: 5,
       tags: ['landscape', 'large']
     }),
     Product.create({
-      title: 'Rockslide',
+      title: 'Boise Foothills',
       description: 'A nice picture of Idaho',
-      price: 12356,
+      price: 1256,
       imageUrl:
-        'https://dl.dropboxusercontent.com/s/92j6svuhk89pcnu/201026_PRS_Idaho_026.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/3wjtbumusl0eh0v/201027_PRS_Idaho_106.jpg?dl=0',
       totalDownloads: 1000,
       likes: 9,
       tags: ['landscape', 'small']
     }),
-    Product.create({
-      title: 'Above The Snake River',
-      description: 'A nice picture of Idaho',
-      price: 1257732,
-      imageUrl:
-        'https://dl.dropboxusercontent.com/s/utcqezql0o8zm6d/201026_PRS_Idaho_028.jpg?dl=0',
-      totalDownloads: 256,
-      likes: 5,
-      tags: ['landscape', 'small']
-    }),
+
     Product.create({
       title: 'Shoshone Falls River Valley',
       description: 'A nice picture of Idaho',
-      price: 2456,
+      price: 5056,
       imageUrl:
-        'https://dl.dropboxusercontent.com/s/kykpsi3w8ziedrs/201026_PRS_Idaho_063.jpg?dl=0',
+        'https://dl.dropboxusercontent.com/s/ddmldq22ks4vsgu/201026_PRS_Idaho_063.jpg?dl=0',
       totalDownloads: 5,
-      likes: 24623,
+      likes: 2463,
       tags: ['landscape', 'large']
+    }),
+    Product.create({
+      title: 'Looking',
+      description: 'Maui Overlook',
+      price: 1256,
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/mce445jaarutki9/190328_PRS_Maui_160.jpg?dl=0',
+      totalDownloads: faker.random.number(),
+      likes: faker.random.number(),
+      tags: ['landscape', 'water', 'mountains']
+    }),
+    Product.create({
+      title: 'Skimming',
+      description: 'Maui',
+      price: 1999,
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/fcd7z3la3j6gjqj/190328_PRS_Maui_510.jpg?dl=0',
+      totalDownloads: faker.random.number(),
+      likes: faker.random.number(),
+      tags: ['landscape', 'water', 'mountains', 'small']
+    }),
+    Product.create({
+      title: 'Waterfalls',
+      description: 'Maui hiking',
+      price: 2999,
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/152o6jszzb9mqif/190330_PRS_Maui_1450.jpg?dl=0',
+      totalDownloads: faker.random.number(),
+      likes: faker.random.number(),
+      tags: ['landscape', 'mountains', 'large']
+    }),
+    Product.create({
+      title: 'VW Vanagon',
+      description: 'Kipalui Camping',
+      price: 2399,
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/pjuzuaj5kudze47/190330_PRS_Maui_1459.jpg?dl=0',
+      totalDownloads: faker.random.number(),
+      likes: faker.random.number(),
+      tags: ['landscape', 'water', 'large']
+    }),
+    Product.create({
+      title: 'Maui Sunrise',
+      description: 'Waves on the black rocks',
+      price: 599,
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/q6q1p2u0jugko2p/190331_PRS_Maui_1522.jpg?dl=0',
+      totalDownloads: faker.random.number(),
+      likes: faker.random.number(),
+      tags: ['landscape', 'water', 'small']
+    }),
+    Product.create({
+      title: 'Fruit Stand',
+      description: 'Getting groceries',
+      price: 199,
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/utw8cquijdnh4i6/190331_PRS_Maui_1577.jpg?dl=0',
+      totalDownloads: faker.random.number(),
+      likes: faker.random.number(),
+      tags: ['small']
+    }),
+    Product.create({
+      title: 'Cozy',
+      description: 'Reading by the fire',
+      price: 199,
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/fcws864f8r2skmg/191019_HighPointMountainHouse_116.jpg?dl=0',
+      totalDownloads: faker.random.number(),
+      likes: faker.random.number(),
+      tags: ['large']
+    }),
+    Product.create({
+      title: 'Morning Coffee',
+      description: 'Morning light coming through',
+      price: 1299,
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/5mrfy7fqjrmpx1f/191019_HighPointMountainHouse_259.jpg?dl=0',
+      totalDownloads: faker.random.number(),
+      likes: faker.random.number(),
+      tags: ['small']
+    }),
+    Product.create({
+      title: 'Lazy Suny',
+      description: 'Morning light coming through',
+      price: 1299,
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/vxgz2qhuq2enb8z/191019_HighPointMountainHouse_448.jpg?dl=0',
+      totalDownloads: faker.random.number(),
+      likes: faker.random.number(),
+      tags: ['large']
+    }),
+    Product.create({
+      title: 'Roadtrip',
+      description: 'Heading to the hot springs',
+      price: 2299,
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/y49l3vbatiwwz9d/201029_PRS_Idaho_139.jpg?dl=0',
+      totalDownloads: faker.random.number(),
+      likes: faker.random.number(),
+      tags: ['large', 'mountains', 'landscape']
+    }),
+    Product.create({
+      title: 'Sawtooths',
+      description: 'At Redfish Lake',
+      price: 7299,
+      imageUrl:
+        'https://dl.dropboxusercontent.com/s/s38qklo7pu59kbf/201029_PRS_Idaho_164.jpg?dl=0',
+      totalDownloads: faker.random.number(),
+      likes: faker.random.number(),
+      tags: ['large', 'mountains', 'landscape', 'water']
     })
   ])
 

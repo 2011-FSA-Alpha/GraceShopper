@@ -1,10 +1,20 @@
 import React, {Component} from 'react'
 import AllProducts from './AllProducts'
 import Carousel from './Carousel'
-import Footer from './Footer'
 import {Typography, Box} from '@material-ui/core'
 
 class Home extends Component {
+  constructor() {
+    super()
+    this.state = {
+      isLoading: true
+    }
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({isLoading: false})
+    }, 300)
+  }
   render() {
     return (
       <div>

@@ -5,7 +5,7 @@ const {User, Order, Product} = require('../server/db/models')
 const fs = require('fs')
 
 const imageArr = fs.readFileSync('urls.txt', 'utf8').split('\n')
-console.log(imageArr)
+console.log('IMAGE LENGTH', imageArr.length)
 
 const randomUser = []
 const randomProduct = []
@@ -14,7 +14,7 @@ const randomProduct = []
 async function largeSeed() {
   for (let i = 0; i <= 200; i++) {
     const randomUserId = Math.ceil(Math.random() * 200)
-    const tags = ['small', 'medium', 'large']
+    const tags = ['small', 'large', 'landscape', 'mountains', 'water', 'city']
     const randomTag = tags[Math.floor(Math.random() * 2)]
 
     randomUser.push({
@@ -28,7 +28,7 @@ async function largeSeed() {
       title: faker.commerce.productName(),
       description: faker.commerce.productDescription(),
       price: faker.random.number(),
-      imageUrl: faker.image.imageUrl(),
+      imageUrl: imageArr[Math.ceil(Math.random() * 32)],
       totalDownloads: faker.random.number(),
       likes: faker.random.number(),
       tags: tags[randomTag],
