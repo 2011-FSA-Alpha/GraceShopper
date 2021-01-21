@@ -70,7 +70,9 @@ router.put('/:productId', adminOnly, async (req, res, next) => {
 // NOTE: only Admins can delete products
 router.delete('/:productId', adminOnly, async (req, res, next) => {
   try {
-    res.send(await Product.destroy({where: {id: req.params.productId}}))
+    let toBeDeleted = await Product.findByPk(req.params.productId)
+    await toBeDeleted.destroy()
+    res.sendStatus(204)
   } catch (error) {
     next(error)
   }
