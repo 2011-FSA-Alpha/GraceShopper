@@ -18,7 +18,7 @@ export class AdminDashboard extends React.Component {
         <h1>All Users:</h1>
         {this.props.users.allUsers.map(user => (
           <div key={user.id}>
-            {/* <EditUser user={user} /> */}
+            <EditUser user={user} />
             <div>Name: {user.name}</div>
             <div>Email: {user.email}</div>
           </div>
@@ -28,7 +28,7 @@ export class AdminDashboard extends React.Component {
         <AddProductForm />
         {this.props.products.map(product => (
           <div key={product.id}>
-            {/* <AdminEditProd product={} /> */}
+            <AdminEditProd product={product} />
             <div>Product Title: {product.title}</div>
             <div>Product Description: {product.description}</div>
             <div>Product Price: ${product.price}</div>
