@@ -46,7 +46,7 @@ const NavBar = ({handleClick, isLoggedIn}) => (
             ) : (
               <div>
                 {/* The navbar will show these links before you log in */}
-                <Button href="/home" color="inherit">
+                <Button href="/" color="inherit">
                   Home
                 </Button>
                 <Button href="/products" color="inherit">
