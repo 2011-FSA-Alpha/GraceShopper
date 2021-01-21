@@ -4,6 +4,12 @@ import 'slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
 
 export default class Carousel extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      isLoading: true
+    }
+  }
   render() {
     const settings = {
       useTransform: true,
