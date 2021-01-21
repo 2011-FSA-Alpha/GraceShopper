@@ -16,15 +16,17 @@ class AddProductForm extends React.Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleSubmit(evt) {
+  async handleSubmit(evt) {
     evt.preventDefault()
-    this.props.addProductThunk()
+    await this.props.addProductThunk(this.state)
+    this.forceUpdate()
   }
 
   handleChange(evt) {
     this.setState({
       [evt.target.name]: evt.target.value
     })
+    console.log(this.state)
   }
 
   render() {
@@ -66,6 +68,7 @@ class AddProductForm extends React.Component {
           onChange={this.handleChange}
           value={tags}
         />
+        <button type="submit">Add Product</button>
       </form>
     )
   }

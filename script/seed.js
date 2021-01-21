@@ -30,7 +30,7 @@ async function seed() {
       name: 'Azriel',
       email: 'azriel@email.com',
       password: '123',
-      adminStatus: false
+      adminStatus: true
     }),
     User.create({
       name: 'Ricky',

@@ -8,13 +8,15 @@ import productsReducer from './products'
 import singleProduct from './singleProduct'
 import {saveState} from '../loadState'
 import historyReducer from './orderHistory'
+import usersReducer from './users'
 
 const reducer = combineReducers({
   user,
   cart: cartReducer,
   products: productsReducer,
   product: singleProduct,
-  orderHistory: historyReducer
+  orderHistory: historyReducer,
+  users: usersReducer
 })
 
 const middleware = composeWithDevTools(
