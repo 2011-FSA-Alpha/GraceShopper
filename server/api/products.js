@@ -29,7 +29,8 @@ router.post('/', adminOnly, async (req, res, next) => {
   try {
     console.log(req.body)
     console.log(req.user)
-    const {title, description, price, imageUrl, tags} = req.body
+    const {title, description, price, imageUrl} = req.body
+    let tags = req.body.tags.split(',')
     const newProduct = await Product.create({
       title,
       description,
