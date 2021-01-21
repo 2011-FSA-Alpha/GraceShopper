@@ -14,8 +14,10 @@ import {
   MenuItem,
   FormGroup,
   Paper,
-  CardActions
+  CardActions,
+  Chip
 } from '@material-ui/core'
+import {spacing} from '@material-ui/system'
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -28,6 +30,7 @@ export class AllProducts extends React.Component {
 
   componentDidMount() {
     this.props.getProducts()
+    this.setState({allProducts: [...this.props.products]})
   }
 
   componentDidUpdate(prevProps) {
@@ -40,8 +43,9 @@ export class AllProducts extends React.Component {
   }
 
   handleChange = e => {
+    console.log(e)
     const filteredProducts = this.props.products.filter(image => {
-      if (image.tags.includes(e.target.value)) {
+      if (image.tags.includes(e)) {
         return image
       }
     })
@@ -51,13 +55,52 @@ export class AllProducts extends React.Component {
   render() {
     return (
       <Box className="container">
-        <FormGroup>
+        <FormGroup m={2}>
           <Box paddingTop="30px" paddingBottom="20px" paddingLeft="20px">
             <Select sm={6} onChange={this.handleChange} value="">
+              <MenuItem disabled>Filter By</MenuItem>
+              <MenuItem value="all">All</MenuItem>
               <MenuItem value="small">Small</MenuItem>
               <MenuItem value="large">Large</MenuItem>
-              <MenuItem value="Landscape">Landscape</MenuItem>
+              <MenuItem value="landscape">Landscape</MenuItem>
             </Select>
+            <Chip
+              color="primary"
+              label="All"
+              clickable="true"
+              onClick={() => this.props.getProducts()}
+            />
+
+            <Chip
+              color="primary"
+              label="Small"
+              clickable="true"
+              onClick={() => this.handleChange('small')}
+            />
+            <Chip
+              color="primary"
+              label="Large"
+              clickable="true"
+              onClick={() => this.handleChange('large')}
+            />
+            <Chip
+              color="primary"
+              label="Landscape"
+              clickable="true"
+              onClick={() => this.handleChange('landscape')}
+            />
+            <Chip
+              color="primary"
+              label="Mountains"
+              clickable="true"
+              onClick={() => this.handleChange('mountains')}
+            />
+            <Chip
+              color="primary"
+              label="Water"
+              clickable="true"
+              onClick={() => this.handleChange('water')}
+            />
           </Box>
         </FormGroup>
         {this.state.currentlyDisplayed ? (

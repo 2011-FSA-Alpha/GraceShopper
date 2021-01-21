@@ -24,7 +24,7 @@ class Home extends Component {
           >
             <img
               src="https://dl.dropboxusercontent.com/s/vi19joy6hboavgo/wallpaper_logo_web.png?dl=0"
-              style={{height: '70%', width: '70%', paddingLeft: '1.5rem'}}
+              style={{height: '75%', width: '75%', paddingLeft: '4rem'}}
             />
             <Box display="flex" justifyContent="center">
               <Typography
