@@ -19,7 +19,7 @@ export default class Carousel extends React.Component {
 
     return (
       <div
-        className="container"
+        className="container fade-in"
         style={{
           display: 'block',
           width: '100%',

@@ -8,7 +8,7 @@ const NavBar = ({handleClick, isLoggedIn}) => (
   <div>
     <nav>
       <AppBar
-        position="static"
+        position="fixed"
         display="flex"
         margin="10px"
         style={{backgroundColor: '#333333'}}

@@ -1,6 +1,15 @@
+* {
+  box-sizing: border-box;
+  font-size: 14px;
+  margin: 0;
+}
+
 body {
   background: #444444;
   font-family: sans-serif;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin-top: 4rem;
 }
 
 a {
@@ -19,4 +28,17 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.fade-in {
+  -webkit-animation: fadein 0.2s;
+  -moz-animation: fadein 0.2s;
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

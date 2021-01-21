@@ -44,7 +44,6 @@ class Home extends Component {
           <Carousel />
         </div>
         <AllProducts />
-        <Footer />
       </div>
     )
   }
