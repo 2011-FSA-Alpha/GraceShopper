@@ -37,6 +37,7 @@ const EditUserForm = props => {
             <span>Must be a valid email!</span>
           ) : null}
         </FormControl>
+
         {props.email.length === 0 || props.name.length === 0 ? (
           <button type="submit" disabled={true}>
             {' '}
@@ -48,6 +49,7 @@ const EditUserForm = props => {
             Submit Changes{' '}
           </button>
         )}
+
       </FormGroup>
     </Box>
   )
