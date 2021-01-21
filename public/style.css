@@ -42,3 +42,15 @@ form div {
     opacity: 1;
   }
 }
+
+.white {
+  color: whitesmoke;
+}
+
+.dark {
+  color: #2d8dff;
+}
+
+.light {
+  color: #9dcaff;
+}
