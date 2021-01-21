@@ -151,15 +151,11 @@ router.put('/cart/:userId/checkout', async (req, res, next) => {
 // Gets a Users order history
 router.get('/history/:userId', async (req, res, next) => {
   try {
-    if (!req.user || req.user.id != req.params.userId) {
-      res.send("INVALID CART! You cannot view another user's order history")
-    } else {
-      const history = await Order.findAll({
-        where: {paid: true, userId: req.params.userId},
-        include: Product
-      })
-      res.send(history)
-    }
+    const history = await Order.findAll({
+      where: {paid: true, userId: req.params.userId},
+      include: Product
+    })
+    res.send(history)
   } catch (error) {
     next(error)
   }
