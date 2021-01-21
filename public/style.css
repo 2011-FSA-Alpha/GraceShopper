@@ -54,3 +54,33 @@ form div {
 .light {
   color: #9dcaff;
 }
+
+input {
+  width: 300px;
+  height: 42px;
+  font-size: 1.3rem;
+  margin: 1rem;
+  border: #9dcaff solid 2px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+a {
+  color: #9dcaff;
+}
+
+button {
+  background: linear-gradient(45deg, #2d8dff 30%, #9dcaff 90%);
+  border: none;
+  padding: 15px 20px;
+  color: white;
+  border-radius: 10px;
+}
+
+div.btn {
+  background: linear-gradient(45deg, #2d8dff 30%, #9dcaff 90%);
+  border: none;
+  padding: 15px 20px;
+  color: white;
+  border-radius: 10px;
+}
