@@ -3,7 +3,8 @@ import {connect} from 'react-redux'
 import {getProducts} from '../store/products'
 import {Link} from 'react-router-dom'
 import {addItemToCart, showCart} from '../store/cart'
-import {fetchProduct} from './SingleProduct'
+import {fetchProduct} from '../store/singleProduct'
+import Footer from './Footer'
 import {
   Grid,
   Typography,
@@ -14,20 +15,27 @@ import {
   MenuItem,
   FormGroup,
   Paper,
-  CardActions
+  CardActions,
+  Chip,
+  CircularProgress
 } from '@material-ui/core'
+import {spacing} from '@material-ui/system'
 
 export class AllProducts extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      isLoading: true,
       currentlyDisplayed: []
     }
   }
 
   componentDidMount() {
     this.props.getProducts()
+    setTimeout(() => {
+      this.setState({allProducts: [...this.props.products], isLoading: false})
+    }, 300)
   }
 
   componentDidUpdate(prevProps) {
@@ -41,7 +49,7 @@ export class AllProducts extends React.Component {
 
   handleChange = e => {
     const filteredProducts = this.props.products.filter(image => {
-      if (image.tags.includes(e.target.value)) {
+      if (image.tags.includes(e)) {
         return image
       }
     })
@@ -50,71 +58,173 @@ export class AllProducts extends React.Component {
 
   render() {
     return (
-      <Box className="container">
-        <FormGroup>
-          <Box paddingTop="30px" paddingBottom="20px" paddingLeft="20px">
-            <Select sm={6} onChange={this.handleChange} value="">
-              <MenuItem value="small">Small</MenuItem>
-              <MenuItem value="large">Large</MenuItem>
-              <MenuItem value="Landscape">Landscape</MenuItem>
-            </Select>
-          </Box>
-        </FormGroup>
-        {this.state.currentlyDisplayed ? (
-          <Grid
-            cols={3}
-            paddingtop="40px"
-            container
-            spacing={3}
-            justify="center"
+      <div className="fade-in">
+        {this.state.isLoading ? (
+          <Box
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+              marginTop: '8rem'
+            }}
           >
-            {this.state.currentlyDisplayed.map(product => {
-              return (
+            <CircularProgress />
+          </Box>
+        ) : (
+          <div className="fade-in">
+            <Box className="container">
+              <FormGroup m={2}>
+                <Box
+                  width="700px"
+                  display="flex"
+                  justifyContent="space-around"
+                  paddingTop="30px"
+                  paddingBottom="20px"
+                  paddingLeft="20px"
+                >
+                  <Typography style={{color: 'white'}} variant="h5">
+                    Filter By:
+                  </Typography>
+                  <Chip
+                    color="secondary"
+                    style={{
+                      background:
+                        'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                    }}
+                    label="All"
+                    onClick={() => this.props.getProducts()}
+                  />
+
+                  <Chip
+                    color="secondary"
+                    style={{
+                      background:
+                        'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                    }}
+                    label="Small"
+                    onClick={() => this.handleChange('small')}
+                  />
+                  <Chip
+                    color="secondary"
+                    style={{
+                      background:
+                        'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                    }}
+                    label="Large"
+                    onClick={() => this.handleChange('large')}
+                  />
+                  <Chip
+                    color="secondary"
+                    style={{
+                      background:
+                        'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                    }}
+                    label="Landscape"
+                    onClick={() => this.handleChange('landscape')}
+                  />
+                  <Chip
+                    color="secondary"
+                    style={{
+                      background:
+                        'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                    }}
+                    label="Mountains"
+                    onClick={() => this.handleChange('mountains')}
+                  />
+                  <Chip
+                    color="secondary"
+                    style={{
+                      background:
+                        'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                    }}
+                    label="Water"
+                    onClick={() => this.handleChange('water')}
+                  />
+                </Box>
+              </FormGroup>
+              {this.state.currentlyDisplayed ? (
                 <Grid
-                  key={product.title + Math.random() * 1000}
+                  cols={3}
+                  paddingtop="40px"
                   container
-                  item
-                  md={4}
-                  spacing={1}
+                  spacing={3}
                   justify="center"
                 >
-                  <Paper elevation={10} style={{backgroundColor: '#333333'}}>
-                    <CardContent>
-                      <Link to={`/products/${product.id}`}>
-                        <img style={{height: '20vw'}} src={product.imageUrl} />
-                        <Typography variant="h5" style={{color: 'lightgray'}}>
-                          {product.title}
-                        </Typography>
-                      </Link>
-                      <CardActions>
-                        <Button
-                          type="button"
-                          variant="contained"
-                          style={{
-                            background:
-                              'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
-                          }}
-                          color="secondary"
-                          onClick={() =>
-                            this.props.addItemToCart(this.props.user.id, {
-                              productId: product.id,
-                              orderId: this.props.cart.id
-                            })
-                          }
+                  {this.state.currentlyDisplayed.map(product => {
+                    return (
+                      <Grid
+                        key={product.title + Math.random() * 1000}
+                        container
+                        item
+                        md={4}
+                        spacing={1}
+                        justify="center"
+                      >
+                        <Paper
+                          elevation={10}
+                          style={{backgroundColor: '#333333'}}
                         >
-                          Add To Cart
-                        </Button>
-                      </CardActions>
-                    </CardContent>
-                  </Paper>
+                          <CardContent>
+                            <Link to={`/products/${product.id}`}>
+                              <img
+                                style={{height: '20vw'}}
+                                src={product.imageUrl}
+                              />
+                              <Typography
+                                variant="h5"
+                                style={{color: 'lightgray'}}
+                              >
+                                {product.title}
+                              </Typography>
+                            </Link>
+                            <CardActions>
+                              <Button
+                                type="button"
+                                variant="contained"
+                                style={{
+                                  background:
+                                    'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                                }}
+                                color="secondary"
+                                style={{
+                                  background:
+                                    'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                                }}
+                                onClick={() =>
+                                  this.props.addItemToCart(this.props.user.id, {
+                                    productId: product.id,
+                                    orderId: this.props.cart.id
+                                  })
+                                }
+                              >
+                                Add To Cart
+                              </Button>
+                            </CardActions>
+                          </CardContent>
+                        </Paper>
+                      </Grid>
+                    )
+                  })}
                 </Grid>
-              )
-            })}
-          </Grid>
-        ) : (
-          <div className="loading">Loading Products...</div>
+              ) : (
+                <Box
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: '100%',
+                    marginTop: '8rem'
+                  }}
+                >
+                  <CircularProgress />
+                </Box>
+              )}
+              <Footer />
+            </Box>
+          </div>
         )}
-      </Box>
+      </div>
     )
   }
 }

@@ -1,8 +1,8 @@
 import React from 'react'
-import {EditUserForm} from './EditUserForm'
+import EditUserForm from './EditUserForm'
 import {connect} from 'react-redux'
 import {editUserProfile} from '../store/user'
-import {Form, Box, Button} from '@material-ui/core'
+import {Box, Button} from '@material-ui/core'
 
 export class EditUser extends React.Component {
   constructor(props) {
