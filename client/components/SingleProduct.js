@@ -34,7 +34,6 @@ export class SingleProduct extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.products !== this.props.products) {
       this.props.showCart(this.props.user.id)
-      console.log(prevProps)
     }
   }
 
@@ -123,14 +122,14 @@ export class SingleProduct extends React.Component {
                   onClick={this.toggleEdit}
                   style={{
                     background:
-                      'linear-gradient(45deg, #2D8DFF 30%, #9DCAFF 90%)'
+                      'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+                    color: 'white'
                   }}
-                  color="secondary"
                 >
                   Edit Product
                 </Button>
-                {showEdit ? <AdminEditProd product={product} /> : null}
               </Box>
+              {showEdit ? <AdminEditProd product={product} /> : null}
             </Paper>
           </Box>
         ) : (
