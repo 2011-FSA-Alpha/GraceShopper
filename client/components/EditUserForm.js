@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   Box,
-  Form,
+  FormGroup,
   Input,
   InputLabel,
   FormControl,
@@ -11,7 +11,7 @@ import {
 const EditUserForm = props => {
   return (
     <Box>
-      <Form onSubmit={props.handleSubmit}>
+      <FormGroup onSubmit={props.handleSubmit}>
         <FormControl>
           <InputLabel htmlFor="name"> Name: </InputLabel>
           <Input
@@ -32,7 +32,7 @@ const EditUserForm = props => {
           />
         </FormControl>
         <Button type="submit"> Submit Changes </Button>
-      </Form>
+      </FormGroup>
     </Box>
   )
 }
