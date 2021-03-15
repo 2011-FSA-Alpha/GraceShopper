@@ -53,8 +53,6 @@ If you want to run the server and/or `webpack` separately, you can also
 
 [View on Figma](https://www.figma.com/file/OaM113RKVYajEhSjtietB7/Wallpapr?node-id=0%3A1)
 
----
-
 ## Standardization
 
 ### Naming Conventions:
