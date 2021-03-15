@@ -2,39 +2,30 @@
 
 | Table of Contents                                                                                          |
 | ---------------------------------------------------------------------------------------------------------- |
+| Deployed Project                                                                                           |
+| [Live App](http://wallpapr.herokuapp.com/)                                                                 |
 | Project Management                                                                                         |
-| [Repo](https://github.com/2011-FSA-Alpha/GraceShopper)                                                     |
-| [Team](https://github.com/2011-FSA-Alpha/GraceShopper/wiki#team)                                           |
-| Project Architecture                                                                                       |
+| [Team](#contributors)                                                                                      |
 | [Architecture](https://github.com/2011-FSA-Alpha/GraceShopper/wiki/Project-Architecture)                   |
 | [DB Schema](https://dbdiagram.io/d/5ffdd60b80d742080a3606c2)                                               |
 | [Wireframes](https://www.figma.com/file/OaM113RKVYajEhSjtietB7/Wallpapr?node-id=0%3A1)                     |
 | Standards                                                                                                  |
-| [Naming Conventions](https://github.com/2011-FSA-Alpha/GraceShopper/wiki#naming-conventions)               |
-| [Commit Convention](https://github.com/2011-FSA-Alpha/GraceShopper/wiki#commit-messages)                   |
-| [Testing Style](https://github.com/2011-FSA-Alpha/GraceShopper/wiki#testing-style)                         |
+| [Naming Conventions](#naming-conventions)                                                                  |
+| [Commit Convention](#commit-messages)                                                                      |
+| [Testing Style](#testing-style)                                                                            |
 | Workflows                                                                                                  |
 | [Pre-Pull Request Workflow](https://github.com/2011-FSA-Alpha/GraceShopper/wiki#pre-pull-request-workflow) |
 | [Resolving Merge Conflicts](https://github.com/2011-FSA-Alpha/GraceShopper/wiki/Resolving-Merge-Conflicts) |
 | Documentation                                                                                              |
 | [NPM Packages](https://github.com/2011-FSA-Alpha/GraceShopper/wiki/Package-Documentation)                  |
 
-## Team
-
-* Ned Brennan — nedbrnnn@gmail.com
-* Morgan Hu — morgan.hu738@gmail.com
-* Azriel Goldman — azmaster3000@gmail.com
-* Ricky Rhodes — rickyarhodes@gmail.com
-
-##
-
 ## Contributors
 
-|                                                     [Ned Brennan](https://www.linkedin.com/in/edward-brennan/)                                                     |                                                   [Morgan Hu](https://www.linkedin.com/in/morgan-hu-3990aa199/)                                                    |                                             [Azriel Goldman](https://www.linkedin.com/in/azriel-goldman-67193b77/)                                              |                                                    [Ricky Rhodes](https://www.linkedin.com/in/rickyrhodes/)                                                     |
-| :----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [<img src="https://user-images.githubusercontent.com/36062933/111173237-dde2cf80-857c-11eb-8ca4-40962da23ad0.png" width = "150" />](https://github.com/NedBrennan) | [<img src="https://user-images.githubusercontent.com/36062933/108449605-be80ad00-7231-11eb-82ed-67d283376dc2.jpeg" width = "150" />](https://github.com/morgan738) | [<img src="https://user-images.githubusercontent.com/36062933/111173257-e20eed00-857c-11eb-9c5c-69e3f7034bc8.jpeg" width = "150" />](https://github.com/panjms) | [<img src="https://user-images.githubusercontent.com/36062933/108449617-c2acca80-7231-11eb-83bc-f9ddc4114c92.jpeg" width = "150" />](https://github.com/h0plyn) |
-|  [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/farhadsiraj)   |   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/gretad711)    |   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/panjms)    |   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/h0plyn)    |
-|                    [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/farhadsiraj/)                    |                   [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/greta-dakers/)                    |                   [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/james--pan/)                   |                  [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/rickyrhodes/)                   |
+|                                                     [Ned Brennan](https://www.linkedin.com/in/edward-brennan/)                                                     |                                                   [Morgan Hu](https://www.linkedin.com/in/morgan-hu-3990aa199/)                                                    |                                               [Azriel Goldman](https://www.linkedin.com/in/azriel-goldman-67193b77/)                                               |                                                    [Ricky Rhodes](https://www.linkedin.com/in/rickyrhodes/)                                                     |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| [<img src="https://user-images.githubusercontent.com/36062933/111173237-dde2cf80-857c-11eb-8ca4-40962da23ad0.png" width = "150" />](https://github.com/NedBrennan) | [<img src="https://user-images.githubusercontent.com/36062933/111173257-e20eed00-857c-11eb-9c5c-69e3f7034bc8.jpeg" width = "150" />](https://github.com/morgan738) | [<img src="https://user-images.githubusercontent.com/36062933/111173276-e6d3a100-857c-11eb-990a-a9c4db9128c1.jpeg" width = "150" />](https://github.com/azrielg20) | [<img src="https://user-images.githubusercontent.com/36062933/108449617-c2acca80-7231-11eb-83bc-f9ddc4114c92.jpeg" width = "150" />](https://github.com/h0plyn) |
+|   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/NedBrennan)   |   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/morgan738)    |   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/azrielg20)    |   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/h0plyn)    |
+|                  [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/edward-brennan/)                   |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/morgan-hu-3990aa199/)                |              [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/azriel-goldman-67193b77/)              |                  [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/rickyrhodes/)                   |
 
 ## Deployed App
 
