@@ -1,32 +1,11 @@
-# Wallpaper
-
-| Table of Contents                                                                                          |
-| ---------------------------------------------------------------------------------------------------------- |
-| Deployed Project                                                                                           |
-| [Live App](http://wallpapr.herokuapp.com/)                                                                 |
-| [Getting Started Locally](#getting-started-locally)                                                        |
-| Project Management                                                                                         |
-| [Team](#contributors)                                                                                      |
-| [Architecture](https://github.com/2011-FSA-Alpha/GraceShopper/wiki/Project-Architecture)                   |
-| [DB Schema](https://dbdiagram.io/d/5ffdd60b80d742080a3606c2)                                               |
-| [Wireframes](https://www.figma.com/file/OaM113RKVYajEhSjtietB7/Wallpapr?node-id=0%3A1)                     |
-| [Task Board](https://github.com/2011-FSA-Alpha/GraceShopper/projects/1)                                    |
-| Standards                                                                                                  |
-| [Naming Conventions](#naming-conventions)                                                                  |
-| [Commit Convention](#commit-messages)                                                                      |
-| [Testing Style](#testing-style)                                                                            |
-| Workflows                                                                                                  |
-| [Pre-Pull Request Workflow](https://github.com/2011-FSA-Alpha/GraceShopper/wiki#pre-pull-request-workflow) |
-| [Resolving Merge Conflicts](https://github.com/2011-FSA-Alpha/GraceShopper/wiki/Resolving-Merge-Conflicts) |
-| Documentation                                                                                              |
-| [NPM Packages](https://github.com/2011-FSA-Alpha/GraceShopper/wiki/Package-Documentation)                  |
+# Cashed
 
 # Contributors
 
 |                                                     [Ned Brennan](https://www.linkedin.com/in/edward-brennan/)                                                     |                                                   [Sean Murphy](https://www.linkedin.com/in/scmurphy96/)                                                    |                                               [John Ahsher](https://www.linkedin.com/in/-john-asher/)                                               |                                                    [Kevin Lee](https://www.linkedin.com/in/kevin-lee-/)                                                     |
 | :----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | [<img src="https://user-images.githubusercontent.com/36062933/111173237-dde2cf80-857c-11eb-8ca4-40962da23ad0.png" width = "150" />](https://github.com/NedBrennan) | [<img src="https://avatars.githubusercontent.com/u/54608605?s=400&v=4" width = "150" />](https://github.com/scmurphy96) | [<img src="https://avatars.githubusercontent.com/u/6667623?s=400&u=b87653292839ec221a5e964b0faa9ac5f1ef38ff&v=4" width = "150" />](https://github.com/jfilm) | [<img src="https://avatars.githubusercontent.com/u/62904438?s=400&u=490262981682487ab16fe4178258adbbc6e79c92&v=4" width = "150" />](https://github.com/juholee96) |
-|   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/NedBrennan)   |   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/morgan738)    |   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/azrielg20)    |   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/h0plyn)    |
+|   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/NedBrennan)   |   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/scmurphy96)    |   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/jfilm)    |   [<img src="https://user-images.githubusercontent.com/36062933/108450440-38656600-7233-11eb-9ed0-34ecedcae435.png" width="20"> ](https://github.com/juholee96)    |
 |                  [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/edward-brennan/)                   |                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/scmurphy96/)                |              [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/-john-asher/)              |                  [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="20"> ](https://www.linkedin.com/in/kevin-lee-/)                   |
 
 # Deployed App
