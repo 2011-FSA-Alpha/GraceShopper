@@ -1,19 +1,18 @@
 # Wallpaper
 
+| Table of Contents                                                                                          |
 | ---------------------------------------------------------------------------------------------------------- |
-| Deployed Project                                                                                           |
-| [Live App](http://wallpapr.herokuapp.com/)                                                                 |
-| [Getting Started Locally](#getting-started-locally)                                                        |
 | Project Management                                                                                         |
-| [Team](#contributors)                                                                                      |
+| [Repo](https://github.com/2011-FSA-Alpha/GraceShopper)                                                     |
+| [Team](https://github.com/2011-FSA-Alpha/GraceShopper/wiki#team)                                           |
+| Project Architecture                                                                                       |
 | [Architecture](https://github.com/2011-FSA-Alpha/GraceShopper/wiki/Project-Architecture)                   |
 | [DB Schema](https://dbdiagram.io/d/5ffdd60b80d742080a3606c2)                                               |
 | [Wireframes](https://www.figma.com/file/OaM113RKVYajEhSjtietB7/Wallpapr?node-id=0%3A1)                     |
-| [Task Board](https://github.com/2011-FSA-Alpha/GraceShopper/projects/1)                                    |
 | Standards                                                                                                  |
-| [Naming Conventions](#naming-conventions)                                                                  |
-| [Commit Convention](#commit-messages)                                                                      |
-| [Testing Style](#testing-style)                                                                            |
+| [Naming Conventions](https://github.com/2011-FSA-Alpha/GraceShopper/wiki#naming-conventions)               |
+| [Commit Convention](https://github.com/2011-FSA-Alpha/GraceShopper/wiki#commit-messages)                   |
+| [Testing Style](https://github.com/2011-FSA-Alpha/GraceShopper/wiki#testing-style)                         |
 | Workflows                                                                                                  |
 | [Pre-Pull Request Workflow](https://github.com/2011-FSA-Alpha/GraceShopper/wiki#pre-pull-request-workflow) |
 | [Resolving Merge Conflicts](https://github.com/2011-FSA-Alpha/GraceShopper/wiki/Resolving-Merge-Conflicts) |
