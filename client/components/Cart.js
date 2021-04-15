@@ -58,6 +58,8 @@ export class Cart extends React.Component {
         width="50vw"
         justifyContent="center"
         paddingTop="400px"
+        spacing={100}
+        mt={30}
       >
         <Card style={{backgroundColor: '#333333'}} width="600px">
           {this.state.loading ? (

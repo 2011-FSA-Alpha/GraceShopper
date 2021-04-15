@@ -21,7 +21,7 @@ export class OrderHistory extends Component {
 
     return (
       <Box paddingTop="40px">
-        <Grid cols={3} paddingtop="40px" container spacing={3} justify="center">
+        <Grid cols={3} paddingtop="40px" container spacing={1} justify="center">
           {isHistory ? (
             <Box>
               {orderHistory.map(order => {
