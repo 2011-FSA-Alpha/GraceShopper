@@ -20,8 +20,8 @@ export class OrderHistory extends Component {
     const isHistory = orderHistory.length > 0
 
     return (
-      <Box paddingTop="40px" spacing={20} mb={20}>
-        <Grid cols={3} paddingtop="40px" container spacing={3} justify="center">
+      <Box paddingTop="40px">
+        <Grid cols={3} paddingtop="40px" container spacing={1} justify="center">
           {isHistory ? (
             <Box>
               {orderHistory.map(order => {
